@@ -2,10 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
 
+using System.ComponentModel.DataAnnotations;
+
 namespace ICS.DAL.Entities;
 
-public record Admin : User
+public record Admin
 {
-    public new required string Login { get; set; }
-
+    public required User User { get; init; }
+    public required string UserLogin { get; set; } = string.Empty;
 }

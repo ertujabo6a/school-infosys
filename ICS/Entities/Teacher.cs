@@ -4,7 +4,8 @@
 
 namespace ICS.DAL.Entities;
 
-public record Teacher : User
+public record Teacher
 {
-    public new required string Login { get; set; }
+    public required User User { get; init; }
+    public required string UserLogin { get; set; } = string.Empty;
 }
