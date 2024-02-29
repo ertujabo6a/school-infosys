@@ -6,6 +6,6 @@ namespace ICS.DAL.Entities;
 
 public record Student : User
 {
-    public new required string Login { get; set; }
+    public required string Login { get; set; }
     public required int Year { get; set; }
 }

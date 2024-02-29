@@ -16,6 +16,8 @@ public class IcsDbContext : DbContext
     public DbSet<EvaluationEntity> EvaluationEntities => Set<EvaluationEntity>();
     public DbSet<OneOffActivityEntity> OneOffActivities => Set<OneOffActivityEntity>();
     public DbSet<PeriodicActivityEntity> PeriodicActivities => Set<PeriodicActivityEntity>();
-
+    public DbSet<Subject> Subjects => Set<Subject>();
+    public DbSet<SubjectTeacher> SubjectTeachers => Set<SubjectTeacher>();
+    public DbSet<SubjectStudent> SubjectStudents => Set<SubjectStudent>();
 
 }

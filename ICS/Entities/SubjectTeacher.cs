@@ -1,7 +1,7 @@
 namespace ICS.DAL.Entities;
 public record SubjectTeacher
 {
-    public Guid ID {get; set; }
+    public required Guid Id {get; set; }
     public required string Login;
-    public required string Abr; 
+    public required string Abbr; 
 }

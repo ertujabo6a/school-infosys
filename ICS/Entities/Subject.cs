@@ -1,7 +1,7 @@
 namespace ICS.DAL.Entities;
 public record Subject
 {
-    public required string Abbreviature { get; set; }
+    public required string Abbr { get; set; } = string.Empty;
     
     public required string Name { get; set; }
     
