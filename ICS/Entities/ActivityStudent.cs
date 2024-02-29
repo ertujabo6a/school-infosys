@@ -1,5 +1,5 @@
 ﻿namespace ICS.DAL.Entities;
-internal class ActivityStudent
+public record ActivityStudent
 {
     public required Guid ActivityId { get; set; }
     public required string StudentLogin { get; set; }
