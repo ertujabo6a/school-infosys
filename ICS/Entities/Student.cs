@@ -7,8 +7,5 @@ namespace ICS.DAL.Entities;
 public record Student : User
 {
     public new required string Login { get; set; }
-    public int Year { get; set; }
-
-    public ICollection<SubjectStudent> Subjects { get; set; }
-
+    public required int Year { get; set; }
 }
