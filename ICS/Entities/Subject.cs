@@ -12,5 +12,8 @@ public record Subject
     public int Points { get; set; }
     
     public bool Compulsorily { get; set; }
+
+
+    public ICollection<ActivityEntity> Activities { get; set; } = new List<ActivityEntity>();
     
 }

@@ -1,6 +1,5 @@
 ﻿using ICS.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ICS.DAL;
 public sealed class IcsDbContext : DbContext
@@ -9,6 +8,8 @@ public sealed class IcsDbContext : DbContext
     public DbSet<Student> Students => Set<Student>();
     public DbSet<Teacher> Teachers => Set<Teacher>();
     public DbSet<Admin> Admins => Set<Admin>();
+    public DbSet<Subject> Subjects => Set<Subject>();
+    public DbSet<ActivityEntity> Activities => Set<ActivityEntity>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -44,5 +45,17 @@ public sealed class IcsDbContext : DbContext
             .WithOne(u => u.Admin)
             .HasForeignKey<Admin>(s => s.UserLogin)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Subject>().HasKey(s => s.Abbr);
+
+        modelBuilder.Entity<ActivityEntity>().HasKey(a => a.EntityId);
+        modelBuilder.Entity<ActivityEntity>()
+            .HasOne(a => a.Subject)
+            .WithMany(s => s.Activities)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        modelBuilder.Entity<Student>()
+            .HasMany(a => a.Activities)
+            .WithMany(s => s.Students);
     }
 }
