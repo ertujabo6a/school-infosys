@@ -15,5 +15,7 @@ public record Subject
 
 
     public ICollection<ActivityEntity> Activities { get; set; } = new List<ActivityEntity>();
+    public ICollection<Student> Students { get; set; } = new List<Student>();
+    public ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
     
 }
