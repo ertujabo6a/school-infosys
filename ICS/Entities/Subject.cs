@@ -1,7 +1,7 @@
 namespace ICS.DAL.Entities;
 public record Subject
 {
-    public required string Abbreviature { get; set; }
+    public required string Abbr { get; set; } = string.Empty;
     
     public required string Name { get; set; }
     
@@ -12,5 +12,10 @@ public record Subject
     public int Points { get; set; }
     
     public bool Compulsorily { get; set; }
+
+
+    public ICollection<ActivityEntity> Activities { get; set; } = new List<ActivityEntity>();
+    public ICollection<Student> Students { get; set; } = new List<Student>();
+    public ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
     
 }
