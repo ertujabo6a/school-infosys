@@ -9,7 +9,10 @@ The application contains four sections:
 4. Evaluation
 
 Each section allows the user to view the list of records in the corresponding table and manipulate them.
-The names of the tables are the same as the names of the section
+The names of the tables are the same as the names of the section. 
+The set of attributes for each table is described here: https://github.com/nesfit/ICS/tree/master/Project
+Please pay attention to the values in brackets, as they correspond to relations between different tables.
+Examples of C# code for entity records (including indications of their relations) can be found here:  https://github.com/nesfit/ICS/tree/master/src/CookBook/CookBook.DAL/Entities 
 
 Functionality of Student section:
 * Showing the list of all students
