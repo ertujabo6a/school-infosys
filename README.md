@@ -38,7 +38,9 @@ Functionality of Evaluation section:
 * Sorting by attributes in the list
 
 TODO: Wireframes for each section: deadline is 13.03 in the evening
+
 TODO: C# entity records for each entity: deadline is 15.03 in the evening
+
 TODO: DBContext of the whole system, InitialMigration, and ERD: deadline is 16.03 in the evening
 
 WARNING: We don't have different types of users and login system anymore, so the wireframes must contain the list of sections and the content of the chosen section only.
