@@ -1,20 +1,41 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+ICS Project 2024: "School Information System" 
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+# Phase 1
+The application contains four sections:
+1. Student
+2. Activity
+3. Subject
+4. Evaluation
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Each section allows the user to view the list of records in the corresponding table and manipulate them.
+The names of the tables are the same as the names of the section
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+Functionality of Student section:
+* Showing the list of all students
+* CRUD (Create, Read, Update, and Delete) operations
+* Searching by attributes
+* Sorting by attributes in the list
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+Functionality of Activity section:
+* Showing the list of all activities
+* CRUD (Create, Read, Update, and Delete) operations
+* Filtering by start time, end time, and chosen subject
+* Sorting by attributes in the list
+
+Functionality of Subject section:
+* Showing the list of all subjects
+* CRUD (Create, Read, Update, and Delete) operations
+* Searching by attributes
+* Sorting by attributes in the list
+
+Functionality of Evaluation section:
+* Showing the list of all evaluations
+* CRUD (Create, Read, Update, and Delete) operations
+* Sorting by attributes in the list
+
+TODO: Wireframes for each section: deadline is 13.03 in the evening
+TODO: C# entity records for each entity: deadline is 15.03 in the evening
+TODO: DBContext of the whole system, InitialMigration, and ERD: deadline is 16.03 in the evening
+
+WARNING: We don't have different types of users and login system anymore, so the wireframes must contain the list of sections and the content of the chosen section only.
