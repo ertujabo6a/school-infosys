@@ -8,7 +8,7 @@ public sealed class IcsDbContext : DbContext
     public DbSet<Student> Students => Set<Student>();
     public DbSet<Teacher> Teachers => Set<Teacher>();
     public DbSet<Admin> Admins => Set<Admin>();
-    public DbSet<Subject> Subjects => Set<Subject>();
+    public DbSet<SubjectEntity> Subjects => Set<SubjectEntity>();
     public DbSet<ActivityEntity> Activities => Set<ActivityEntity>();
     public DbSet<OneOffActivityEntity> OneOffActivities => Set<OneOffActivityEntity>();
     public DbSet<PeriodicActivityEntity> PeriodicActivities => Set<PeriodicActivityEntity>();
@@ -51,7 +51,7 @@ public sealed class IcsDbContext : DbContext
             .HasForeignKey<Admin>(s => s.UserLogin)
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<Subject>().HasKey(s => s.Abbr);
+        modelBuilder.Entity<SubjectEntity>().HasKey(s => s.Abbr);
 
         modelBuilder.Entity<ActivityEntity>().HasKey(a => a.EntityId);
         modelBuilder.Entity<ActivityEntity>()
