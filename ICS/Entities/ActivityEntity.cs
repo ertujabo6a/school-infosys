@@ -6,10 +6,11 @@ public record ActivityEntity : IEntity
     public required Room Room { get; init; }
     public required DateTime StartTime { get; set; }
     public required DateTime EndTime { get; set; }
-    public required string Description { get; set; } = string.Empty;
+    public string? Description { get; set; }
 
-    public required string SubjectAbbr { get; set; } = string.Empty;
     public required SubjectEntity Subject { get; init; }
+    public required Guid SubjectId { get; set; }
     public ICollection<EvaluationEntity> Evaluations { get; set; } = new List<EvaluationEntity>();
+
     public required Guid Id { get; set; }
 }

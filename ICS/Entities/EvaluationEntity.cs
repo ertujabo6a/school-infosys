@@ -9,5 +9,6 @@ public record EvaluationEntity : IEntity
     public required Guid StudentId { get; set; }
     public required ActivityEntity Activity { get; set; }
     public required StudentEntity Student { get; set; }
+
     public required Guid Id { get; set; }
 }

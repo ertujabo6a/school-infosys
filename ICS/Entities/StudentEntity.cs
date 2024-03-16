@@ -8,5 +8,6 @@ public record StudentEntity : IEntity
 
     public ICollection<SubjectEntity> Subjects { get; set; } = new List<SubjectEntity>();
     public ICollection<EvaluationEntity> Evaluations { get; set; } = new List<EvaluationEntity>();
+
     public required Guid Id { get; set; }
 }
