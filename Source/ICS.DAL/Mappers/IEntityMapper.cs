@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ICS.DAL.Mappers;
-internal interface IEntityMapper
+public interface IEntityMapper<TEntity>
 {
     // TODO: implement Mapper Interface
 }

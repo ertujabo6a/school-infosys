@@ -13,14 +13,14 @@ using Microsoft.EntityFrameworkCore;
 namespace ICS.DAL.Repositories;
 internal interface IRepository<TEntity> where TEntity : class, IEntity
 {
-    public IQueryable<TEntity> GetAll();
-    public ValueTask<bool> IsExistsAsync(TEntity entity);
+    public IQueryable<TEntity> Get();
+    public Task DeleteAsync(Guid Id);
+    public ValueTask<bool> ExistsAsync(TEntity entity);
     public ValueTask<TEntity> InsertAsync(TEntity entity);
     public ValueTask<TEntity> UpdateAsync(TEntity entity);
-    public void DeleteById(Guid Id);
 
     public async ValueTask<TEntity?> GetByIdAsync(Guid Id)
     {
-        return await GetAll().SingleAsync(entity => entity.Id == Id);
+        return await Get().SingleAsync(entity => entity.Id == Id);
     }
 }
