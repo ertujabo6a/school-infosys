@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ICS.DAL.Entities;
 
 namespace ICS.DAL.Mappers;
-internal interface IEntityMapper
+
+public interface IEntityMapper<in TEntity> where TEntity : IEntityMapper
 {
-    // TODO: implement Mapper Interface
+    void Map(TEntity oldEntity, TEntity newEntity);
 }
