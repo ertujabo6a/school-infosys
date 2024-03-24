@@ -29,7 +29,7 @@ public class Repository<TEntity>(DbContext context,
     public async ValueTask<TEntity> UpdateAsync(TEntity entity)
     {
         TEntity existingEntity = await _dbSet.SingleAsync(e => e.Id == entity.Id).ConfigureAwait(false);
-        entityMapper.MapToExistingEntity(existingEntity, entity); // TODO: integrate with mapper, as it be implemented
+        entityMapper.Map(existingEntity, entity); // TODO: integrate with mapper, as it be implemented
         return existingEntity;
     }
 
