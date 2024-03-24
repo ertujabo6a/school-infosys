@@ -14,7 +14,7 @@ public record ActivityListModel : ModelBase
     {
         Id = Guid.NewGuid(),
         Type = default,
-        SubjectAbbr = String.Empty,
+        SubjectAbbr = string.Empty,
         ActivityRoom = default,
         StartDate = default,
         EndDate = default

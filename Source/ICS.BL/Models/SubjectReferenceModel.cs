@@ -7,6 +7,6 @@ public record SubjectReferenceModel : ModelBase
     public static SubjectReferenceModel Empty => new()
     {
         Id = Guid.NewGuid(),
-        SubjectAbbr = String.Empty
+        SubjectAbbr = string.Empty
     };
 }
