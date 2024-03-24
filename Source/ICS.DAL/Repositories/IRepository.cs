@@ -11,7 +11,7 @@ using ICS.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ICS.DAL.Repositories;
-internal interface IRepository<TEntity> where TEntity : class, IEntity
+public interface IRepository<TEntity> where TEntity : class, IEntity
 {
     public IQueryable<TEntity> Get();
     public Task DeleteAsync(Guid entityId);

@@ -4,5 +4,5 @@ namespace ICS.DAL.UnitOfWork;
 
 public interface IUnitOfWorkFactory
 {
-    IUnitOfWork Create();
+    public IUnitOfWork Create();
 }
