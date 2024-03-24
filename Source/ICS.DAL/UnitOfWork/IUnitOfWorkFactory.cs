@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ICS.DAL.UnitOfWork
+namespace ICS.DAL.UnitOfWork;
+
+public interface IUnitOfWorkFactory
 {
-    public interface IUnitOfWorkFactory
-    {
-        IUnitOfWork Create();
-    }
+    IUnitOfWork Create();
 }
