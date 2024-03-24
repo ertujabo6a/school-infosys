@@ -6,7 +6,7 @@ public record ActivityListModel : ModelBase
 {
     public required ActivityType Type { get; set; }
     public required string SubjectAbbr { get; set; }
-    public required Room AcrivityRoom { get; set; }
+    public required Room ActivityRoom { get; set; }
     public required DateTime StartDate { get; set; }
     public required DateTime EndDate { get; set; }
 
@@ -15,7 +15,7 @@ public record ActivityListModel : ModelBase
         Id = Guid.NewGuid(),
         Type = default,
         SubjectAbbr = String.Empty,
-        AcrivityRoom = default,
+        ActivityRoom = default,
         StartDate = default,
         EndDate = default
     };
