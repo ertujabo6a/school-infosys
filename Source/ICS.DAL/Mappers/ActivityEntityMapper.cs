@@ -1,6 +1,6 @@
 using ICS.DAL.Entities;
 
-namespace ICS.DAL.Mappers
+namespace ICS.DAL.Mappers;
 
 public class ActivityEntityMapper : IEntityMapper<ActivityEntity>
 {
@@ -11,7 +11,5 @@ public class ActivityEntityMapper : IEntityMapper<ActivityEntity>
         oldEntity.StartTime = newEntity.StartTime;
         oldEntity.EndTime = newEntity.EndTime;
         oldEntity.Description = newEntity.Description;
-        oldEntity.Subject = newEntity.Subject;
-        oldEntity.SubjectId = newEntity.SubjectId;
     }
 }
