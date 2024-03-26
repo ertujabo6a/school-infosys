@@ -1,4 +1,6 @@
-﻿namespace ICS.DAL.Entities;
+﻿using ICS.Common.Enums;
+
+namespace ICS.DAL.Entities;
 
 public record ActivityEntity : IEntity
 {

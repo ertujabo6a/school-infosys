@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ICS.Common\ICS.Common.csproj" />
+  </ItemGroup>
+
 </Project>
