@@ -1,6 +1,6 @@
 ﻿namespace ICS.BL.Models;
 
-internal interface IModel
+public interface IModel
 {
     Guid Id { get; }
 }
