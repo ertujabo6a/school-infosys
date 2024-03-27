@@ -40,10 +40,19 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
     public async Task GetAll_Activities_ContainsActivityEntity()
     {
         // Act
-        var entity = await IcsDbContextSut.Activities.ToArrayAsync();
+        var entities = await IcsDbContextSut.Activities.ToArrayAsync();
 
         // Assert
-        Assert.Contains(ActivitySeeds.ActivityEntity, entity);
+        bool contains = entities.Any(e =>
+            e.Id == ActivitySeeds.ActivityEntity.Id &&
+            e.Description == ActivitySeeds.ActivityEntity.Description &&
+            e.Room == ActivitySeeds.ActivityEntity.Room &&
+            e.StartTime == ActivitySeeds.ActivityEntity.StartTime &&
+            e.EndTime == ActivitySeeds.ActivityEntity.EndTime &&
+            e.SubjectId == ActivitySeeds.ActivityEntity.SubjectId &&
+            e.Type == ActivitySeeds.ActivityEntity.Type
+            );
+        Assert.True(contains);
     }
 
     [Fact]
@@ -104,15 +113,5 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
         ActivityEntity? actual = await dbContext.Activities.SingleOrDefaultAsync(e => e.Id == entity.Id);
         Assert.Null(actual);
     }
-
-    /*[Fact]
-    public async Task Delete_ActivityUsedInEvaluation_Throws()
-    {
-        var baseEntity = ActivitySeeds.ActivityInEvaluation;
-
-        IcsDbContextSut.Activities.Remove(baseEntity);
-
-        await Assert.ThrowsAsync<DbUpdateException>(async () => await IcsDbContextSut.SaveChangesAsync());
-    }*/
 
 }
