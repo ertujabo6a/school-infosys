@@ -14,8 +14,6 @@ public class IcsTestingDbContext(DbContextOptions contextOptions, bool seedTesti
         if (seedTestingData)
         {
             Seed.WithSamples(modelBuilder);
-            Seed.WithSamples(modelBuilder);
-            Seed.WithSamples(modelBuilder);
         }
     }
 }
