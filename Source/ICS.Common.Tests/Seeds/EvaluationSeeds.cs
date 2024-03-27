@@ -21,9 +21,9 @@ public static class EvaluationSeeds
     {
         Id = Guid.Parse("07b4cc7e-43aa-48ea-a829-f653c56c6728"),
         StudentId = StudentSeeds.StudentInEvaluation.Id,
-        Student = StudentSeeds.StudentInEvaluation,
+        Student = null!,
         ActivityId = ActivitySeeds.ActivityInEvaluation.Id,
-        Activity = ActivitySeeds.ActivityInEvaluation,
+        Activity = null!,
         Points = 4,
         Description = "Good job",
     };
