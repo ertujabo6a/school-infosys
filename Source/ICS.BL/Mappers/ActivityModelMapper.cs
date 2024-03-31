@@ -33,11 +33,15 @@ public class ActivityModelMapper
                 Type = entity.Type
             };
 
-    public override ActivityEntity MapToEntity(ActivityReferenceModel ref_model)
+    public override ActivityEntity MapToEntity(ActivityListModel list_model)
         => new()
         {
-            Id = ref_model.Id,
-            Type = ref_model.Type
-
+            Id = list_model.Id,
+            Type = list_model.Type,
+            Room = list_model.ActivityRoom,
+            StartTime = list_model.StartDate,
+            EndTime = list_model.EndDate,
+            Subject = null,
+            SubjectId = default
         };
 }

@@ -30,6 +30,12 @@ public class SubjectModelMapper
             SubjectAbbr = entity.Abbr
         };
 
-    public override SubjectEntity MapToEntity(SubjectReferenceModel ref_model)
-        => new() { Id = ref_model.Id,  Abbr = ref_model.SubjectAbbr };
+    public override SubjectEntity MapToEntity(SubjectListModel list_model)
+        => new()
+        {
+            Id = list_model.Id,
+            Abbr = list_model.SubjectAbbr,
+            Name = list_model.SubjectName,
+            Credits = list_model.Credits
+        };
 }

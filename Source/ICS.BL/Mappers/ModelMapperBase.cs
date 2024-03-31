@@ -14,7 +14,7 @@ public abstract class ModelMapperBase<TEntity, TListModel, TReferenceModel> : IM
     public IEnumerable<TReferenceModel> MapToReferenceModel(IEnumerable<TEntity> entities)
         => entities.Select(MapToReferenceModel);
 
-    public abstract TEntity MapToEntity(TReferenceModel ref_model);
+    public abstract TEntity MapToEntity(TListModel list_model);
 
 
 }

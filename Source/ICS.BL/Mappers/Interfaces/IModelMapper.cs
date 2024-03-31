@@ -1,6 +1,6 @@
 ﻿namespace ICS.BL.Mappers.Interfaces;
 
-public interface IModelMapper<TEntity, out TListModel, TReferenceModel>
+public interface IModelMapper<TEntity, TListModel, TReferenceModel>
 {
     TListModel MapToListModel(TEntity? entity);
 
@@ -13,5 +13,5 @@ public interface IModelMapper<TEntity, out TListModel, TReferenceModel>
     IEnumerable<TReferenceModel> MapToReferenceModel(IEnumerable<TEntity> entities)
         => entities.Select(MapToReferenceModel);
 
-    TEntity MapToEntity(TReferenceModel ref_model);
+    TEntity MapToEntity(TListModel list_model);
 }

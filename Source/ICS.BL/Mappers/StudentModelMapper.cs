@@ -1,4 +1,4 @@
-using System
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ICS.BL.Models;
@@ -18,8 +18,8 @@ public class StudentModelMapper(ISubjectModelMapper subjectModelMapper)
         : new StudentListModel
         {
             Id = entity.Id,
-            Name = entity.Name
-                = entity.Surname,
+            Name = entity.Name,
+            Surname = entity.Surname,
             ImageUrl = entity.ImageUrl,
             Subjects = subjectModelMapper.MapToReferenceModel(entity.Subjects).ToObservableCollection()
         };
@@ -34,6 +34,11 @@ public class StudentModelMapper(ISubjectModelMapper subjectModelMapper)
             Surname = entity.Surname
         };
 
-    public override StudentEntity MapToEntity(StudentReferenceModel ref_model)
-        => new() { Id = ref_model.Id, Name = ref_model.Name, Surname = ref_model.Surname };
+    public override StudentEntity MapToEntity(StudentListModel list_model)
+        => new()
+        {
+            Id = list_model.Id,
+            Name = list_model.Name,
+            Surname = list_model.Surname
+        };
 }
