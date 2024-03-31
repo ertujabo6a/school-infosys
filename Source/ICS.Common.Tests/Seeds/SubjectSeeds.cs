@@ -29,5 +29,4 @@ public static class SubjectSeeds
         Abbr = "ICS",
         Credits = 4,
     };
-
 }
