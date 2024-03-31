@@ -104,5 +104,22 @@ namespace ICS.DAL.Tests
             var actual = await dbContext.Students.SingleOrDefaultAsync(e => e.Id == entity.Id);
             Assert.Null(actual);
         }
+
+        [Fact]
+        public async Task Delete_StudentWithEvaluation_Removed()
+        {
+            // Arrange
+            var entity = StudentSeeds.StudentInEvaluation;
+            var evaluation = EvaluationSeeds.EvaluationEntity;
+
+            // Act
+            IcsDbContextSut.Remove(entity);
+            await IcsDbContextSut.SaveChangesAsync();
+
+            // Assert
+            await using IcsDbContext dbContext = DbContextFactory.CreateDbContext();
+            var actual = await dbContext.Evaluations.SingleOrDefaultAsync(e => e.Id == evaluation.Id);
+            Assert.Null(actual);
+        }
     }
 }
