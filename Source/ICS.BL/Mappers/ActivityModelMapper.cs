@@ -41,7 +41,7 @@ public class ActivityModelMapper
             Room = list_model.ActivityRoom,
             StartTime = list_model.StartDate,
             EndTime = list_model.EndDate,
-            Subject = null,
+            Subject = null!,
             SubjectId = default
         };
 }

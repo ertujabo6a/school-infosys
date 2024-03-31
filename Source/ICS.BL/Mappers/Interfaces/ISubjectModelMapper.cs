@@ -6,5 +6,4 @@ namespace ICS.BL.Mappers.Interfaces;
 public interface ISubjectModelMapper
     : IModelMapper<SubjectEntity, SubjectListModel, SubjectReferenceModel>
 {
-
 }
