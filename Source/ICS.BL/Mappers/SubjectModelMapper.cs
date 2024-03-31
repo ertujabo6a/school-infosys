@@ -1,14 +1,14 @@
 using System;
 using System.Collections.ObjectModel;
+using ICS.BL.Mappers.Interfaces;
 using ICS.BL.Models;
-using ICS.BL.Entities;
 using ICS.DAL.Entities;
 
 namespace ICS.BL.Mappers;
 
 public class SubjectModelMapper
     : ModelMapperBase<SubjectEntity, SubjectListModel, SubjectReferenceModel>,
-    ISubjecctModelMapper
+    ISubjectModelMapper
 {
     public override SubjectListModel MapToListModel(SubjectEntity? entity)
         => entity is null
@@ -21,7 +21,7 @@ public class SubjectModelMapper
             Credits = entity.Credits
         };
 
-    public override SubjectReferencceModel MapToReferenceModel(SubjectEntity? entity)
+    public override SubjectReferenceModel MapToReferenceModel(SubjectEntity? entity)
         => entity is null
         ? SubjectReferenceModel.Empty
         : new SubjectReferenceModel
@@ -31,5 +31,5 @@ public class SubjectModelMapper
         };
 
     public override SubjectEntity MapToEntity(SubjectReferenceModel ref_model)
-        => new() { Id = ref_model.Id,  SubjectAbbr = ref_model.Abbr };
+        => new() { Id = ref_model.Id,  Abbr = ref_model.SubjectAbbr };
 }

@@ -1,14 +1,22 @@
+using ICS.BL.Mappers.Interfaces;
+
 namespace ICS.BL.Mappers;
 
-public abstract class ModelMapperBase<TEntity, TlistModel, TReferenceModel> : IModelMapper<TEntity, TlistModel, TReferenceModel>
+public abstract class ModelMapperBase<TEntity, TListModel, TReferenceModel> : IModelMapper<TEntity, TListModel, TReferenceModel>
 {
-    public abstract TlistModel MapToListModel(TEntity? entity);
+    public abstract TListModel MapToListModel(TEntity? entity);
 
     public IEnumerable<TListModel> MapToListModel(IEnumerable<TEntity> entities)
         => entities.Select(MapToListModel);
 
     public abstract TReferenceModel MapToReferenceModel(TEntity entity);
 
+    public IEnumerable<TReferenceModel> MapToReferenceModel(IEnumerable<TEntity> entities)
+        => entities.Select(MapToReferenceModel);
+
     public abstract TEntity MapToEntity(TReferenceModel ref_model);
 
+
 }
+
+

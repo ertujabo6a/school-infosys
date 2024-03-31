@@ -1,7 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using ICS.BL.Models;
-using ICS.BL.Entities;
+using ICS.BL.Mappers.Interfaces;
 using ICS.DAL.Entities;
 
 namespace ICS.BL.Mappers;
@@ -34,5 +34,10 @@ public class ActivityModelMapper
             };
 
     public override ActivityEntity MapToEntity(ActivityReferenceModel ref_model)
-        => new() { Id = ref_model.Id, Type = ref_model.Type };
+        => new()
+        {
+            Id = ref_model.Id,
+            Type = ref_model.Type
+
+        };
 }
