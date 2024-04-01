@@ -5,7 +5,7 @@ using ICS.DAL.Entities;
 namespace ICS.BL.Mappers;
 
 public class EvaluationModelMapper
-    : ModelMapperBase2<EvaluationEntity, EvaluationListModel>,
+    : ModelMapperBase<EvaluationEntity, EvaluationListModel, EvaluationListModel>,
     IEvaluationModelMapper
 {
     public override EvaluationListModel MapToListModel(EvaluationEntity? entity)
@@ -30,4 +30,5 @@ public class EvaluationModelMapper
             Student = null!
         };
 
+    public override EvaluationListModel MapToReferenceModel(EvaluationEntity? entity) => throw new NotImplementedException();
 }
