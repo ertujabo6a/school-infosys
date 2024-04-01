@@ -1,5 +1,4 @@
-﻿using ICS.BL.Facades.Interfaces;
-using ICS.BL.Mappers.Interfaces;
+﻿using ICS.BL.Mappers.Interfaces;
 using ICS.BL.Models;
 using ICS.DAL.Entities;
 using ICS.DAL.Repositories;
@@ -60,9 +59,9 @@ public abstract class
         return ModelMapper.MapToListModel(entities);
     }
 
-    public async Task<TReferenceModel> SaveAsync(TReferenceModel model)
+    public async Task<TListModel> SaveAsync(TListModel model)
     {
-        TReferenceModel result;
+        TListModel result;
         GuardCollectionsAreNotSet(model);
         TEntity entity = ModelMapper.MapToEntity(model);
         IUnitOfWork uow = UnitOfWorkFactory.Create();
@@ -71,13 +70,13 @@ public abstract class
         if(await repository.ExistsAsync(entity))
         {
             TEntity updateEntity = await repository.UpdateAsync(entity);
-            result = ModelMapper.MapToReferenceModel(updateEntity);
+            result = ModelMapper.MapToListModel(updateEntity);
         }
         else
         {
             entity.Id = Guid.NewGuid();
             TEntity insertedEntity = await repository.InsertAsync(entity);
-            result = ModelMapper.MapToReferenceModel(insertedEntity);
+            result = ModelMapper.MapToListModel(insertedEntity);
         }
 
         await uow.CommitAsync();
@@ -93,7 +92,7 @@ public abstract class
     /// </summary>
     /// <param name="model">Model to be inserted or updated</param>
     /// <exception cref="InvalidOperationException"></exception>
-    private static void GuardCollectionsAreNotSet(TReferenceModel model)
+    private static void GuardCollectionsAreNotSet(TListModel model)
     {
         IEnumerable<PropertyInfo> collectionProperties = model
             .GetType()

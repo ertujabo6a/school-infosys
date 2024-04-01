@@ -2,13 +2,13 @@
 using ICS.DAL.Entities;
 
 namespace ICS.BL.Facades;
-public interface IFacade<TEntity, TListModel, TDetailModel>
+public interface IFacade<TEntity, TListModel, TReferenceModel>
     where TEntity : class, IEntity
     where TListModel : IModel
-    where TDetailModel : class, IModel
+    where TReferenceModel : class, IModel
 {
     Task DeleteAsync(Guid id);
-    Task<TDetailModel?> GetAsync(Guid id);
+    Task<TReferenceModel?> GetAsync(Guid id);
     Task<IEnumerable<TListModel>> GetAsync();
-    Task<TDetailModel> SaveAsync(TDetailModel model);
+    Task<TListModel> SaveAsync(TListModel model);
 }
