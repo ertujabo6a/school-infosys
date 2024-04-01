@@ -5,7 +5,7 @@ using ICS.DAL.Entities;
 using ICS.DAL.Mappers;
 using ICS.DAL.UnitOfWork;
 
-namespace ICS.BL.Facades.Interfaces;
+namespace ICS.BL.Facades;
 public class StudentFacade : FacadeBase<StudentEntity, StudentListModel, StudentReferenceModel, StudentEntityMapper>,
     IStudentFacade
 {
