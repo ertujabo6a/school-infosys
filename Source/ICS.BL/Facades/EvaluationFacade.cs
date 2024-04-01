@@ -1,5 +1,4 @@
-﻿
-using ICS.BL.Mappers.Interfaces;
+﻿using ICS.BL.Mappers.Interfaces;
 using ICS.BL.Models;
 using ICS.DAL.Entities;
 using ICS.DAL.Mappers;
