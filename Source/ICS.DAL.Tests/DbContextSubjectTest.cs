@@ -1,7 +1,5 @@
 ﻿using ICS.Common.Tests;
-using ICS.Common.Tests.Factories;
 using ICS.Common.Tests.Seeds;
-using ICS.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
