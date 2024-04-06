@@ -7,13 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ICS.BL\ICS.BL.csproj" />
-    <ProjectReference Include="..\ICS.Common.Tests\ICS.Common.Tests.csproj" />
-    <ProjectReference Include="..\ICS.DAL\ICS.DAL.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="xunit" Version="2.7.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <ProjectReference Include="..\ICS.BL\ICS.BL.csproj" />
+    <ProjectReference Include="..\ICS.Common.Tests\ICS.Common.Tests.csproj" />
+    <ProjectReference Include="..\ICS.DAL\ICS.DAL.csproj" />
   </ItemGroup>
 
 </Project>
