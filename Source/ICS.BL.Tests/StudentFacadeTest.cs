@@ -63,7 +63,7 @@ public sealed class StudentFacadeTests : FacadeTestsBase
         {
             Id = Guid.Empty,
             Name = "New Name",
-            Surname = "NEW Surname",
+            Surname = "New Surname",
         };
 
         //Act
@@ -98,20 +98,21 @@ public sealed class StudentFacadeTests : FacadeTestsBase
     }
 
     [Fact]
-    public async Task Saveasyn_UpdateWithSideColl()
+    public async Task SaveAsync_UpdateWithSideColl()
     {
         var student = new StudentListModel()
         {
             Id =StudentSeeds.StudentEntity.Id,
             Name = StudentSeeds.StudentEntity.Name,
             Surname = StudentSeeds.StudentEntity.Surname,
-            Subjects = new ObservableCollection<SubjectReferenceModel>()
+            Subjects = 
             {
                 new()
                 {
-                    SubjectAbbr = "IDS"
+                    SubjectAbbr = SubjectSeeds.SubjectEntity.Abbr
                 }
             }
+            
         };
         await Assert.ThrowsAnyAsync<InvalidOperationException>(() => _studentFacade.SaveAsync(student));
     }
