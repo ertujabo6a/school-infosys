@@ -1,6 +1,9 @@
 using ICS.BL.Models;
 using ICS.BL.Mappers.Interfaces;
 using ICS.DAL.Entities;
+using ICS.Common.Tests.Seeds;
+
+
 
 namespace ICS.BL.Mappers;
 
@@ -24,8 +27,8 @@ public class EvaluationModelMapper
             Id = list_model.Id,
             Description = list_model.Description,
             Points = list_model.Points,
-            ActivityId = default,
-            StudentId = default,
+            ActivityId = ActivitySeeds.ActivityEntity.Id,
+            StudentId = StudentSeeds.StudentEntity.Id,
             Activity = null!,
             Student = null!
         };
