@@ -18,11 +18,10 @@ public class ActivityModelMapper
             {
                 Id = entity.Id,
                 Type = entity.Type,
-                SubjectAbbr = string.Empty,
                 ActivityRoom = entity.Room,
                 StartDate = entity.StartTime,
-                EndDate = entity.EndTime
-
+                EndDate = entity.EndTime,
+                SubjectAbbr = entity.Subject?.Abbr ?? string.Empty
             };
 
     public override ActivityReferenceModel MapToReferenceModel(ActivityEntity? entity)

@@ -10,6 +10,7 @@ using ICS.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
+using ICS.BL.Facades.Interfaces;
 
 namespace ICS.BL.Tests;
 
