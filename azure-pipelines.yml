@@ -1,0 +1,45 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  buildConfiguration: 'Release'
+  dotNetFramework: 'net8.0'
+  dotNetVersion: '8.0.x'
+  targetRuntime: 'win-x64'
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      version: $(dotNetVersion)
+      includePreviewVersions: true
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build ICS.DAL'
+    inputs:
+      command: 'build'
+      projects: '**/Source/ICS.DAL.csproj'
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet test ICS.DAL.Tests'
+    inputs:
+      command: 'test'
+      publishTestResults: true
+      projects: '**/Source/ICS.DAL.Tests.csproj'
+      
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build ICS.BL'
+    inputs:
+      command: 'build'
+      projects: '**/Source/ICS.BL.csproj'
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet test ICS.BL.Tests'
+    inputs:
+      command: 'test'
+      publishTestResults: true
+      projects: '**/Source/ICS.BL.Tests.csproj'
