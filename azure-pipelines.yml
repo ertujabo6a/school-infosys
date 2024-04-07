@@ -24,7 +24,7 @@ steps:
     displayName: 'dotnet build ICS.DAL'
     inputs:
       command: 'build'
-      projects: '**/Source/ICS.DAL/ICS.DAL.csproj'
+      projects: '**/ICS.DAL.csproj'
   - task: DotNetCoreCLI@2
     displayName: 'dotnet test ICS.DAL.Tests'
     inputs:
