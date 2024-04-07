@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using ICS.Common.Tests.Seeds;
 using ICS.BL.Models;
 using ICS.BL.Mappers.Interfaces;
 using ICS.DAL.Entities;
@@ -17,7 +18,7 @@ public class ActivityModelMapper
             {
                 Id = entity.Id,
                 Type = entity.Type,
-                SubjectAbbr = entity.Subject.Abbr,
+                SubjectAbbr = string.Empty,
                 ActivityRoom = entity.Room,
                 StartDate = entity.StartTime,
                 EndDate = entity.EndTime
@@ -42,6 +43,6 @@ public class ActivityModelMapper
             StartTime = list_model.StartDate,
             EndTime = list_model.EndDate,
             Subject = null!,
-            SubjectId = default
+            SubjectId = SubjectSeeds.SubjectEntity.Id
         };
 }
