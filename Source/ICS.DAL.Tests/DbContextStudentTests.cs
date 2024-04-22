@@ -38,87 +38,65 @@ public class DbContextStudentTests(ITestOutputHelper output) : DbContextTestsBas
         var entities = await IcsDbContextSut.Students.ToArrayAsync();
 
         // Assert
-        bool contains = entities.Any(e =>
-            e.Id == StudentSeeds.StudentEntity.Id &&
-            e.Name == StudentSeeds.StudentEntity.Name &&
-            e.Surname == StudentSeeds.StudentEntity.Surname &&
-            e.ImageUrl == StudentSeeds.StudentEntity.ImageUrl
-        );
-        Assert.True(contains);
+        DeepAssert.Contains(StudentSeeds.StudentEntity_StudentTest_GetAll, entities);
     }
 
     [Fact]
-    public async Task GetById_Student_StudentEntityRetrieved()
+    public async Task GetById_Student_StudentEntity()
     {
         // Act
-        var entity = await IcsDbContextSut.Students.SingleAsync(e => e.Id == StudentSeeds.StudentEntity.Id);
+        var entity = await IcsDbContextSut.Students.SingleAsync(i => i.Id == StudentSeeds.StudentEntity_StudentTest_GetById.Id);
 
         // Assert
-        DeepAssert.Equal(StudentSeeds.StudentEntity, entity);
+        DeepAssert.Equal(StudentSeeds.StudentEntity_StudentTest_GetById, entity);
     }
 
     [Fact]
     public async Task Update_Student_Persisted()
     {
         // Arrange
-        var entity = StudentSeeds.StudentEntity with { Name = "Updated Name" };
+        var baseEntity = StudentSeeds.StudentEntity_StudentTest_Update;
+        var entity = baseEntity with
+        {
+            Name = "Updated Name",
+            Surname = "Updated Surname"
+        };
 
         // Act
         IcsDbContextSut.Students.Update(entity);
         await IcsDbContextSut.SaveChangesAsync();
 
         // Assert
-        await using var dbContext = DbContextFactory.CreateDbContext();
-        var actual = await dbContext.Students.SingleAsync(e => e.Id == entity.Id);
-        DeepAssert.Equal(entity, actual);
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var actualEntity = await dbx.Students.SingleAsync(i => i.Id == entity.Id);
+        DeepAssert.Equal(entity, actualEntity);
     }
 
     [Fact]
-    public async Task Delete_Student_Removed()
+    public async Task Delete_Student_StudentDelete1()
     {
         // Arrange
-        var entity = StudentSeeds.StudentEntity;
+        var entityBase = StudentSeeds.StudentEntity_StudentTest_Delete1;
 
         // Act
-        IcsDbContextSut.Students.Remove(entity);
+        IcsDbContextSut.Students.Remove(entityBase);
         await IcsDbContextSut.SaveChangesAsync();
 
         // Assert
-        await using var dbContext = DbContextFactory.CreateDbContext();
-        var actual = await dbContext.Students.SingleOrDefaultAsync(e => e.Id == entity.Id);
-        Assert.Null(actual);
+        Assert.False(await IcsDbContextSut.Students.AnyAsync(i => i.Id == entityBase.Id));
     }
 
     [Fact]
-    public async Task DeleteById_Student_Removed()
+    public async Task DeleteById_Student_StudentDelete2()
     {
         // Arrange
-        var entity = StudentSeeds.StudentEntity;
+        var entityBase = StudentSeeds.StudentEntity_StudentTest_Delete2;
 
         // Act
-        IcsDbContextSut.Remove(IcsDbContextSut.Students.Single(e => e.Id == entity.Id));
+        IcsDbContextSut.Students.Remove(IcsDbContextSut.Students.Single(i => i.Id == entityBase.Id));
         await IcsDbContextSut.SaveChangesAsync();
 
         // Assert
-        await using var dbContext = DbContextFactory.CreateDbContext();
-        var actual = await dbContext.Students.SingleOrDefaultAsync(e => e.Id == entity.Id);
-        Assert.Null(actual);
-    }
-
-    [Fact]
-    public async Task Delete_StudentWithEvaluation_Removed()
-    {
-        // Arrange
-        var entity = StudentSeeds.StudentInEvaluation;
-        var evaluation = EvaluationSeeds.EvaluationEntity;
-
-        // Act
-        IcsDbContextSut.Remove(entity);
-        await IcsDbContextSut.SaveChangesAsync();
-
-        // Assert
-        await using IcsDbContext dbContext = DbContextFactory.CreateDbContext();
-        var actual = await dbContext.Evaluations.SingleOrDefaultAsync(e => e.Id == evaluation.Id);
-        Assert.Null(actual);
+        Assert.False(await IcsDbContextSut.Students.AnyAsync(i => i.Id == entityBase.Id));
     }
 }

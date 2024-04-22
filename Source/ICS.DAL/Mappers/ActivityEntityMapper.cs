@@ -11,5 +11,6 @@ public class ActivityEntityMapper : IEntityMapper<ActivityEntity>
         oldEntity.StartTime = newEntity.StartTime;
         oldEntity.EndTime = newEntity.EndTime;
         oldEntity.Description = newEntity.Description;
+        oldEntity.SubjectId = newEntity.SubjectId;
     }
 }

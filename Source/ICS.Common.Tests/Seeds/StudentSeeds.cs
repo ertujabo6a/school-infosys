@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
 using ICS.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,28 +5,47 @@ namespace ICS.Common.Tests.Seeds;
 
 public static class StudentSeeds
 {
-    public static readonly StudentEntity EmptyStudentEntity = new()
+    private static readonly StudentEntity StudentTestEntity = new()
     {
         Id = default,
-        Name = default!,
-        Surname = default!,
-        ImageUrl = default,
-    };
-
-    public static readonly StudentEntity StudentEntity = new()
-    {
-        Id = Guid.Parse("07b4cc7e-43aa-48ea-a829-f653c56c6728"),
-        Name = "Jan",
-        Surname = "Novak",
+        Name = "Name",
+        Surname = "Surname",
         ImageUrl = "https://example.com/images/jan.jpg"
     };
 
-    public static readonly StudentEntity StudentInEvaluation = new()
-    {
-        Id = Guid.Parse("07b4cc7e-43aa-48ea-a829-f653c56c6729"),
-        Name = "John",
-        Surname = "Johnson",
-        ImageUrl = "https://example.com/images/john.jpg"
-    };
+    public static readonly StudentEntity StudentEntity_StudentTest_GetAll =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-000000000000") };
+    public static readonly StudentEntity StudentEntity_StudentTest_GetById =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-000000000001") };
+    public static readonly StudentEntity StudentEntity_StudentTest_Update =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-000000000002") };
+    public static readonly StudentEntity StudentEntity_StudentTest_Delete1 =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-000000000003") };
+    public static readonly StudentEntity StudentEntity_StudentTest_Delete2 =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-000000000004") };
+    public static readonly StudentEntity StudentEntity_EvaluationTest_AddNew =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-000000000008") };
+    public static readonly StudentEntity StudentEntity_EvaluationTest_GetAll =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-000000000009") };
+    public static readonly StudentEntity StudentEntity_EvaluationTest_GetByStudent =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-00000000000a") };
+    public static readonly StudentEntity StudentEntity_EvaluationTest_Update =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-00000000000b") };
+    public static readonly StudentEntity StudentEntity_EvaluationTest_Delete =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-00000000000c") };
 
+    public static void Seed(this ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<StudentEntity>().HasData(
+            StudentEntity_StudentTest_GetAll,
+            StudentEntity_StudentTest_GetById,
+            StudentEntity_StudentTest_Update,
+            StudentEntity_StudentTest_Delete1,
+            StudentEntity_StudentTest_Delete2,
+            StudentEntity_EvaluationTest_AddNew,
+            StudentEntity_EvaluationTest_GetAll,
+            StudentEntity_EvaluationTest_GetByStudent,
+            StudentEntity_EvaluationTest_Update,
+            StudentEntity_EvaluationTest_Delete);
+    }
 }

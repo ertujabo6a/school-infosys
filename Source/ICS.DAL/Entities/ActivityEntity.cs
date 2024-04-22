@@ -10,9 +10,9 @@ public record ActivityEntity : IEntity
     public required DateTime EndTime { get; set; }
     public string? Description { get; set; }
 
-    public required SubjectEntity Subject { get; set; }
     public required Guid SubjectId { get; set; }
-    public ICollection<EvaluationEntity> Evaluations { get; set; } = new List<EvaluationEntity>();
+    public required SubjectEntity Subject { get; set; }
+    public ICollection<EvaluationEntity> Evaluations { get; init; } = new List<EvaluationEntity>();
 
     public required Guid Id { get; set; }
 }

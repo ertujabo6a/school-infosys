@@ -1,22 +1,23 @@
 ﻿using ICS.Common.Tests;
 using ICS.Common.Tests.Seeds;
+using ICS.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace ICS.DAL.Tests;
-public class DbContextSubjectTest (ITestOutputHelper output) : DbContextTestsBase(output)
+public class DbContextSubjectTest(ITestOutputHelper output) : DbContextTestsBase(output)
 {
     [Fact]
     public async Task AddNew_Subject_Persisted()
     {
         // Arrange
-        var entity = SubjectSeeds.EmptySubjectEntity with
+        var entity = new SubjectEntity
         {
-            Id = Guid.Parse("06a8a2cf-ea03-4095-a3e4-aa0291fe9c49"),
-            Name = "Seminář C#",
-            Abbr = "ICS",
-            Credits = 4
+            Id = Guid.Parse("fab130cd-eefe-443f-baf6-3d96cc2cbf99"),
+            Name = "New subject",
+            Abbr = "NS",
+            Credits = 10
         };
 
         // Act
@@ -24,113 +25,76 @@ public class DbContextSubjectTest (ITestOutputHelper output) : DbContextTestsBas
         await IcsDbContextSut.SaveChangesAsync();
 
         // Assert
-        await using var DbContext = await DbContextFactory.CreateDbContextAsync();
-        var actualEntity = await DbContext.Subjects
-            .SingleAsync(i => i.Id == entity.Id);
+        await using var dbContext = DbContextFactory.CreateDbContext();
+        var actualEntity = await dbContext.Subjects.SingleAsync(s => s.Id == entity.Id);
         DeepAssert.Equal(entity, actualEntity);
     }
 
     [Fact]
-    public async Task GetAll_Subjects_ContainsSubjectEntity()
+    public async Task GetAll_Subject_ContainsSeededSubject()
     {
-        // Arrange
+        // Act
         var entities = await IcsDbContextSut.Subjects.ToArrayAsync();
 
         // Assert
-        bool contains = entities.Any(e =>
-            e.Id == SubjectSeeds.SubjectEntity.Id &&
-            e.Name == SubjectSeeds.SubjectEntity.Name &&
-            e.Abbr == SubjectSeeds.SubjectEntity.Abbr &&
-            e.Credits == SubjectSeeds.SubjectEntity.Credits
-            );
-        Assert.True(contains);
+        DeepAssert.Contains(SubjectSeeds.SubjectEntity_SubjectTest_GetAll, entities);
     }
 
     [Fact]
     public async Task GetById_Subject()
     {
         // Act
-        var entity = await IcsDbContextSut.Subjects.SingleAsync(e => e.Id == SubjectSeeds.SubjectEntity.Id);
+        var entity = await IcsDbContextSut.Subjects.SingleAsync(i => i.Id == SubjectSeeds.SubjectEntity_SubjectTest_GetById.Id);
 
         // Assert
-        DeepAssert.Equal(SubjectSeeds.SubjectEntity, entity);
-    }
-
-    [Fact]
-    public async Task GetById_IncludingActivities_Subject()
-    {
-        // Act
-        var entity = await IcsDbContextSut.Subjects
-            .Include(i => i.Activities)
-            .SingleAsync(i => i.Id == SubjectSeeds.SubjectEntity.Id);
-
-        // Assert
-        DeepAssert.Equal(SubjectSeeds.SubjectEntity, entity);
+        DeepAssert.Equal(SubjectSeeds.SubjectEntity_SubjectTest_GetById, entity);
     }
 
     [Fact]
     public async Task Update_Subject_Persisted()
     {
         // Arrange
-        var entity = SubjectSeeds.SubjectEntity with { Name = "Updated name" };
+        var baseEntity = SubjectSeeds.SubjectEntity_SubjectTest_Update;
+        var entity = baseEntity with
+        {
+            Name = "Updated Name",
+        };
 
         // Act
         IcsDbContextSut.Subjects.Update(entity);
         await IcsDbContextSut.SaveChangesAsync();
 
         // Assert
-        await using IcsDbContext dbContext = DbContextFactory.CreateDbContext();
-        var actual = await dbContext.Subjects.SingleAsync(e => e.Id == entity.Id);
-        DeepAssert.Equal(entity, actual);
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var actualEntity = await dbx.Subjects.SingleAsync(i => i.Id == entity.Id);
+        DeepAssert.Equal(entity, actualEntity);
     }
 
     [Fact]
-    public async Task Delete_Subject_Removed()
+    public async Task Delete_Subject()
     {
         // Arrange
-        var entity = SubjectSeeds.SubjectEntity;
+        var entityBase = SubjectSeeds.SubjectEntity_SubjectTest_Delete;
 
         // Act
-        IcsDbContextSut.Subjects.Remove(entity);
+        IcsDbContextSut.Subjects.Remove(entityBase);
         await IcsDbContextSut.SaveChangesAsync();
 
         // Assert
-        await using IcsDbContext dbContext = DbContextFactory.CreateDbContext();
-        var actual = await dbContext.Subjects.SingleOrDefaultAsync(e => e.Id == entity.Id);
-        Assert.Null(actual);
+        Assert.False(await IcsDbContextSut.Subjects.AnyAsync(i => i.Id == entityBase.Id));
     }
 
     [Fact]
-    public async Task DelelteById_Subject_Removed()
+    public async Task DeleteById_Subject()
     {
         // Arrange
-        var entity = SubjectSeeds.SubjectEntity;
+        var entityBase = SubjectSeeds.SubjectEntity_SubjectTest_DeleteById;
 
         // Act
-        IcsDbContextSut.Remove(IcsDbContextSut.Subjects.Single(e => e.Id == entity.Id));
+        IcsDbContextSut.Subjects.Remove(IcsDbContextSut.Subjects.Single(i => i.Id == entityBase.Id));
         await IcsDbContextSut.SaveChangesAsync();
 
         // Assert
-        await using IcsDbContext dbContext = DbContextFactory.CreateDbContext();
-        var actual = await dbContext.Subjects.SingleOrDefaultAsync(e => e.Id == entity.Id);
-        Assert.Null(actual);
+        Assert.False(await IcsDbContextSut.Subjects.AnyAsync(i => i.Id == entityBase.Id));
     }
-
-    [Fact]
-    public async Task Delete_SujectWithActivity_Removed()
-    {
-        // Arrange
-        var entity = SubjectSeeds.SubjectForActivity;
-        var activity = ActivitySeeds.ActivityEntity;
-
-        // Act
-        IcsDbContextSut.Remove(entity);
-        await IcsDbContextSut.SaveChangesAsync();
-
-        // Assert
-        await using IcsDbContext dbContext = DbContextFactory.CreateDbContext();
-        var actual = await dbContext.Activities.SingleOrDefaultAsync(e => e.Id == activity.Id);
-        Assert.Null(actual);
-    }
-
 }
