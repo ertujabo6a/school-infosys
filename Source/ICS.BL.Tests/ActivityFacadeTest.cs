@@ -27,7 +27,7 @@ public class ActivityFacadeTests : FacadeTestsBase
     public async Task Add_NewActivity_Persisted()
     {
         // Arrange
-        var activity = new ActivityListModel()
+        var activity = new ActivityDetailModel()
         {
             Id = Guid.Parse(input: "fab130cd-eefe-443f-baf6-3d96cc2cbf23"),
             SubjectAbbr = "ABR",
@@ -76,7 +76,7 @@ public class ActivityFacadeTests : FacadeTestsBase
     [Fact]
     public async Task InsertById()
     {
-        var activityListModel = new ActivityListModel()
+        var activityListModel = new ActivityDetailModel()
         {
             Id = Guid.Parse(input: "fab130cd-eefe-443f-baf6-3d96cc2cbf23"),
             SubjectAbbr = "ABR",

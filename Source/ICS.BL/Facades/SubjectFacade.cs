@@ -9,5 +9,5 @@ namespace ICS.BL.Facades;
 public class SubjectFacade(
     IUnitOfWorkFactory unitOfWorkFactory,
     ISubjectModelMapper modelMapper)
-    : FacadeBase<SubjectEntity, SubjectListModel, SubjectReferenceModel, SubjectEntityMapper>(unitOfWorkFactory,
+    : FacadeBase<SubjectEntity, SubjectDetailModel, SubjectListModel, SubjectEntityMapper>(unitOfWorkFactory,
         modelMapper), ISubjectFacade;

@@ -9,6 +9,6 @@ namespace ICS.BL.Facades;
 public class ActivityFacade(
     IUnitOfWorkFactory unitOfWorkFactory,
     IActivityModelMapper modelMapper)
-    : FacadeBase<ActivityEntity, ActivityListModel, ActivityReferenceModel, ActivityEntityMapper>(unitOfWorkFactory,
+    : FacadeBase<ActivityEntity, ActivityDetailModel, ActivityListModel, ActivityEntityMapper>(unitOfWorkFactory,
             modelMapper),
         IActivityFacade;

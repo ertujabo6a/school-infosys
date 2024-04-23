@@ -21,7 +21,7 @@ public sealed class SubjectFacadeTests : FacadeTestsBase
     [Fact]
     public async Task Create_WithNonExistingItem_DoesNotThrow()
     {
-        var model = new SubjectListModel()
+        var model = new SubjectDetailModel()
         {
             Id = Guid.Empty,
             SubjectName = "Subject 1",
@@ -69,7 +69,7 @@ public sealed class SubjectFacadeTests : FacadeTestsBase
     public async Task NewSubject_InsertOrUpdate_SubjectAdded()
     {
         //Arrange
-        var subject = new SubjectListModel()
+        var subject = new SubjectDetailModel()
         {
             Id = Guid.Empty,
             SubjectName = "New Subject",
@@ -90,7 +90,7 @@ public sealed class SubjectFacadeTests : FacadeTestsBase
     public async Task SeededSubject_InsertOrUpdate_SubjectUpdated()
     {
         //Arrange
-        var subject = new SubjectListModel()
+        var subject = new SubjectDetailModel()
         {
             Id = SubjectSeeds.SubjectEntity.Id,
             SubjectName = SubjectSeeds.SubjectEntity.Name,

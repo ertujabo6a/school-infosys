@@ -21,7 +21,7 @@ public sealed class EvaluationFacadeTests : FacadeTestsBase
     [Fact]
     public async Task Create_WithNonExistingItem_DoesNotThrow()
     {
-        var model = new EvaluationListModel()
+        var model = new EvaluationDetailModel()
         {
             Id = Guid.Empty,
             Description = "Description 1",
@@ -60,7 +60,7 @@ public sealed class EvaluationFacadeTests : FacadeTestsBase
     [Fact]
     public async Task Insert_NewEvaluation_Added()
     {
-        var model = new EvaluationListModel()
+        var model = new EvaluationDetailModel()
         {
             Id = Guid.Empty,
             Description = "Description 1",

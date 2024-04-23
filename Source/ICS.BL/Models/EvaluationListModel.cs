@@ -1,11 +1,13 @@
-﻿namespace ICS.BL.Models;
+﻿using System.Collections.ObjectModel;
+
+namespace ICS.BL.Models;
 
 public record EvaluationListModel : ModelBase
 {
-    public SubjectReferenceModel? Subject { get; set; }
-    public ActivityReferenceModel? Activity { get; set; }
-    public StudentReferenceModel? Student { get; set; }
-    public string? Description { get; set; }
+    public Guid? StudentId { get; set; }
+    public StudentListModel? Student { get; set; }
+    public Guid? ActivityId { get; set; }
+    public ActivityListModel? Activity { get; set; }
     public required int Points { get; set; }
 
     public static EvaluationListModel Empty => new()

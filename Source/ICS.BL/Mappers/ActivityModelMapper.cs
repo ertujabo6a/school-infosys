@@ -8,13 +8,13 @@ using ICS.DAL.Entities;
 namespace ICS.BL.Mappers;
 
 public class ActivityModelMapper
-    : ModelMapperBase<ActivityEntity, ActivityListModel, ActivityReferenceModel>,
+    : ModelMapperBase<ActivityEntity, ActivityDetailModel, ActivityListModel>,
     IActivityModelMapper
 {
-    public override ActivityListModel MapToListModel(ActivityEntity? entity)
+    public override ActivityDetailModel MapToListModel(ActivityEntity? entity)
         => entity is null
-            ? ActivityListModel.Empty
-            : new ActivityListModel
+            ? ActivityDetailModel.Empty
+            : new ActivityDetailModel
             {
                 Id = entity.Id,
                 Type = entity.Type,
@@ -24,16 +24,16 @@ public class ActivityModelMapper
                 SubjectAbbr = entity.Subject?.Abbr ?? string.Empty
             };
 
-    public override ActivityReferenceModel MapToReferenceModel(ActivityEntity? entity)
+    public override ActivityListModel MapToReferenceModel(ActivityEntity? entity)
         => entity is null
-            ? ActivityReferenceModel.Empty
-            : new ActivityReferenceModel
+            ? ActivityListModel.Empty
+            : new ActivityListModel
             {
                 Id = entity.Id,
                 Type = entity.Type
             };
 
-    public override ActivityEntity MapToEntity(ActivityListModel list_model)
+    public override ActivityEntity MapToEntity(ActivityDetailModel list_model)
         => new()
         {
             Id = list_model.Id,

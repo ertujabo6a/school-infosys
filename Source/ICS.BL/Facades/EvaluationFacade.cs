@@ -9,6 +9,6 @@ namespace ICS.BL.Facades;
 public class EvaluationFacade(
     IUnitOfWorkFactory unitOfWorkFactory,
     IEvaluationModelMapper modelMapper)
-    : FacadeBase<EvaluationEntity, EvaluationListModel, EvaluationListModel, EvaluationEntityMapper>(unitOfWorkFactory,
+    : FacadeBase<EvaluationEntity, EvaluationDetailModel, EvaluationDetailModel, EvaluationEntityMapper>(unitOfWorkFactory,
             modelMapper),
         IEvaluationFacade;

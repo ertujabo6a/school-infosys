@@ -7,13 +7,13 @@ using ICS.DAL.Entities;
 namespace ICS.BL.Mappers;
 
 public class SubjectModelMapper
-    : ModelMapperBase<SubjectEntity, SubjectListModel, SubjectReferenceModel>,
+    : ModelMapperBase<SubjectEntity, SubjectDetailModel, SubjectListModel>,
     ISubjectModelMapper
 {
-    public override SubjectListModel MapToListModel(SubjectEntity? entity)
+    public override SubjectDetailModel MapToListModel(SubjectEntity? entity)
         => entity is null
-        ? SubjectListModel.Empty
-        : new SubjectListModel
+        ? SubjectDetailModel.Empty
+        : new SubjectDetailModel
         {
             Id = entity.Id,
             SubjectName = entity.Name,
@@ -21,16 +21,16 @@ public class SubjectModelMapper
             Credits = entity.Credits
         };
 
-    public override SubjectReferenceModel MapToReferenceModel(SubjectEntity? entity)
+    public override SubjectListModel MapToReferenceModel(SubjectEntity? entity)
         => entity is null
-        ? SubjectReferenceModel.Empty
-        : new SubjectReferenceModel
+        ? SubjectListModel.Empty
+        : new SubjectListModel
         {
             Id = entity.Id,
             SubjectAbbr = entity.Abbr
         };
 
-    public override SubjectEntity MapToEntity(SubjectListModel list_model)
+    public override SubjectEntity MapToEntity(SubjectDetailModel list_model)
         => new()
         {
             Id = list_model.Id,

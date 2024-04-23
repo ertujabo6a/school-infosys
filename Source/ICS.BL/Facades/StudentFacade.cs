@@ -9,5 +9,5 @@ namespace ICS.BL.Facades;
 public class StudentFacade(
     IUnitOfWorkFactory unitOfWorkFactory,
     IStudentModelMapper modelMapper)
-    : FacadeBase<StudentEntity, StudentListModel, StudentReferenceModel, StudentEntityMapper>(unitOfWorkFactory,
+    : FacadeBase<StudentEntity, StudentDetailModel, StudentListModel, StudentEntityMapper>(unitOfWorkFactory,
         modelMapper), IStudentFacade;

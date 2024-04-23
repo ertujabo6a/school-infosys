@@ -9,13 +9,13 @@ namespace ICS.BL.Mappers;
 
 
 public class StudentModelMapper(ISubjectModelMapper subjectModelMapper)
-    : ModelMapperBase<StudentEntity, StudentListModel, StudentReferenceModel>,
+    : ModelMapperBase<StudentEntity, StudentDetailModel, StudentListModel>,
     IStudentModelMapper
 {
-    public override StudentListModel MapToListModel(StudentEntity? entity)
+    public override StudentDetailModel MapToListModel(StudentEntity? entity)
         => entity is null
-        ? StudentListModel.Empty
-        : new StudentListModel
+        ? StudentDetailModel.Empty
+        : new StudentDetailModel
         {
             Id = entity.Id,
             Name = entity.Name,
@@ -24,17 +24,17 @@ public class StudentModelMapper(ISubjectModelMapper subjectModelMapper)
             Subjects = subjectModelMapper.MapToReferenceModel(entity.Subjects).ToObservableCollection()
         };
 
-    public override StudentReferenceModel MapToReferenceModel(StudentEntity? entity)
+    public override StudentListModel MapToReferenceModel(StudentEntity? entity)
         => entity is null
-        ? StudentReferenceModel.Empty
-        : new StudentReferenceModel
+        ? StudentListModel.Empty
+        : new StudentListModel
         {
             Id = entity.Id,
             Name = entity.Name,
             Surname = entity.Surname
         };
 
-    public override StudentEntity MapToEntity(StudentListModel list_model)
+    public override StudentEntity MapToEntity(StudentDetailModel list_model)
         => new()
         {
             Id = list_model.Id,

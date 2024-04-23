@@ -23,7 +23,7 @@ public sealed class StudentFacadeTests : FacadeTestsBase
     [Fact]
     public async Task GetAsync_Student_NonExistent()
     {
-        StudentReferenceModel? student = await _studentFacade.GetAsync(StudentSeeds.EmptyStudentEntity.Id);
+        StudentListModel? student = await _studentFacade.GetAsync(StudentSeeds.EmptyStudentEntity.Id);
 
         Assert.Null(student);
     }
@@ -31,7 +31,7 @@ public sealed class StudentFacadeTests : FacadeTestsBase
     [Fact]
     public async Task GetAsync_Student_SampleById()
     {
-        StudentReferenceModel? student = await _studentFacade.GetAsync(StudentSeeds.StudentEntity.Id);
+        StudentListModel? student = await _studentFacade.GetAsync(StudentSeeds.StudentEntity.Id);
 
         Assert.NotNull(student);
         Assert.Equal(StudentSeeds.StudentEntity.Id, student.Id);
@@ -59,7 +59,7 @@ public sealed class StudentFacadeTests : FacadeTestsBase
     public async Task SaveAsync_InsertOrUpdate_NewStudent()
     {
         //Arrange
-        var student = new StudentListModel()
+        var student = new StudentDetailModel()
         {
             Id = Guid.Empty,
             Name = "New Name",
@@ -79,7 +79,7 @@ public sealed class StudentFacadeTests : FacadeTestsBase
     public async Task SaveAsync_InsertOrUpdate_StudentUpdated()
     {
         //Arrange
-        var student = new StudentListModel()
+        var student = new StudentDetailModel()
         {
             Id = StudentSeeds.StudentEntity.Id,
             Name = StudentSeeds.StudentEntity.Name,
@@ -100,7 +100,7 @@ public sealed class StudentFacadeTests : FacadeTestsBase
     [Fact]
     public async Task SaveAsync_UpdateWithSideColl()
     {
-        var student = new StudentListModel()
+        var student = new StudentDetailModel()
         {
             Id =StudentSeeds.StudentEntity.Id,
             Name = StudentSeeds.StudentEntity.Name,

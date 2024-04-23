@@ -2,6 +2,6 @@
 using ICS.DAL.Entities;
 
 namespace ICS.BL.Facades.Interfaces;
-public interface ISubjectFacade : IFacade<SubjectEntity, SubjectListModel, SubjectReferenceModel>
+public interface ISubjectFacade : IFacade<SubjectEntity, SubjectDetailModel, SubjectListModel>
 {
 }

@@ -4,6 +4,6 @@ using ICS.DAL.Entities;
 namespace ICS.BL.Mappers.Interfaces;
 
 public interface ISubjectModelMapper
-    : IModelMapper<SubjectEntity, SubjectListModel, SubjectReferenceModel>
+    : IModelMapper<SubjectEntity, SubjectDetailModel, SubjectListModel>
 {
 }
