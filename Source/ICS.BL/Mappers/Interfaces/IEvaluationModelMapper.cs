@@ -3,6 +3,6 @@ using ICS.DAL.Entities;
 
 namespace ICS.BL.Mappers.Interfaces;
 
-public interface IEvaluationModelMapper : IModelMapper<EvaluationEntity, EvaluationDetailModel, EvaluationDetailModel>
+public interface IEvaluationModelMapper : IModelMapper<EvaluationEntity, EvaluationListModel, EvaluationDetailModel>
 {
 }

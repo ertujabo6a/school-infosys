@@ -4,6 +4,6 @@ using ICS.DAL.Entities;
 namespace ICS.BL.Mappers.Interfaces;
 
 public interface IStudentModelMapper
-    : IModelMapper<StudentEntity, StudentDetailModel, StudentListModel>
+    : IModelMapper<StudentEntity, StudentListModel, StudentDetailModel>
 {
 }
