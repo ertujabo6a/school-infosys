@@ -16,6 +16,7 @@ public record ActivityDetailModel : ModelBase
     public static ActivityDetailModel Empty => new()
     {
         Id = Guid.Empty,
+        SubjectId = Guid.Empty,
         SubjectAbbr = string.Empty,
         Type = default,
         ActivityRoom = default,

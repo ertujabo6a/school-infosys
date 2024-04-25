@@ -1,6 +1,3 @@
-using System;
-using System.Collections.ObjectModel;
-using ICS.Common.Tests.Seeds;
 using ICS.BL.Models;
 using ICS.BL.Mappers.Interfaces;
 using ICS.DAL.Entities;
@@ -17,10 +14,7 @@ public class ActivityModelMapper
             : new ActivityListModel
             {
                 Id = entity.Id,
-                SubjectId = entity.Subject.Id,
-                Type = entity.Type,
-                StartDate = entity.StartTime,
-                EndDate = entity.EndTime
+                Type = entity.Type
             };
 
     public override ActivityDetailModel MapToDetailModel(ActivityEntity? entity)
@@ -29,6 +23,8 @@ public class ActivityModelMapper
             : new ActivityDetailModel
             {
                 Id = entity.Id,
+                SubjectId = entity.SubjectId,
+                SubjectAbbr = entity.Subject.Abbr,
                 Type = entity.Type,
                 ActivityRoom = entity.Room,
                 StartDate = entity.StartTime,
@@ -46,7 +42,7 @@ public class ActivityModelMapper
             StartTime = detailModel.StartDate,
             EndTime = detailModel.EndDate,
             Description = detailModel.Description,
-            SubjectId = detailModel.Subject.Id,
+            SubjectId = detailModel.SubjectId,
             Subject = null!
         };
 }

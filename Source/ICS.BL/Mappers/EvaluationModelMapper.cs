@@ -1,9 +1,6 @@
 using ICS.BL.Models;
 using ICS.BL.Mappers.Interfaces;
 using ICS.DAL.Entities;
-using ICS.Common.Tests.Seeds;
-
-
 
 namespace ICS.BL.Mappers;
 
@@ -17,9 +14,12 @@ public class EvaluationModelMapper
         : new EvaluationListModel
         {
             Id = entity.Id,
-            Points = entity.Points,
+            ActivityId = entity.ActivityId,
+            Activity = entity.Activity.Type,
             StudentId = entity.StudentId,
-            ActivityId = entity.ActivityId
+            StudentName = entity.Student.Name,
+            StudentSurname = entity.Student.Surname,
+            Points = entity.Points,
         };
 
     public override EvaluationDetailModel MapToDetailModel(EvaluationEntity? entity)
@@ -29,7 +29,12 @@ public class EvaluationModelMapper
             {
                 Id = entity.Id,
                 ActivityId = entity.ActivityId,
+                Activity = entity.Activity.Type,
                 StudentId = entity.StudentId,
+                StudentName = entity.Student.Name,
+                StudentSurname = entity.Student.Surname,
+                SubjectId = entity.Activity.Subject.Id,
+                SubjectAbbr = entity.Activity.Subject.Abbr,
                 Points = entity.Points,
                 Description = entity.Description
             };
@@ -45,5 +50,4 @@ public class EvaluationModelMapper
             Activity = null!,
             Student = null!
         };
-
 }
