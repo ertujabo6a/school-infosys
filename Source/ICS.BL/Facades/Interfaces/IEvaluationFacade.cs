@@ -2,6 +2,8 @@
 using ICS.DAL.Entities;
 
 namespace ICS.BL.Facades.Interfaces;
-public interface IEvaluationFacade : IFacade<EvaluationEntity, EvaluationDetailModel, EvaluationDetailModel>
+
+public interface IEvaluationFacade : IFacade<EvaluationEntity, EvaluationListModel, EvaluationDetailModel>
 {
+    Task<IEnumerable<EvaluationListModel>> GetAsync(string? orderBy);
 }
