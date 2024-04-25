@@ -6,7 +6,7 @@ public record SubjectListModel : ModelBase
 
     public static SubjectListModel Empty => new()
     {
-        Id = Guid.NewGuid(),
+        Id = Guid.Empty,
         SubjectAbbr = string.Empty
     };
 }

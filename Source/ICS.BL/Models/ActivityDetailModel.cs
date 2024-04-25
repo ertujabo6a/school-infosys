@@ -6,8 +6,8 @@ namespace ICS.BL.Models;
 public record ActivityDetailModel : ModelBase
 {
     public required ActivityType Type { get; set; }
-    public Guid? SubjectId { get; set; }
-    public SubjectListModel? Subject { get; set; }
+    public required Guid SubjectId { get; set; }
+    public required string SubjectAbbr { get; set; }
     public required Room ActivityRoom { get; set; }
     public required DateTime StartDate { get; set; }
     public required DateTime EndDate { get; set; }
@@ -15,7 +15,8 @@ public record ActivityDetailModel : ModelBase
 
     public static ActivityDetailModel Empty => new()
     {
-        Id = Guid.NewGuid(),
+        Id = Guid.Empty,
+        SubjectAbbr = string.Empty,
         Type = default,
         ActivityRoom = default,
         StartDate = default,

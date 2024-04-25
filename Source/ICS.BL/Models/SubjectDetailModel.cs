@@ -12,7 +12,7 @@ public record SubjectDetailModel : ModelBase
 
     public static SubjectDetailModel Empty => new()
     {
-        Id = Guid.NewGuid(),
+        Id = Guid.Empty,
         SubjectName = string.Empty,
         SubjectAbbr = string.Empty,
         Credits = default

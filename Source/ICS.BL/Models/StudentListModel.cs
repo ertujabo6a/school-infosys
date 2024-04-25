@@ -7,7 +7,7 @@ public record StudentListModel : ModelBase
 
     public static StudentListModel Empty => new()
     {
-        Id = Guid.NewGuid(),
+        Id = Guid.Empty,
         Name = string.Empty,
         Surname = string.Empty
     };
