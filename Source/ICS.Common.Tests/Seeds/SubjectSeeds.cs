@@ -55,6 +55,13 @@ public static class SubjectSeeds
     public static readonly SubjectEntity SubjectEntity_BL_StudentTest_UpdateWithSideColl =
         SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000006"), Abbr = "IFN"};
 
+    public static readonly SubjectEntity SubjectEntity_BL_ActivityTest_GetById =
+        SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000007") };
+    public static readonly SubjectEntity SubjectEntity_BL_ActivityTest_DeleteById =
+        SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000008") };
+    public static readonly SubjectEntity SubjectEntity_BL_ActivityTest_Insert =
+        SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000009") };
+
 
     public static void Seed(this ModelBuilder modelBuilder) =>
         modelBuilder.Entity<SubjectEntity>().HasData(
@@ -78,5 +85,8 @@ public static class SubjectSeeds
             SubjectEntity_BL_SubjectTest_Delete,
             SubjectEntity_BL_SubjectTest_Delete_SubjectUsedInActivity,
             SubjectEntity_BL_SubjectTest_Update,
-            SubjectEntity_BL_StudentTest_UpdateWithSideColl);
+            SubjectEntity_BL_StudentTest_UpdateWithSideColl,
+            SubjectEntity_BL_ActivityTest_GetById,
+            SubjectEntity_BL_ActivityTest_DeleteById,
+            SubjectEntity_BL_ActivityTest_Insert);
 }

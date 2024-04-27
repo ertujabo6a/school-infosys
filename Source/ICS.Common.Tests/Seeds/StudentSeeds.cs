@@ -45,6 +45,9 @@ public static class StudentSeeds
     public static readonly StudentEntity StudentEntity_BL_StudentTest_UpdateWithSideColl =
         StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-010000000005") };
 
+    public static readonly StudentEntity StudentEntity_BL_ActivityTest_AddNew =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-010000000006") };
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<StudentEntity>().HasData(
@@ -63,6 +66,7 @@ public static class StudentSeeds
             StudentEntity_BL_StudentTest_GetAll,
             StudentEntity_BL_StudentTest_Delete,
             StudentEntity_BL_StudentTest_Update,
-            StudentEntity_BL_StudentTest_UpdateWithSideColl);
+            StudentEntity_BL_StudentTest_UpdateWithSideColl,
+            StudentEntity_BL_ActivityTest_AddNew);
     }
 }
