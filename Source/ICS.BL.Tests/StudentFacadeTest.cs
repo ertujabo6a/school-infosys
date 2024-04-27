@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
 using ICS.DAL.Entities;
-using System.Collections.ObjectModel;
 
 namespace ICS.BL.Tests;
 
@@ -23,7 +22,7 @@ public sealed class StudentFacadeTests : FacadeTestsBase
     [Fact]
     public async Task GetAsync_Student_NonExistent()
     {
-        StudentListModel? student = await _studentFacade.GetAsync(StudentSeeds.EmptyStudentEntity.Id);
+        var student = await _studentFacade.GetAsync(Guid.NewGuid());
 
         Assert.Null(student);
     }
@@ -31,28 +30,28 @@ public sealed class StudentFacadeTests : FacadeTestsBase
     [Fact]
     public async Task GetAsync_Student_SampleById()
     {
-        StudentListModel? student = await _studentFacade.GetAsync(StudentSeeds.StudentEntity.Id);
+        var student = await _studentFacade.GetAsync(StudentSeeds.StudentEntity_BL_StudentTest_GetById.Id);
 
         Assert.NotNull(student);
-        Assert.Equal(StudentSeeds.StudentEntity.Id, student.Id);
+        Assert.Equal(StudentSeeds.StudentEntity_BL_StudentTest_GetById.Id, student.Id);
     }
 
     [Fact]
     public async Task GetAll_Single_SeededStudent()
     {
         var students = await _studentFacade.GetAsync();
-        var student = students.Single(s => s.Id == StudentSeeds.StudentEntity.Id);
+        var student = students.Single(s => s.Id == StudentSeeds.StudentEntity_BL_StudentTest_GetAll.Id);
 
-        DeepAssert.Equal(StudentModelMapper.MapToListModel(StudentSeeds.StudentEntity), student);
+        DeepAssert.Equal(StudentModelMapper.MapToListModel(StudentSeeds.StudentEntity_BL_StudentTest_GetAll), student);
     }
 
     [Fact]
     public async Task Delete_Student_SampleDataDeleted()
     {
-        await _studentFacade.DeleteAsync(StudentSeeds.StudentEntity.Id);
+        await _studentFacade.DeleteAsync(StudentSeeds.StudentEntity_BL_StudentTest_Delete.Id);
 
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        Assert.False(await dbxAssert.Students.AnyAsync(s => s.Id == StudentSeeds.StudentEntity.Id));
+        Assert.False(await dbxAssert.Students.AnyAsync(s => s.Id == StudentSeeds.StudentEntity_BL_StudentTest_Delete.Id));
     }
 
     [Fact]
@@ -71,8 +70,8 @@ public sealed class StudentFacadeTests : FacadeTestsBase
 
         //Assert
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        StudentEntity? studentFromDb = await dbxAssert.Students.SingleAsync(s => s.Id == student.Id);
-        DeepAssert.Equal(student, StudentModelMapper.MapToListModel(studentFromDb));
+        var studentFromDb = await dbxAssert.Students.SingleAsync(s => s.Id == student.Id);
+        DeepAssert.Equal(student, StudentModelMapper.MapToDetailModel(studentFromDb));
     }
 
     [Fact]
@@ -81,9 +80,9 @@ public sealed class StudentFacadeTests : FacadeTestsBase
         //Arrange
         var student = new StudentDetailModel()
         {
-            Id = StudentSeeds.StudentEntity.Id,
-            Name = StudentSeeds.StudentEntity.Name,
-            Surname = StudentSeeds.StudentEntity.Surname,
+            Id = StudentSeeds.StudentEntity_BL_StudentTest_Update.Id,
+            Name = StudentSeeds.StudentEntity_BL_StudentTest_Update.Name,
+            Surname = StudentSeeds.StudentEntity_BL_StudentTest_Update.Surname,
         };
         student.Name += " Updated";
         student.Surname += " Updated";
@@ -94,7 +93,7 @@ public sealed class StudentFacadeTests : FacadeTestsBase
         //Assert
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
         StudentEntity studentFromDb = await dbxAssert.Students.SingleAsync(s => s.Id == student.Id);
-        DeepAssert.Equal(student, StudentModelMapper.MapToListModel(studentFromDb));
+        DeepAssert.Equal(student, StudentModelMapper.MapToDetailModel(studentFromDb));
     }
 
     [Fact]
@@ -102,17 +101,17 @@ public sealed class StudentFacadeTests : FacadeTestsBase
     {
         var student = new StudentDetailModel()
         {
-            Id =StudentSeeds.StudentEntity.Id,
-            Name = StudentSeeds.StudentEntity.Name,
-            Surname = StudentSeeds.StudentEntity.Surname,
-            Subjects = 
+            Id =StudentSeeds.StudentEntity_BL_StudentTest_UpdateWithSideColl.Id,
+            Name = StudentSeeds.StudentEntity_BL_StudentTest_UpdateWithSideColl.Name,
+            Surname = StudentSeeds.StudentEntity_BL_StudentTest_UpdateWithSideColl.Surname,
+            Subjects =
             {
                 new()
                 {
-                    SubjectAbbr = SubjectSeeds.SubjectEntity.Abbr
+                    SubjectAbbr = SubjectSeeds.SubjectEntity_BL_StudentTest_UpdateWithSideColl.Abbr
                 }
             }
-            
+
         };
         await Assert.ThrowsAnyAsync<InvalidOperationException>(() => _studentFacade.SaveAsync(student));
     }

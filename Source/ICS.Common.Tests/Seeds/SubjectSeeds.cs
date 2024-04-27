@@ -52,6 +52,8 @@ public static class SubjectSeeds
         SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000004") };
     public static readonly SubjectEntity SubjectEntity_BL_SubjectTest_Update =
         SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000005") };
+    public static readonly SubjectEntity SubjectEntity_BL_StudentTest_UpdateWithSideColl =
+        SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000006"), Abbr = "IFN"};
 
 
     public static void Seed(this ModelBuilder modelBuilder) =>
@@ -75,5 +77,6 @@ public static class SubjectSeeds
             SubjectEntity_BL_SubjectTest_DeleteById,
             SubjectEntity_BL_SubjectTest_Delete,
             SubjectEntity_BL_SubjectTest_Delete_SubjectUsedInActivity,
-            SubjectEntity_BL_SubjectTest_Update);
+            SubjectEntity_BL_SubjectTest_Update,
+            SubjectEntity_BL_StudentTest_UpdateWithSideColl);
 }
