@@ -42,6 +42,17 @@ public static class SubjectSeeds
     public static readonly SubjectEntity SubjectEntity_EvaluationTest_Delete =
         SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-00000000001d") };
 
+    public static readonly SubjectEntity SubjectEntity_BL_SubjectTest_GetAll =
+        SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000001") };
+    public static readonly SubjectEntity SubjectEntity_BL_SubjectTest_DeleteById =
+        SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000002") };
+    public static readonly SubjectEntity SubjectEntity_BL_SubjectTest_Delete =
+        SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000003") };
+    public static readonly SubjectEntity SubjectEntity_BL_SubjectTest_Delete_SubjectUsedInActivity =
+        SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000004") };
+    public static readonly SubjectEntity SubjectEntity_BL_SubjectTest_Update =
+        SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000005") };
+
 
     public static void Seed(this ModelBuilder modelBuilder) =>
         modelBuilder.Entity<SubjectEntity>().HasData(
@@ -58,5 +69,11 @@ public static class SubjectSeeds
             SubjectEntity_EvaluationTest_GetAll,
             SubjectEntity_EvaluationTest_GetByStudent,
             SubjectEntity_EvaluationTest_Update,
-            SubjectEntity_EvaluationTest_Delete);
+            SubjectEntity_EvaluationTest_Delete,
+
+            SubjectEntity_BL_SubjectTest_GetAll,
+            SubjectEntity_BL_SubjectTest_DeleteById,
+            SubjectEntity_BL_SubjectTest_Delete,
+            SubjectEntity_BL_SubjectTest_Delete_SubjectUsedInActivity,
+            SubjectEntity_BL_SubjectTest_Update);
 }

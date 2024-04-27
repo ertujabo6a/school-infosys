@@ -11,11 +11,11 @@ namespace ICS.BL.Tests;
 
 public sealed class SubjectFacadeTests : FacadeTestsBase
 {
-    private readonly ISubjectFacade _subjectFacadeSUT;
+    private readonly ISubjectFacade _subjectFacadeSut;
 
     public SubjectFacadeTests(ITestOutputHelper output) : base(output)
     {
-        _subjectFacadeSUT = new SubjectFacade(UnitOfWorkFactory, SubjectModelMapper);
+        _subjectFacadeSut = new SubjectFacade(UnitOfWorkFactory, SubjectModelMapper);
     }
 
     [Fact]
@@ -29,22 +29,22 @@ public sealed class SubjectFacadeTests : FacadeTestsBase
             Credits = 5
         };
 
-        var _ = await _subjectFacadeSUT.SaveAsync(model);
+        var _ = await _subjectFacadeSut.SaveAsync(model);
     }
 
     [Fact]
     public async Task GetAll_Single_SeededSubject()
     {
-        var subjects = await _subjectFacadeSUT.GetAsync();
-        var subject = subjects.Single(s => s.Id == SubjectSeeds.SubjectEntity.Id);
+        var subjects = await _subjectFacadeSut.GetAsync();
+        var subject = subjects.Single(s => s.Id == SubjectSeeds.SubjectEntity_BL_SubjectTest_GetAll.Id);
 
-        DeepAssert.Equal(SubjectModelMapper.MapToListModel(SubjectSeeds.SubjectEntity), subject);
+        DeepAssert.Equal(SubjectModelMapper.MapToListModel(SubjectSeeds.SubjectEntity_BL_SubjectTest_GetAll), subject);
     }
 
     [Fact]
     public async Task GetById_NonExistent()
     {
-        var subject = await _subjectFacadeSUT.GetAsync(Guid.NewGuid());
+        var subject = await _subjectFacadeSut.GetAsync(Guid.NewGuid());
 
         Assert.Null(subject);
     }
@@ -52,17 +52,17 @@ public sealed class SubjectFacadeTests : FacadeTestsBase
     [Fact]
     public async Task SeededSubject_DeleteById_Deleted()
     {
-        await _subjectFacadeSUT.DeleteAsync(SubjectSeeds.SubjectEntity.Id);
+        await _subjectFacadeSut.DeleteAsync(SubjectSeeds.SubjectEntity_BL_SubjectTest_DeleteById.Id);
 
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        Assert.False(await dbxAssert.Subjects.AnyAsync(s => s.Id == SubjectSeeds.SubjectEntity.Id));
+        Assert.False(await dbxAssert.Subjects.AnyAsync(s => s.Id == SubjectSeeds.SubjectEntity_BL_SubjectTest_DeleteById.Id));
     }
 
     [Fact]
     public async Task Delete_SubjectUsedInActivity_DoesNotThrow()
     {
         //Act & Assert
-        await _subjectFacadeSUT.DeleteAsync(SubjectSeeds.SubjectEntity.Id);;
+        await _subjectFacadeSut.DeleteAsync(SubjectSeeds.SubjectEntity_BL_SubjectTest_Delete_SubjectUsedInActivity.Id);
     }
 
     [Fact]
@@ -78,12 +78,12 @@ public sealed class SubjectFacadeTests : FacadeTestsBase
         };
 
         //Act
-        subject = await _subjectFacadeSUT.SaveAsync(subject);
+        subject = await _subjectFacadeSut.SaveAsync(subject);
 
         //Assert
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
         var subjectFromDb = await dbxAssert.Subjects.SingleAsync(s => s.Id == subject.Id);
-        DeepAssert.Equal(subject, SubjectModelMapper.MapToListModel(subjectFromDb));
+        DeepAssert.Equal(subject, SubjectModelMapper.MapToDetailModel(subjectFromDb));
     }
 
     [Fact]
@@ -92,20 +92,20 @@ public sealed class SubjectFacadeTests : FacadeTestsBase
         //Arrange
         var subject = new SubjectDetailModel()
         {
-            Id = SubjectSeeds.SubjectEntity.Id,
-            SubjectName = SubjectSeeds.SubjectEntity.Name,
-            SubjectAbbr = SubjectSeeds.SubjectEntity.Abbr,
-            Credits = SubjectSeeds.SubjectEntity.Credits
+            Id = SubjectSeeds.SubjectEntity_BL_SubjectTest_Update.Id,
+            SubjectName = SubjectSeeds.SubjectEntity_BL_SubjectTest_Update.Name,
+            SubjectAbbr = SubjectSeeds.SubjectEntity_BL_SubjectTest_Update.Abbr,
+            Credits = SubjectSeeds.SubjectEntity_BL_SubjectTest_Update.Credits
         };
         subject.SubjectName += " Updated";
         subject.SubjectAbbr += "U";
 
         //Act
-        await _subjectFacadeSUT.SaveAsync(subject);
+        await _subjectFacadeSut.SaveAsync(subject);
 
         //Assert
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
         var subjectFromDb = await dbxAssert.Subjects.SingleAsync(s => s.Id == subject.Id);
-        DeepAssert.Equal(subject, SubjectModelMapper.MapToListModel(subjectFromDb));
+        DeepAssert.Equal(subject, SubjectModelMapper.MapToDetailModel(subjectFromDb));
     }
 }

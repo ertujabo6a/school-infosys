@@ -66,6 +66,14 @@ public static class ActivitySeeds
             SubjectId = SubjectSeeds.SubjectEntity_EvaluationTest_Delete.Id
         };
 
+
+    public static readonly ActivityEntity ActivityEntity_BL_SubjectTest_SubjectUsedInActivity =
+        ActivityTestEntity with
+        {
+            Id = Guid.Parse("fab130cd-eefe-443f-baf6-110000000001"),
+            SubjectId = SubjectSeeds.SubjectEntity_BL_SubjectTest_Delete_SubjectUsedInActivity.Id
+        };
+
     public static void Seed(this ModelBuilder modelBuilder) =>
         modelBuilder.Entity<ActivityEntity>().HasData(
             ActivityEntity_ActivityTest_GetById,
@@ -75,5 +83,7 @@ public static class ActivitySeeds
             ActivityEntity_EvaluationTest_GetAll,
             ActivityEntity_EvaluationTest_GetByStudent,
             ActivityEntity_EvaluationTest_Update,
-            ActivityEntity_EvaluationTest_Delete);
+            ActivityEntity_EvaluationTest_Delete,
+
+            ActivityEntity_BL_SubjectTest_SubjectUsedInActivity);
 }
