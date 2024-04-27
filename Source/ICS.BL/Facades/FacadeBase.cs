@@ -9,7 +9,7 @@ using ICS.DAL.Repositories;
 using ICS.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
-namespace CookBook.BL.Facades;
+namespace ICS.BL.Facades;
 
 public abstract class
     FacadeBase<TEntity, TListModel, TDetailModel, TEntityMapper>(
@@ -89,7 +89,7 @@ public abstract class
         else
         {
             entity.Id = Guid.NewGuid();
-            TEntity insertedEntity = repository.Insert(entity);
+            TEntity insertedEntity = await repository.InsertAsync(entity);
             result = ModelMapper.MapToDetailModel(insertedEntity);
         }
 
