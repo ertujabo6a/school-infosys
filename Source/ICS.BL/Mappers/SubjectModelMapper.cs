@@ -8,6 +8,8 @@ public class SubjectModelMapper(IStudentModelMapper studentModelMapper, IActivit
     : ModelMapperBase<SubjectEntity, SubjectListModel, SubjectDetailModel>,
     ISubjectModelMapper
 {
+    public void SetStudentModelMapper(IStudentModelMapper studModelMapper) => studentModelMapper = studModelMapper;
+
     public override SubjectListModel MapToListModel(SubjectEntity? entity)
         => entity is null
             ? SubjectListModel.Empty
@@ -25,7 +27,7 @@ public class SubjectModelMapper(IStudentModelMapper studentModelMapper, IActivit
             Id = entity.Id,
             SubjectName = entity.Name,
             SubjectAbbr = entity.Abbr,
-            Credits = entity.Credits,
+            Credits = entity.Credits,   
             Students = studentModelMapper.MapToListModel(entity.Students).ToObservableCollection(),
             Activities = activityModelMapper.MapToListModel(entity.Activities).ToObservableCollection()
         };

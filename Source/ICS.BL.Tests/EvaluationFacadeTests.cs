@@ -23,7 +23,7 @@ public sealed class EvaluationFacadeTests : FacadeTestsBase
     {
         var model = new EvaluationDetailModel()
         {
-            Id = Guid.Empty,
+            Id = Guid.Parse("fab130cd-eefe-443f-baf6-110000001111"),
             Description = "Description 1",
             Points = 5,
             StudentId = StudentSeeds.StudentEntity_BL_EvaluationTest_AddNew.Id,

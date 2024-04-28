@@ -70,7 +70,7 @@ public static class ActivitySeeds
     public static readonly ActivityEntity ActivityEntity_BL_SubjectTest_SubjectUsedInActivity =
         ActivityTestEntity with
         {
-            Id = Guid.Parse("fab130cd-eefe-443f-baf6-110000000001"),
+            Id = Guid.Parse("fab130cd-eefe-443f-baf6-110000000000"),
             SubjectId = SubjectSeeds.SubjectEntity_BL_SubjectTest_Delete_SubjectUsedInActivity.Id
         };
     public static readonly ActivityEntity ActivityEntity_BL_ActivityTest_GetById =
