@@ -25,7 +25,14 @@ public sealed class EvaluationFacadeTests : FacadeTestsBase
         {
             Id = Guid.Empty,
             Description = "Description 1",
-            Points = 5
+            Points = 5,
+            StudentId = StudentSeeds.StudentEntity_BL_EvaluationTest_AddNew.Id,
+            StudentName = StudentSeeds.StudentEntity_BL_EvaluationTest_AddNew.Name,
+            StudentSurname = StudentSeeds.StudentEntity_BL_EvaluationTest_AddNew.Surname,
+            SubjectId = SubjectSeeds.SubjectEntity_BL_EvaluationTest_AddNew.Id,
+            SubjectAbbr = SubjectSeeds.SubjectEntity_BL_EvaluationTest_AddNew.Abbr,
+            ActivityId = ActivitySeeds.ActivityEntity_BL_EvaluationTest_AddNew.Id,
+            Activity = ActivitySeeds.ActivityEntity_BL_EvaluationTest_AddNew.Type
         };
 
         var _ = await _evaluationFacadeSUT.SaveAsync(model);
@@ -35,9 +42,9 @@ public sealed class EvaluationFacadeTests : FacadeTestsBase
     public async Task GetAll_Single_SeededEvaluation()
     {
         var evaluations = await _evaluationFacadeSUT.GetAsync();
-        var evaluation = evaluations.Single(e => e.Id == EvaluationSeeds.EvaluationEntity.Id);
+        var evaluation = evaluations.Single(e => e.Id == EvaluationSeeds.EvaluationEntity_BL_EvaluationTest_GetAll.Id);
 
-        DeepAssert.Equal(EvaluationModelMapper.MapToListModel(EvaluationSeeds.EvaluationEntity), evaluation);
+        DeepAssert.Equal(EvaluationModelMapper.MapToListModel(EvaluationSeeds.EvaluationEntity_BL_EvaluationTest_GetAll), evaluation);
     }
 
     [Fact]
@@ -51,10 +58,10 @@ public sealed class EvaluationFacadeTests : FacadeTestsBase
     [Fact]
     public async Task DeleteById_SeededEvaluation_Deleted()
     {
-        await _evaluationFacadeSUT.DeleteAsync(EvaluationSeeds.EvaluationEntity.Id);
+        await _evaluationFacadeSUT.DeleteAsync(EvaluationSeeds.EvaluationEntity_BL_EvaluationTest_Delete.Id);
 
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        Assert.False(await dbxAssert.Evaluations.AnyAsync(e => e.Id == EvaluationSeeds.EvaluationEntity.Id));
+        Assert.False(await dbxAssert.Evaluations.AnyAsync(e => e.Id == EvaluationSeeds.EvaluationEntity_BL_EvaluationTest_Delete.Id));
     }
 
     [Fact]
@@ -64,28 +71,35 @@ public sealed class EvaluationFacadeTests : FacadeTestsBase
         {
             Id = Guid.Empty,
             Description = "Description 1",
-            Points = 5
+            Points = 5,
+            StudentId = StudentSeeds.StudentEntity_BL_EvaluationTest_AddNew.Id,
+            StudentName = StudentSeeds.StudentEntity_BL_EvaluationTest_AddNew.Name,
+            StudentSurname = StudentSeeds.StudentEntity_BL_EvaluationTest_AddNew.Surname,
+            SubjectId = SubjectSeeds.SubjectEntity_BL_EvaluationTest_AddNew.Id,
+            SubjectAbbr = SubjectSeeds.SubjectEntity_BL_EvaluationTest_AddNew.Abbr,
+            ActivityId = ActivitySeeds.ActivityEntity_BL_EvaluationTest_AddNew.Id,
+            Activity = ActivitySeeds.ActivityEntity_BL_EvaluationTest_AddNew.Type
         };
 
         var savedModel = await _evaluationFacadeSUT.SaveAsync(model);
 
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
         var evaluation = await dbxAssert.Evaluations.SingleAsync(e => e.Id == savedModel.Id);
-        DeepAssert.Equal(savedModel, EvaluationModelMapper.MapToListModel(evaluation));
+        DeepAssert.Equal(savedModel, EvaluationModelMapper.MapToDetailModel(evaluation));
     }
 
     [Fact]
     public async Task Update_ExistingEvaluation__Updated()
     {
-        var model = EvaluationModelMapper.MapToListModel(EvaluationSeeds.EvaluationEntity);
+        var model = EvaluationModelMapper.MapToDetailModel(EvaluationSeeds.EvaluationEntity_BL_EvaluationTest_Update);
         model.Points = 10;
         model.Description = "Updated description";
 
         await _evaluationFacadeSUT.SaveAsync(model);
 
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        var evaluation = await dbxAssert.Evaluations.SingleAsync(e => e.Id == EvaluationSeeds.EvaluationEntity.Id);
-        DeepAssert.Equal(model, EvaluationModelMapper.MapToListModel(evaluation));
+        var evaluation = await dbxAssert.Evaluations.SingleAsync(e => e.Id == EvaluationSeeds.EvaluationEntity_BL_EvaluationTest_Update.Id);
+        DeepAssert.Equal(model, EvaluationModelMapper.MapToDetailModel(evaluation));
     }
 
 

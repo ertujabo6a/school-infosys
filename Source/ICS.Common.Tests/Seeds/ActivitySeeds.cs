@@ -86,6 +86,39 @@ public static class ActivitySeeds
             SubjectId = SubjectSeeds.SubjectEntity_BL_ActivityTest_DeleteById.Id
         };
 
+
+
+    public static readonly ActivityEntity ActivityEntity_BL_EvaluationTest_AddNew =
+        ActivityTestEntity with
+        {
+            Id = Guid.Parse("fab130cd-eefe-443f-baf6-110000000021"),
+            SubjectId = SubjectSeeds.SubjectEntity_EvaluationTest_AddNew.Id
+        };
+    public static readonly ActivityEntity ActivityEntity_BL_EvaluationTest_GetAll =
+        ActivityTestEntity with
+        {
+            Id = Guid.Parse("fab130cd-eefe-443f-baf6-110000000022"),
+            SubjectId = SubjectSeeds.SubjectEntity_EvaluationTest_GetAll.Id
+        };
+    public static readonly ActivityEntity ActivityEntity_BL_EvaluationTest_GetByStudent =
+        ActivityTestEntity with
+        {
+            Id = Guid.Parse("fab130cd-eefe-443f-baf6-110000000023"),
+            SubjectId = SubjectSeeds.SubjectEntity_EvaluationTest_GetByStudent.Id
+        };
+    public static readonly ActivityEntity ActivityEntity_BL_EvaluationTest_Update =
+        ActivityTestEntity with
+        {
+            Id = Guid.Parse("fab130cd-eefe-443f-baf6-110000000024"),
+            SubjectId = SubjectSeeds.SubjectEntity_EvaluationTest_Update.Id
+        };
+    public static readonly ActivityEntity ActivityEntity_BL_EvaluationTest_Delete =
+        ActivityTestEntity with
+        {
+            Id = Guid.Parse("fab130cd-eefe-443f-baf6-110000000025"),
+            SubjectId = SubjectSeeds.SubjectEntity_EvaluationTest_Delete.Id
+        };
+
     public static void Seed(this ModelBuilder modelBuilder) =>
         modelBuilder.Entity<ActivityEntity>().HasData(
             ActivityEntity_ActivityTest_GetById,
@@ -99,5 +132,11 @@ public static class ActivitySeeds
 
             ActivityEntity_BL_SubjectTest_SubjectUsedInActivity,
             ActivityEntity_BL_ActivityTest_GetById,
-            ActivityEntity_BL_ActivityTest_DeleteById);
+            ActivityEntity_BL_ActivityTest_DeleteById,
+
+            ActivityEntity_BL_EvaluationTest_AddNew,
+            ActivityEntity_BL_EvaluationTest_GetAll,
+            ActivityEntity_BL_EvaluationTest_GetByStudent,
+            ActivityEntity_BL_EvaluationTest_Update,
+            ActivityEntity_BL_EvaluationTest_Delete);
 }

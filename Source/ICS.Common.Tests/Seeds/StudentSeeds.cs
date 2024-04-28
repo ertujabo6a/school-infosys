@@ -48,6 +48,17 @@ public static class StudentSeeds
     public static readonly StudentEntity StudentEntity_BL_ActivityTest_AddNew =
         StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-010000000006") };
 
+    public static readonly StudentEntity StudentEntity_BL_EvaluationTest_AddNew =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-010000000008") };
+    public static readonly StudentEntity StudentEntity_BL_EvaluationTest_GetAll =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-010000000009") };
+    public static readonly StudentEntity StudentEntity_BL_EvaluationTest_GetByStudent =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-01000000000a") };
+    public static readonly StudentEntity StudentEntity_BL_EvaluationTest_Update =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-01000000000b") };
+    public static readonly StudentEntity StudentEntity_BL_EvaluationTest_Delete =
+        StudentTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-01000000000c") };
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<StudentEntity>().HasData(
@@ -67,6 +78,12 @@ public static class StudentSeeds
             StudentEntity_BL_StudentTest_Delete,
             StudentEntity_BL_StudentTest_Update,
             StudentEntity_BL_StudentTest_UpdateWithSideColl,
-            StudentEntity_BL_ActivityTest_AddNew);
+            StudentEntity_BL_ActivityTest_AddNew,
+
+            StudentEntity_BL_EvaluationTest_AddNew,
+            StudentEntity_BL_EvaluationTest_GetAll,
+            StudentEntity_BL_EvaluationTest_GetByStudent,
+            StudentEntity_BL_EvaluationTest_Update,
+            StudentEntity_BL_EvaluationTest_Delete);
     }
 }
