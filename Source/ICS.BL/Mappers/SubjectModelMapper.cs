@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using ICS.BL.Mappers.Interfaces;
 using ICS.BL.Models;
 using ICS.DAL.Entities;
@@ -27,9 +28,13 @@ public class SubjectModelMapper(IStudentModelMapper studentModelMapper, IActivit
             Id = entity.Id,
             SubjectName = entity.Name,
             SubjectAbbr = entity.Abbr,
-            Credits = entity.Credits,   
-            Students = studentModelMapper.MapToListModel(entity.Students).ToObservableCollection(),
-            Activities = activityModelMapper.MapToListModel(entity.Activities).ToObservableCollection()
+            Credits = entity.Credits,
+            Students = entity.Students != null
+                ? studentModelMapper.MapToListModel(entity.Students).ToObservableCollection()
+                : new ObservableCollection<StudentListModel>(),
+            Activities = entity.Activities != null
+                ? activityModelMapper.MapToListModel(entity.Activities).ToObservableCollection()
+                : new ObservableCollection<ActivityListModel>()
         };
 
     public override SubjectEntity MapToEntity(SubjectDetailModel list_model)
