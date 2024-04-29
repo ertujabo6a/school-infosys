@@ -55,6 +55,8 @@ public static class SubjectSeeds
     public static readonly SubjectEntity SubjectEntity_BL_StudentTest_UpdateWithSideColl =
         SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000006"), Abbr = "IFN"};
 
+    public static readonly SubjectEntity SubjectEntity_BL_ActivityTest_AddNew =
+        SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-1000000a0010") };
     public static readonly SubjectEntity SubjectEntity_BL_ActivityTest_GetById =
         SubjectTestEntity with { Id = Guid.Parse("fab130cd-eefe-443f-baf6-100000000007") };
     public static readonly SubjectEntity SubjectEntity_BL_ActivityTest_DeleteById =
@@ -100,6 +102,7 @@ public static class SubjectSeeds
             SubjectEntity_BL_ActivityTest_GetById,
             SubjectEntity_BL_ActivityTest_DeleteById,
             SubjectEntity_BL_ActivityTest_Insert,
+            SubjectEntity_BL_ActivityTest_AddNew,
 
             SubjectEntity_BL_EvaluationTest_AddNew,
             SubjectEntity_BL_EvaluationTest_GetAll,

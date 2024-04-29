@@ -36,7 +36,7 @@ public class ActivityFacadeTests : FacadeTestsBase
             StartDate = new DateTime(2024, 4, 1, 12, 0, 0),
             EndDate = new DateTime(2024, 5, 3, 13, 50, 0),
             Description = "Some fun activity",
-            SubjectId = StudentSeeds.StudentEntity_BL_ActivityTest_AddNew.Id
+            SubjectId = SubjectSeeds.SubjectEntity_ActivityTest_AddNew.Id
         };
         // Act
         var _activity = await _activityFacadeSUT.SaveAsync(activity);
