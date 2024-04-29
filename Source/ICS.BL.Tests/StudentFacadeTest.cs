@@ -60,7 +60,7 @@ public sealed class StudentFacadeTests : FacadeTestsBase
         //Arrange
         var student = new StudentDetailModel()
         {
-            Id = Guid.Empty,
+            Id = Guid.NewGuid(),
             Name = "New Name",
             Surname = "New Surname",
         };
