@@ -24,7 +24,7 @@ public class ActivityModelMapper
             {
                 Id = entity.Id,
                 SubjectId = entity.SubjectId,
-                SubjectAbbr = entity.Subject.Abbr,
+                SubjectAbbr = entity.Subject == null ? string.Empty : entity.Subject.Abbr,
                 Type = entity.Type,
                 ActivityRoom = entity.Room,
                 StartDate = entity.StartTime,

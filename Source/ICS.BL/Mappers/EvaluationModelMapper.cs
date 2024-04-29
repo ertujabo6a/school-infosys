@@ -15,10 +15,10 @@ public class EvaluationModelMapper
         {
             Id = entity.Id,
             ActivityId = entity.ActivityId,
-            Activity = entity.Activity.Type,
+            Activity = entity.Activity != null ? entity.Activity.Type : 0,
             StudentId = entity.StudentId,
-            StudentName = entity.Student.Name,
-            StudentSurname = entity.Student.Surname,
+            StudentName = entity.Student != null ? entity.Student.Name : string.Empty,
+            StudentSurname = entity.Student != null ? entity.Student.Surname : string.Empty,
             Points = entity.Points,
         };
 
@@ -29,12 +29,12 @@ public class EvaluationModelMapper
             {
                 Id = entity.Id,
                 ActivityId = entity.ActivityId,
-                Activity = entity.Activity.Type,
+                Activity = entity.Activity != null ? entity.Activity.Type : 0,
                 StudentId = entity.StudentId,
-                StudentName = entity.Student.Name,
-                StudentSurname = entity.Student.Surname,
-                SubjectId = entity.Activity.Subject.Id,
-                SubjectAbbr = entity.Activity.Subject.Abbr,
+                StudentName = entity.Student != null ? entity.Student.Name : string.Empty,
+                StudentSurname = entity.Student != null ? entity.Student.Surname : string.Empty,
+                SubjectId = entity.Activity != null ? entity.Activity.Subject.Id : Guid.Empty,
+                SubjectAbbr = entity.Activity != null ? entity.Activity.Subject.Abbr : string.Empty,
                 Points = entity.Points,
                 Description = entity.Description
             };
