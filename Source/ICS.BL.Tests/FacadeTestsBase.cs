@@ -29,8 +29,9 @@ public class FacadeTestsBase : IAsyncLifetime
 
         ActivityModelMapper = new ActivityModelMapper();
         EvaluationModelMapper = new EvaluationModelMapper();
-        SubjectModelMapper = new SubjectModelMapper();
+        SubjectModelMapper = new SubjectModelMapper(null!, ActivityModelMapper);
         StudentModelMapper = new StudentModelMapper(SubjectModelMapper);
+        SubjectModelMapper.SetStudentModelMapper(StudentModelMapper);
 
         UnitOfWorkFactory = new UnitOfWorkFactory(DbContextFactory);
     }

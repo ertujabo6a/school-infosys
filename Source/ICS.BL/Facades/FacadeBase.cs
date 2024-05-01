@@ -1,37 +1,37 @@
-﻿using ICS.BL.Mappers.Interfaces;
+﻿using System.Collections;
+using System.Reflection;
+using ICS.BL.Facades.Interfaces;
+using ICS.BL.Mappers.Interfaces;
 using ICS.BL.Models;
 using ICS.DAL.Entities;
+using ICS.DAL.Mappers;
 using ICS.DAL.Repositories;
 using ICS.DAL.UnitOfWork;
-using ICS.DAL.Mappers;
 using Microsoft.EntityFrameworkCore;
-using System.Collections;
-using System.Reflection;
 
 namespace ICS.BL.Facades;
 
 public abstract class
-    FacadeBase<TEntity, TListModel, TReferenceModel, TEntityMapper>
+    FacadeBase<TEntity, TListModel, TDetailModel, TEntityMapper>(
+        IUnitOfWorkFactory unitOfWorkFactory,
+        IModelMapper<TEntity, TListModel, TDetailModel> modelMapper)
+    : IFacade<TEntity, TListModel, TDetailModel>
     where TEntity : class, IEntity
-    where TListModel : IModel
-    where TReferenceModel : class, IModel
+    where TListModel : class, IModel
+    where TDetailModel : class, IModel
     where TEntityMapper : IEntityMapper<TEntity>, new()
 {
-    protected readonly IModelMapper<TEntity, TListModel, TReferenceModel> ModelMapper;
-    protected readonly IUnitOfWorkFactory UnitOfWorkFactory;
+    protected readonly IModelMapper<TEntity, TListModel, TDetailModel> ModelMapper = modelMapper;
+    protected readonly IUnitOfWorkFactory UnitOfWorkFactory = unitOfWorkFactory;
 
-    protected FacadeBase(IUnitOfWorkFactory unitOfWorkFactory, IModelMapper<TEntity, TListModel, TReferenceModel> modelMapper)
-    {
-        UnitOfWorkFactory = unitOfWorkFactory;
-        ModelMapper = modelMapper;
-    }
+    protected virtual ICollection<string> IncludesNavigationPathDetail => new List<string>();
 
     public async Task DeleteAsync(Guid id)
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
         try
         {
-           await uow.GetRepository<TEntity, TEntityMapper>().DeleteAsync(id).ConfigureAwait(false);
+            await uow.GetRepository<TEntity, TEntityMapper>().DeleteAsync(id).ConfigureAwait(false);
             await uow.CommitAsync().ConfigureAwait(false);
         }
         catch (DbUpdateException e)
@@ -40,49 +40,62 @@ public abstract class
         }
     }
 
-    public virtual async Task<TReferenceModel?> GetAsync(Guid id)
+    public virtual async Task<TDetailModel?> GetAsync(Guid id)
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
 
-        IQueryable<TEntity> querry = uow.GetRepository<TEntity, TEntityMapper>().Get();
+        IQueryable<TEntity> query = uow.GetRepository<TEntity, TEntityMapper>().Get();
 
-        TEntity? entity = await querry.SingleOrDefaultAsync(e => e.Id == id);
+        foreach (string includePath in IncludesNavigationPathDetail)
+        {
+            query = query.Include(includePath);
+        }
 
-        return entity is null? null : ModelMapper.MapToReferenceModel(entity);
+        TEntity? entity = await query.SingleOrDefaultAsync(e => e.Id == id).ConfigureAwait(false);
+
+        return entity is null
+            ? null
+            : ModelMapper.MapToDetailModel(entity);
     }
 
+    // Always use paging in production
     public virtual async Task<IEnumerable<TListModel>> GetAsync()
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-        List<TEntity> entities = await uow.GetRepository<TEntity, TEntityMapper>().Get().ToListAsync();
+        List<TEntity> entities = await uow
+            .GetRepository<TEntity, TEntityMapper>()
+            .Get()
+            .ToListAsync().ConfigureAwait(false);
 
         return ModelMapper.MapToListModel(entities);
     }
 
-    public async Task<TListModel> SaveAsync(TListModel model)
+    public virtual async Task<TDetailModel> SaveAsync(TDetailModel model)
     {
-        TListModel result;
+        TDetailModel result;
+
         GuardCollectionsAreNotSet(model);
+
         TEntity entity = ModelMapper.MapToEntity(model);
-        IUnitOfWork uow = UnitOfWorkFactory.Create();
+
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
         IRepository<TEntity> repository = uow.GetRepository<TEntity, TEntityMapper>();
 
-        if(await repository.ExistsAsync(entity))
+        if (await repository.ExistsAsync(entity).ConfigureAwait(false))
         {
-            TEntity updateEntity = await repository.UpdateAsync(entity);
-            result = ModelMapper.MapToListModel(updateEntity);
+            TEntity updatedEntity = await repository.UpdateAsync(entity).ConfigureAwait(false);
+            result = ModelMapper.MapToDetailModel(updatedEntity);
         }
         else
         {
             entity.Id = Guid.NewGuid();
             TEntity insertedEntity = await repository.InsertAsync(entity);
-            result = ModelMapper.MapToListModel(insertedEntity);
+            result = ModelMapper.MapToDetailModel(insertedEntity);
         }
 
-        await uow.CommitAsync();
+        await uow.CommitAsync().ConfigureAwait(false);
 
         return result;
-
     }
 
     /// <summary>
@@ -92,7 +105,7 @@ public abstract class
     /// </summary>
     /// <param name="model">Model to be inserted or updated</param>
     /// <exception cref="InvalidOperationException"></exception>
-    private static void GuardCollectionsAreNotSet(TListModel model)
+    private static void GuardCollectionsAreNotSet(TDetailModel model)
     {
         IEnumerable<PropertyInfo> collectionProperties = model
             .GetType()

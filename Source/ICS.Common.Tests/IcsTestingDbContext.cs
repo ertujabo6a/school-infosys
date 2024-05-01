@@ -13,7 +13,10 @@ public class IcsTestingDbContext(DbContextOptions contextOptions, bool seedTesti
 
         if (seedTestingData)
         {
-            Seed.WithSamples(modelBuilder);
+            StudentSeeds.Seed(modelBuilder);
+            SubjectSeeds.Seed(modelBuilder);
+            ActivitySeeds.Seed(modelBuilder);
+            EvaluationSeeds.Seed(modelBuilder);
         }
     }
 }

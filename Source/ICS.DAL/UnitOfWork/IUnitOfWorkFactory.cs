@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace ICS.DAL.UnitOfWork;
+﻿namespace ICS.DAL.UnitOfWork;
 
 public interface IUnitOfWorkFactory
 {

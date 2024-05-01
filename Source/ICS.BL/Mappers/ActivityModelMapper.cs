@@ -1,6 +1,3 @@
-using System;
-using System.Collections.ObjectModel;
-using ICS.Common.Tests.Seeds;
 using ICS.BL.Models;
 using ICS.BL.Mappers.Interfaces;
 using ICS.DAL.Entities;
@@ -8,7 +5,7 @@ using ICS.DAL.Entities;
 namespace ICS.BL.Mappers;
 
 public class ActivityModelMapper
-    : ModelMapperBase<ActivityEntity, ActivityListModel, ActivityReferenceModel>,
+    : ModelMapperBase<ActivityEntity, ActivityListModel, ActivityDetailModel>,
     IActivityModelMapper
 {
     public override ActivityListModel MapToListModel(ActivityEntity? entity)
@@ -17,31 +14,35 @@ public class ActivityModelMapper
             : new ActivityListModel
             {
                 Id = entity.Id,
+                Type = entity.Type
+            };
+
+    public override ActivityDetailModel MapToDetailModel(ActivityEntity? entity)
+        => entity is null
+            ? ActivityDetailModel.Empty
+            : new ActivityDetailModel
+            {
+                Id = entity.Id,
+                SubjectId = entity.SubjectId,
+                SubjectAbbr = entity.Subject == null ? string.Empty : entity.Subject.Abbr,
                 Type = entity.Type,
                 ActivityRoom = entity.Room,
                 StartDate = entity.StartTime,
                 EndDate = entity.EndTime,
-                SubjectAbbr = entity.Subject?.Abbr ?? string.Empty
+                Description = entity.Description
             };
 
-    public override ActivityReferenceModel MapToReferenceModel(ActivityEntity? entity)
-        => entity is null
-            ? ActivityReferenceModel.Empty
-            : new ActivityReferenceModel
-            {
-                Id = entity.Id,
-                Type = entity.Type
-            };
 
-    public override ActivityEntity MapToEntity(ActivityListModel list_model)
+    public override ActivityEntity MapToEntity(ActivityDetailModel detailModel)
         => new()
         {
-            Id = list_model.Id,
-            Type = list_model.Type,
-            Room = list_model.ActivityRoom,
-            StartTime = list_model.StartDate,
-            EndTime = list_model.EndDate,
-            Subject = null!,
-            SubjectId = SubjectSeeds.SubjectEntity.Id
+            Id = detailModel.Id,
+            Type = detailModel.Type,
+            Room = detailModel.ActivityRoom,
+            StartTime = detailModel.StartDate,
+            EndTime = detailModel.EndDate,
+            Description = detailModel.Description,
+            SubjectId = detailModel.SubjectId,
+            Subject = null!
         };
 }

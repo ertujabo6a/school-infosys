@@ -14,104 +14,68 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
     public async Task AddNew_Activity_Persisted()
     {
         // Arrange
-        ActivityEntity entity = new()
+        var newActivity = new ActivityEntity
         {
-            Id = Guid.Parse(input: "fab130cd-eefe-443f-baf6-3d96cc2cbf23"),
+            Id = Guid.Parse("47b4cc7e-43aa-48ea-e829-f653c56c0006"),
             Type = ActivityType.Lecture,
-            Room = Room.E112,
-            StartTime = new DateTime(2024, 3, 28, 12, 0, 0),
-            EndTime = new DateTime(2024, 3, 28, 13, 50, 0),
-            Description = "ICS Testing Lecture",
-            SubjectId = SubjectSeeds.SubjectForActivity.Id,
-            Subject = null!
+            Room = Room.D105,
+            StartTime = new DateTime(2024, 1, 1, 12, 0, 0),
+            EndTime = new DateTime(2024, 1, 1, 13, 0, 0),
+            Subject = null!,
+            SubjectId = SubjectSeeds.SubjectEntity_ActivityTest_AddNew.Id
         };
 
         // Act
-        IcsDbContextSut.Activities.Add(entity);
+        await IcsDbContextSut.Activities.AddAsync(newActivity);
         await IcsDbContextSut.SaveChangesAsync();
 
         // Assert
-        await using IcsDbContext dbContext = DbContextFactory.CreateDbContext();
-        ActivityEntity actual = await dbContext.Activities.SingleAsync(e => e.Id == entity.Id);
-        DeepAssert.Equal(entity, actual, nameof(ActivityEntity.Subject));
+        await using var dbContext = DbContextFactory.CreateDbContext();
+        var actualEntity = await dbContext.Activities.SingleAsync(s => s.Id == newActivity.Id);
+        DeepAssert.Equal(newActivity, actualEntity);
     }
 
     [Fact]
-    public async Task GetAll_Activities_ContainsActivityEntity()
+    public async Task GetById_Activity()
     {
         // Act
-        var entities = await IcsDbContextSut.Activities.ToArrayAsync();
+        var entity = await IcsDbContextSut.Activities.SingleAsync(i => i.Id == ActivitySeeds.ActivityEntity_ActivityTest_GetById.Id);
 
         // Assert
-        bool contains = entities.Any(e =>
-            e.Id == ActivitySeeds.ActivityEntity.Id &&
-            e.Description == ActivitySeeds.ActivityEntity.Description &&
-            e.Room == ActivitySeeds.ActivityEntity.Room &&
-            e.StartTime == ActivitySeeds.ActivityEntity.StartTime &&
-            e.EndTime == ActivitySeeds.ActivityEntity.EndTime &&
-            e.SubjectId == ActivitySeeds.ActivityEntity.SubjectId &&
-            e.Type == ActivitySeeds.ActivityEntity.Type
-            );
-        Assert.True(contains);
-    }
-
-    [Fact]
-    public async Task GetById_Activity_ActivityEntityRetrieved()
-    {
-        // Act
-        ActivityEntity entity = await IcsDbContextSut.Activities.SingleAsync(e => e.Id == ActivitySeeds.ActivityEntity.Id);
-
-        // Assert
-        DeepAssert.Equal(ActivitySeeds.ActivityEntity, entity, nameof(ActivityEntity.Subject));
+        DeepAssert.Equal(ActivitySeeds.ActivityEntity_ActivityTest_GetById, entity);
     }
 
     [Fact]
     public async Task Update_Activity_Persisted()
     {
         // Arrange
-        ActivityEntity entity = ActivitySeeds.ActivityEntity with { Description = "Updated Description" };
+        var baseEntity = ActivitySeeds.ActivityEntity_ActivityTest_Update;
+        var entity = baseEntity with
+        {
+            Type = ActivityType.Seminar
+        };
 
         // Act
         IcsDbContextSut.Activities.Update(entity);
         await IcsDbContextSut.SaveChangesAsync();
 
         // Assert
-        await using IcsDbContext dbContext = DbContextFactory.CreateDbContext();
-        ActivityEntity actual = await dbContext.Activities.SingleAsync(e => e.Id == entity.Id);
-        DeepAssert.Equal(entity, actual, nameof(ActivityEntity.Subject));
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var actualEntity = await dbx.Activities.SingleAsync(i => i.Id == entity.Id);
+        DeepAssert.Equal(entity, actualEntity);
     }
 
     [Fact]
-    public async Task Delete_Activity_Removed()
+    public async Task Delete_Activity()
     {
         // Arrange
-        ActivityEntity entity = ActivitySeeds.ActivityEntity;
+        var entityBase = ActivitySeeds.ActivityEntity_ActivityTest_Delete;
 
         // Act
-        IcsDbContextSut.Activities.Remove(entity);
+        IcsDbContextSut.Activities.Remove(entityBase);
         await IcsDbContextSut.SaveChangesAsync();
 
         // Assert
-        await using IcsDbContext dbContext = DbContextFactory.CreateDbContext();
-        ActivityEntity? actual = await dbContext.Activities.SingleOrDefaultAsync(e => e.Id == entity.Id);
-        Assert.Null(actual);
+        Assert.False(await IcsDbContextSut.Activities.AnyAsync(i => i.Id == entityBase.Id));
     }
-
-    [Fact]
-    public async Task DeleteById_Activity_Removed()
-    {
-        // Arrange
-        ActivityEntity entity = ActivitySeeds.ActivityEntity;
-
-        // Act
-        IcsDbContextSut.Remove(
-            IcsDbContextSut.Activities.Single(e => e.Id == entity.Id));
-        await IcsDbContextSut.SaveChangesAsync();
-
-        // Assert
-        await using IcsDbContext dbContext = DbContextFactory.CreateDbContext();
-        ActivityEntity? actual = await dbContext.Activities.SingleOrDefaultAsync(e => e.Id == entity.Id);
-        Assert.Null(actual);
-    }
-
 }

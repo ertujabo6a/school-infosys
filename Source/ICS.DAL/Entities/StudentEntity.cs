@@ -6,8 +6,8 @@ public record StudentEntity : IEntity
     public required string Surname { get; set; }
     public string? ImageUrl { get; set; }
 
-    public ICollection<SubjectEntity> Subjects { get; set; } = new List<SubjectEntity>();
-    public ICollection<EvaluationEntity> Evaluations { get; set; } = new List<EvaluationEntity>();
+    public ICollection<SubjectEntity> Subjects { get; init; } = [];
+    public ICollection<EvaluationEntity> Evaluations { get; init; } = [];
 
     public required Guid Id { get; set; }
 }

@@ -1,14 +1,11 @@
 using ICS.BL.Models;
 using ICS.BL.Mappers.Interfaces;
 using ICS.DAL.Entities;
-using ICS.Common.Tests.Seeds;
-
-
 
 namespace ICS.BL.Mappers;
 
 public class EvaluationModelMapper
-    : ModelMapperBase<EvaluationEntity, EvaluationListModel, EvaluationListModel>,
+    : ModelMapperBase<EvaluationEntity, EvaluationListModel, EvaluationDetailModel>,
     IEvaluationModelMapper
 {
     public override EvaluationListModel MapToListModel(EvaluationEntity? entity)
@@ -17,21 +14,40 @@ public class EvaluationModelMapper
         : new EvaluationListModel
         {
             Id = entity.Id,
-            Description = entity.Description,
-            Points = entity.Points
+            ActivityId = entity.ActivityId,
+            Activity = entity.Activity != null ? entity.Activity.Type : 0,
+            StudentId = entity.StudentId,
+            StudentName = entity.Student != null ? entity.Student.Name : string.Empty,
+            StudentSurname = entity.Student != null ? entity.Student.Surname : string.Empty,
+            Points = entity.Points,
         };
 
-    public override EvaluationEntity MapToEntity(EvaluationListModel list_model)
+    public override EvaluationDetailModel MapToDetailModel(EvaluationEntity? entity)
+        => entity is null
+            ? EvaluationDetailModel.Empty
+            : new EvaluationDetailModel
+            {
+                Id = entity.Id,
+                ActivityId = entity.ActivityId,
+                Activity = entity.Activity != null ? entity.Activity.Type : 0,
+                StudentId = entity.StudentId,
+                StudentName = entity.Student != null ? entity.Student.Name : string.Empty,
+                StudentSurname = entity.Student != null ? entity.Student.Surname : string.Empty,
+                SubjectId = entity.Activity != null ? entity.Activity.Subject.Id : Guid.Empty,
+                SubjectAbbr = entity.Activity != null ? entity.Activity.Subject.Abbr : string.Empty,
+                Points = entity.Points,
+                Description = entity.Description
+            };
+
+    public override EvaluationEntity MapToEntity(EvaluationDetailModel detailModel)
         => new()
         {
-            Id = list_model.Id,
-            Description = list_model.Description,
-            Points = list_model.Points,
-            ActivityId = ActivitySeeds.ActivityEntity.Id,
-            StudentId = StudentSeeds.StudentEntity.Id,
+            Id = detailModel.Id,
+            Description = detailModel.Description,
+            Points = detailModel.Points,
+            ActivityId = detailModel.ActivityId,
+            StudentId = detailModel.StudentId,
             Activity = null!,
             Student = null!
         };
-
-    public override EvaluationListModel MapToReferenceModel(EvaluationEntity? entity) => throw new NotImplementedException();
 }

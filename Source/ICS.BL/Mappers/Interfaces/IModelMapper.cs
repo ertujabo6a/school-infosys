@@ -1,17 +1,17 @@
 ﻿namespace ICS.BL.Mappers.Interfaces;
 
-public interface IModelMapper<TEntity, TListModel, TReferenceModel>
+public interface IModelMapper<TEntity, TListModel, TDetailModel>
 {
     TListModel MapToListModel(TEntity? entity);
 
-    //Maps a collectioon of Entities to a collection of ListModels
+    //Maps a collection of Entities to a collection of ListModels
     IEnumerable<TListModel> MapToListModel(IEnumerable<TEntity> entities)
         => entities.Select(MapToListModel);
 
-    TReferenceModel MapToReferenceModel(TEntity entity);
-    //Maps a collectioon of Entities to a collection of ListModels
-    IEnumerable<TReferenceModel> MapToReferenceModel(IEnumerable<TEntity> entities)
-        => entities.Select(MapToReferenceModel);
+    TDetailModel MapToDetailModel(TEntity entity);
+    //Maps a collection of Entities to a collection of ListModels
+    IEnumerable<TDetailModel> MapToDetailModel(IEnumerable<TEntity> entities)
+        => entities.Select(MapToDetailModel);
 
-    TEntity MapToEntity(TListModel list_model);
+    TEntity MapToEntity(TDetailModel detailModel);
 }

@@ -2,17 +2,10 @@
 
 namespace ICS.DAL.UnitOfWork;
 
-public class UnitOfWorkFactory : IUnitOfWorkFactory
+public class UnitOfWorkFactory(IDbContextFactory<IcsDbContext> dbContextFactory) : IUnitOfWorkFactory
 {
-    private readonly IDbContextFactory<IcsDbContext> _dbContextFactory;
-
-    public UnitOfWorkFactory(IDbContextFactory<IcsDbContext> dbContextFactory)
-    {
-        _dbContextFactory = dbContextFactory ?? throw new ArgumentNullException(nameof(dbContextFactory));
-    }
-
     public IUnitOfWork Create()
     {
-        return new UnitOfWork(_dbContextFactory.CreateDbContext());
+        return new UnitOfWork(dbContextFactory.CreateDbContext());
     }
 }

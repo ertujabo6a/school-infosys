@@ -6,9 +6,8 @@ public record SubjectEntity : IEntity
     public required string Abbr { get; set; }
     public required int Credits { get; set; }
 
-    public ICollection<ActivityEntity> Activities { get; set; } = new List<ActivityEntity>();
-    public ICollection<StudentEntity> Students { get; set; } = new List<StudentEntity>();
+    public ICollection<ActivityEntity> Activities { get; init; } = [];
+    public ICollection<StudentEntity> Students { get; init; } = [];
 
     public required Guid Id { get; set; }
-
 }
