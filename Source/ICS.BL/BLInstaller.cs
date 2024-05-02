@@ -7,7 +7,7 @@ namespace ICS.BL;
 
 public static class BLInstaller
 {
-    public static IServiceCollection AddBLService(this IServiceCollection services)
+    public static IServiceCollection AddBLServices(this IServiceCollection services)
     {
         services.AddSingleton<IUnitOfWorkFactory, UnitOfWorkFactory>();
 
