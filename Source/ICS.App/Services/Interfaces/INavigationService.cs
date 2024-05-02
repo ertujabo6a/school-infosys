@@ -1,7 +1,7 @@
 ﻿using ICS.App;
 using ICS.App.ViewModels;
 
-namespace CookBook.App.Services;
+namespace ICS.App.Services;
 
 public interface INavigationService
 {

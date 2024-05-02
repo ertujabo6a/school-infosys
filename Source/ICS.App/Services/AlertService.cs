@@ -1,4 +1,4 @@
-﻿namespace CookBook.App.Services;
+﻿namespace ICS.App.Services;
 
 public class AlertService : IAlertService
 {
