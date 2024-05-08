@@ -5,31 +5,35 @@ using ICS.BL.Models;
 using ICS.BL.Facades.Interfaces;
 using ICS.App.Messages;
 
-namespace ICS.App.ViewModels.Evaluation;
+namespace ICS.App.ViewModels.Subject;
 
 [QueryProperty(nameof(Id), nameof(Id))]
-public partial class EvaluationDetailViewModel(
-    IEvaluationFacade evaluationFacade,
+
+public partial class SubjectDetailViewModel(
+    ISubjectFacade subjectFacade,
     INavigationService navigationService,
     IMessengerService messengerService)
-    : ViewModelBase(messengerService), IRecipient<EvaluationEditMessage>
+    : ViewModelBase(messengerService), IRecipient<SubjectEditMessage>
 {
+
     public Guid Id { get; set; }
-    public EvaluationDetailModel? Evaluation { get; set; }
+    public SubjectDetailModel? Subject { get; set; }
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        Evaluation = await evaluationFacade.GetAsync(Id);
+
+        Subject = await subjectFacade.GetAsync(Id);
     }
 
     [RelayCommand]
     private async Task DeleteAsync()
     {
-        if (Evaluation != null)
+        if (Subject is not null)
         {
-            await evaluationFacade.DeleteAsync(Evaluation.Id);
-            MessengerService.Send(new EvaluationDeleteMessage());
+            await subjectFacade.DeleteAsync(Subject.Id);
+            MessengerService.Send(new SubjectDeleteMessage());
+
             navigationService.SendBackButtonPressed();
         }
     }
@@ -38,18 +42,25 @@ public partial class EvaluationDetailViewModel(
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        if (Evaluation is not null)
+        if (Subject is not null)
         {
             await navigationService.GoToAsync("/edit",
-                new Dictionary<string, object?> { [nameof(EvaluationEditViewModel.Evaluation)] = Evaluation});
+                new Dictionary<string, object?> { [nameof(SubjectEditViewModel.Subject)] = Subject});
         }
     }
 
-    public async void Receive(EvaluationEditMessage message)
+    public async void Receive(SubjectEditMessage message)
     {
-        if (message.EvaluationId == Evaluation?.Id)
+        if (message.SubjectId == Subject?.Id)
         {
             await LoadDataAsync();
         }
     }
+
+    public async void Receive(SubjectDeleteMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+
 }

@@ -5,23 +5,24 @@ using ICS.BL.Models;
 using ICS.BL.Facades.Interfaces;
 using ICS.App.Messages;
 
+namespace ICS.App.ViewModels.Subject;
 
-namespace ICS.App.ViewModels.Evaluation;
-
-[QueryProperty(nameof(Evaluation), nameof(Evaluation))]
-public partial class EvaluationEditViewModel(
-    IEvaluationFacade evaluationFacade,
+[QueryProperty(nameof(Subject), nameof(Subject))]
+public partial class SubjectEditViewModel(
+    ISubjectFacade subjectFacade,
     INavigationService navigationService,
     IMessengerService messengerService)
     : ViewModelBase(messengerService)
 {
-    public EvaluationDetailModel Evaluation { get; init; } = EvaluationDetailModel.Empty;
+    public SubjectDetailModel Subject { get; init; } = SubjectDetailModel.Empty;
 
     [RelayCommand]
+
     private async Task SaveAsync()
     {
-        await evaluationFacade.SaveAsync(Evaluation);
-        MessengerService.Send(new EvaluationEditMessage { EvaluationId = Evaluation.Id });
+        await subjectFacade.SaveAsync(Subject);
+        MessengerService.Send(new SubjectEditMessage { SubjectId = Subject.Id });
+
         navigationService.SendBackButtonPressed();
     }
 }
