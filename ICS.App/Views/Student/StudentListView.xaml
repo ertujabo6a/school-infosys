@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Student.StudentListView"
+                       Title="Student List"
+                       x:DataType="vm:StudentListViewModel"
+                       x:Name="StudentListViewRoot">
+    <VerticalStackLayout>
+        <Label Text="Student list" />
+    </VerticalStackLayout>
+</views:ContentPageBase>
