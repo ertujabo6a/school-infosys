@@ -1,9 +1,4 @@
-﻿using ICS.App.ViewModels;
-using ICS.App.ViewModels.Subject;
-using ICS.App.Views;
-using ICS.App.Views.Student;
-
-namespace ICS.App;
+﻿namespace ICS.App;
 
 public partial class App : Application
 {
@@ -11,7 +6,6 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        var aaa = serviceProvider.GetRequiredService<StudentListView>();
         MainPage = serviceProvider.GetRequiredService<AppShell>();
     }
 }

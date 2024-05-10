@@ -5,7 +5,7 @@ using ICS.App.Services;
 using ICS.BL.Facades.Interfaces;
 using ICS.BL.Models;
 
-namespace ICS.App.ViewModels.Activity;
+namespace ICS.App.ViewModels;
 
 [QueryProperty(nameof(Id), nameof(Id))]
 public partial class ActivityDetailViewModel(

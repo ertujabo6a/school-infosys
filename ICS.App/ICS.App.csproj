@@ -90,16 +90,34 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Activity\ActivityListView.xaml.cs">
+	    <DependentUpon>ActivityListView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Evaluation\EvaluationListView.xaml.cs">
+	    <DependentUpon>EvaluationListView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Student\StudentListView.xaml.cs">
 	    <DependentUpon>StudentListView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Subject\SubjectListView.xaml.cs">
+	    <DependentUpon>SubjectListView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\Activity\ActivityListView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ContentPageBase.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Evaluation\EvaluationListView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Student\StudentListView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Subject\SubjectListView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

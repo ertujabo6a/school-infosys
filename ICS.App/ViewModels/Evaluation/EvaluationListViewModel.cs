@@ -6,7 +6,7 @@ using ICS.BL.Facades.Interfaces;
 using ICS.App.Messages;
 
 
-namespace ICS.App.ViewModels.Evaluation;
+namespace ICS.App.ViewModels;
 
 public partial class EvaluationListViewModel(
     IEvaluationFacade evaluationFacade,

@@ -4,7 +4,7 @@ using ICS.App.Services;
 using ICS.BL.Facades.Interfaces;
 using ICS.BL.Models;
 
-namespace ICS.App.ViewModels.Activity;
+namespace ICS.App.ViewModels;
 
 [QueryProperty(nameof(Activity), nameof(Activity))]
 public partial class ActivityEditViewModel(

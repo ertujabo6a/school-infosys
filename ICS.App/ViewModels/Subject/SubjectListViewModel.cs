@@ -5,7 +5,7 @@ using ICS.BL.Models;
 using ICS.BL.Facades.Interfaces;
 using ICS.App.Messages;
 
-namespace ICS.App.ViewModels.Subject;
+namespace ICS.App.ViewModels;
 
 public partial class SubjectListViewModel(
     ISubjectFacade subjectFacade,

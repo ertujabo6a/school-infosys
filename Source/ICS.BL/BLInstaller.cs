@@ -1,4 +1,5 @@
 ﻿using ICS.BL.Facades.Interfaces;
+using ICS.BL.Mappers;
 using ICS.BL.Mappers.Interfaces;
 using ICS.DAL.UnitOfWork;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,11 +18,22 @@ public static class BLInstaller
             .AsMatchingInterface()
             .WithSingletonLifetime());
 
-        services.Scan(selector => selector
+        var activityModelMapper = new ActivityModelMapper();
+        var evaluationModelMapper = new EvaluationModelMapper();
+        var subjectModelMapper = new SubjectModelMapper(null!, activityModelMapper);
+        var studentModelMapper = new StudentModelMapper(subjectModelMapper);
+        subjectModelMapper.SetStudentModelMapper(studentModelMapper);
+
+        services.AddSingleton(typeof(IActivityModelMapper), activityModelMapper);
+        services.AddSingleton(typeof(IEvaluationModelMapper), evaluationModelMapper);
+        services.AddSingleton(typeof(ISubjectModelMapper), subjectModelMapper);
+        services.AddSingleton(typeof(IStudentModelMapper), studentModelMapper);
+
+        /*services.Scan(selector => selector
             .FromAssemblyOf<BusinessLogic>()
             .AddClasses(filter => filter.AssignableTo(typeof(IModelMapper<,,>)))
             .AsSelfWithInterfaces()
-            .WithSingletonLifetime());
+            .WithSingletonLifetime());*/
 
         return services;
     }

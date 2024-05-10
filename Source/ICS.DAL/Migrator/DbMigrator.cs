@@ -13,5 +13,6 @@ public class DbMigrator(IDbContextFactory<IcsDbContext> dbContextFactory, DALOpt
         {
             await dbContext.Database.EnsureDeletedAsync(cancellationToken);
         }
+        await dbContext.Database.EnsureCreatedAsync(cancellationToken);
     }
 }

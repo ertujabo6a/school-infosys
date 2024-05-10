@@ -2,21 +2,20 @@
 
 #nullable disable
 
-namespace ICS.DAL.Migrations
+namespace ICS.DAL.Migrations;
+
+/// <inheritdoc />
+public partial class MayUpdate : Migration
 {
     /// <inheritdoc />
-    public partial class MayUpdate : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
 
-        }
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+    /// <inheritdoc />
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
 
-        }
     }
 }

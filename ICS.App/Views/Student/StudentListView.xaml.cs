@@ -9,8 +9,4 @@ public partial class StudentListView
 	{
 		InitializeComponent();
 	}
-    /*public StudentListView()
-    {
-        InitializeComponent();
-    }*/
 }

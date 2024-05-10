@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:s="clr-namespace:ICS.App.Views.Student"
+       xmlns:student="clr-namespace:ICS.App.Views.Student"
+       xmlns:subject="clr-namespace:ICS.App.Views.Subject"
+       xmlns:activity="clr-namespace:ICS.App.Views.Activity"
+       xmlns:evaluation="clr-namespace:ICS.App.Views.Evaluation"
        x:Class="ICS.App.AppShell"
        x:Name="AppShellRoot"
        xmlns:local="clr-namespace:ICS.App"
        FlyoutBehavior="Disabled">
 
-    <ShellContent ContentTemplate="{DataTemplate s:StudentListView}" Route="students" />
+    <Shell.MenuBarItems>
+        <MenuBarItem Text="Sections">
+            <MenuFlyoutItem Text="Students"
+                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToStudentsCommand}" />
+            <MenuFlyoutItem Text="Subjects"
+                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToSubjectsCommand}" />
+            <MenuFlyoutItem Text="Activities"
+                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToActivitiesCommand}" />
+            <MenuFlyoutItem Text="Evaluations"
+                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToEvaluationsCommand}" />
+        </MenuBarItem>
+    </Shell.MenuBarItems>
+
+    <ShellContent ContentTemplate="{DataTemplate student:StudentListView}" Route="students" />
+    <ShellContent ContentTemplate="{DataTemplate subject:SubjectListView}" Route="subjects" />
+    <ShellContent ContentTemplate="{DataTemplate activity:ActivityListView}" Route="activities" />
+    <ShellContent ContentTemplate="{DataTemplate evaluation:EvaluationListView}" Route="evaluations" />
+    
 </Shell>
