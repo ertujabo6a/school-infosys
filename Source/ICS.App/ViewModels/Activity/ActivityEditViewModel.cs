@@ -4,27 +4,26 @@ using ICS.App.Services;
 using ICS.BL.Facades.Interfaces;
 using ICS.BL.Models;
 
-namespace ICS.App.ViewModels.Activity
+namespace ICS.App.ViewModels.Activity;
+
+[QueryProperty(nameof(Activity), nameof(Activity))]
+public partial class ActivityEditViewModel(
+    IActivityFacade activityFacade,
+    INavigationService navigationService,
+    IMessengerService messengerService)
+    : ViewModelBase(messengerService)
 {
-    [QueryProperty(nameof(Activity), nameof(Activity))]
-    public partial class ActivityEditViewModel(
-        IActivityFacade activityFacade,
-        INavigationService navigationService,
-        IMessengerService messengerService)
-        : ViewModelBase(messengerService)
+    private readonly IMessengerService _messengerService = messengerService;
+
+    public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
+
+    [RelayCommand]
+    private async Task SaveAsync()
     {
-        private readonly IMessengerService _messengerService = messengerService;
+        await activityFacade.SaveAsync(Activity);
 
-        public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
+        _messengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
 
-        [RelayCommand]
-        private async Task SaveAsync()
-        {
-            await activityFacade.SaveAsync(Activity);
-
-            _messengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
-
-            navigationService.SendBackButtonPressed();
-        }
+        navigationService.SendBackButtonPressed();
     }
 }

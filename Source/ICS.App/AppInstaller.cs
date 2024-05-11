@@ -3,7 +3,7 @@ using ICS.App.Services;
 using ICS.App.ViewModels;
 using ICS.App.Views;
 
-namespace ICS.App;
+namespace ICS.App.Shells;
 
 public static class AppInstaller
 {

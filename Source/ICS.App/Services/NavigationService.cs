@@ -1,4 +1,6 @@
 ﻿using ICS.App.ViewModels;
+using ICS.App.ViewModels.Student;
+using ICS.App.Views.Student;
 
 namespace ICS.App.Services;
 
@@ -6,7 +8,7 @@ public class NavigationService : INavigationService
 {
     public IEnumerable<RouteModel> Routes { get; } = new List<RouteModel>
     {
-        // TODO: Routes
+        new("//students", typeof(StudentListView), typeof(StudentListViewModel))
     };
 
     public async Task GoToAsync<TViewModel>()

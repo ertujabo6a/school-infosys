@@ -2,12 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
 
-namespace ICS.App;
+namespace ICS.BL;
 
-public partial class AppShell : Shell
+public partial class App : Application
 {
-    public AppShell()
+    public App()
     {
         InitializeComponent();
+
+        MainPage = new AppShell();
     }
 }
