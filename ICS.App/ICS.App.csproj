@@ -102,6 +102,14 @@
 	  <Compile Update="Views\Subject\SubjectListView.xaml.cs">
 	    <DependentUpon>SubjectListView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Activity\ActivityEditView.xaml.cs">
+	    <DependentUpon>ActivityEditView.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Views\Activity\ActivityDetailView.xaml.cs">
+	    <DependentUpon>ActivityDetailView.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -118,6 +126,14 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Subject\SubjectListView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Activity\ActivityEditView.xaml">
+	    <SubType>Designer</SubType>
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Activity\ActivityDetailView.xaml">
+	    <SubType>Designer</SubType>
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

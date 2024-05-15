@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       Title="Edit activity"
+                       x:Class="ICS.App.Views.Activity.ActivityEditView"
+                       x:DataType="vm:ActivityEditViewModel"
+                       x:Name="ActivityEditViewRoot">
+
+        <Grid RowDefinitions="70, *">
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*, Auto"
+              ColumnSpacing="15">
+
+            <Button Grid.Column="1"
+                    VerticalOptions="Start"
+                    HeightRequest="30"
+                    Text="Save"
+                    CornerRadius="5"
+                    BackgroundColor="Green"
+                    Command="{Binding SaveCommand}" />
+        </Grid>
+        <Grid Grid.Row="1"
+              HorizontalOptions="Fill" VerticalOptions="Start"
+              RowDefinitions="170, *" ColumnDefinitions="Auto, *"
+              RowSpacing="20" ColumnSpacing="20">
+
+            <VerticalStackLayout Grid.Row="0" Grid.RowSpan="2"
+                                 Grid.Column="1"
+                                 HorizontalOptions="Fill"
+                                 Spacing="10">
+                <Label Text="ID" />
+                <Entry HorizontalOptions="Fill"
+                       Text="{Binding Activity.Id}" />
+
+                <Label Text="Type" />
+                <Entry HorizontalOptions="Fill"
+                       Text="{Binding Activity.Type}" />
+
+                <Label Text="Subject ID" />
+                <Entry HorizontalOptions="Fill"
+                       Text="{Binding Activity.SubjectId}" />
+
+                <Label Text="Subject abbreviation" />
+                <Entry HorizontalOptions="Fill"
+                       Text="{Binding Activity.SubjectAbbr}" />
+
+                <Label Text="Room" />
+                <Entry HorizontalOptions="Fill"
+                       Text="{Binding Activity.ActivityRoom}" />
+
+                <Label Text="Start time" />
+                <Entry HorizontalOptions="Fill"
+                       Text="{Binding Activity.StartTime}" />
+
+                <Label Text="End time" />
+                <Entry HorizontalOptions="Fill"
+                       Text="{Binding Activity.EndTime}" />
+
+                <Label Text="Description" />
+                <Editor HorizontalOptions="Fill"
+                        AutoSize="TextChanges"
+                        Text="{Binding Activity.Description}" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</views:ContentPageBase>
+
+
+

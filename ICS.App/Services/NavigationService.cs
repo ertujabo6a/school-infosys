@@ -15,20 +15,25 @@ public class NavigationService : INavigationService
         new("//subjects", typeof(SubjectListView), typeof(SubjectListViewModel)),
 
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
+        new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
+
+        new("//activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+        new("//activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
 
         new("//evaluations", typeof(EvaluationListView), typeof(EvaluationListViewModel))
+
     };
 
     public async Task GoToAsync<TViewModel>()
         where TViewModel : IViewModel
     {
-        var route = GetRouteByViewModel<TViewModel>();
+        string route = GetRouteByViewModel<TViewModel>();
         await Shell.Current.GoToAsync(route);
     }
     public async Task GoToAsync<TViewModel>(IDictionary<string, object?> parameters)
         where TViewModel : IViewModel
     {
-        var route = GetRouteByViewModel<TViewModel>();
+        string route = GetRouteByViewModel<TViewModel>();
         await Shell.Current.GoToAsync(route, parameters);
     }
 
@@ -42,6 +47,6 @@ public class NavigationService : INavigationService
         => Shell.Current.SendBackButtonPressed();
 
     private string GetRouteByViewModel<TViewModel>()
-        where TViewModel : IViewModel 
+        where TViewModel : IViewModel
         => Routes.First(route => route.ViewModelType == typeof(TViewModel)).Route;
 }
