@@ -11,7 +11,7 @@ public record ActivityEntity : IEntity
     public string? Description { get; set; }
 
     public required Guid SubjectId { get; set; }
-    public required SubjectEntity Subject { get; set; }
+    public SubjectEntity? Subject { get; set; }
     public ICollection<EvaluationEntity> Evaluations { get; init; } = new List<EvaluationEntity>();
 
     public required Guid Id { get; set; }
