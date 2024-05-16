@@ -17,11 +17,11 @@ public class NavigationService : INavigationService
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
         new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
 
-        new("//activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
-        new("//activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+        new("//evaluations", typeof(EvaluationListView), typeof(EvaluationListViewModel)),
+        new("//evaluations/detail", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
 
-        new("//evaluations", typeof(EvaluationListView), typeof(EvaluationListViewModel))
-
+        new("//evaluations/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
+        new("//evaluations/detail/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel))
     };
 
     public async Task GoToAsync<TViewModel>()

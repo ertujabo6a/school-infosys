@@ -96,6 +96,9 @@
 	  <Compile Update="Views\Evaluation\EvaluationListView.xaml.cs">
 	    <DependentUpon>EvaluationListView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Evaluation\EvaluationDetailView.xaml.cs">
+	    <DependentUpon>EvaluationDetailView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Student\StudentListView.xaml.cs">
 	    <DependentUpon>StudentListView.xaml</DependentUpon>
 	  </Compile>
@@ -119,7 +122,13 @@
 	  <MauiXaml Update="Views\ContentPageBase.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Evaluation\EvaluationEditView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Evaluation\EvaluationListView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Evaluation\EvaluationDetailView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Student\StudentListView.xaml">
