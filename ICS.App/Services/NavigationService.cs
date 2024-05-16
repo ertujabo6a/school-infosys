@@ -16,7 +16,11 @@ public class NavigationService : INavigationService
 
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
 
-        new("//evaluations", typeof(EvaluationListView), typeof(EvaluationListViewModel))
+        new("//evaluations", typeof(EvaluationListView), typeof(EvaluationListViewModel)),
+        new("//evaluations/detail", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
+
+        new("//evaluations/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
+        new("//evaluations/detail/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel))
     };
 
     public async Task GoToAsync<TViewModel>()
