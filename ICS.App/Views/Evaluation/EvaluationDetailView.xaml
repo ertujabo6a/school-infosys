@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Evaluation.EvaluationDetailView"
+                       x:DataType="vm:EvaluationDetailViewModel"
+                       x:Name="EvaluationDetailViewRoot">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <VerticalStackLayout HorizontalOptions="Center">
+            <Label Text="{Binding Evaluation.StudentName}" Grid.Row="0"></Label>
+            
+            <Border>
+                <Label Text="{Binding Evaluation.Activity}" Grid.Row="1"></Label>
+            </Border>
+            
+            <Border>
+                <Label Text="{Binding Evaluation.SubjectAbbr}" Grid.Row="2"></Label>
+            </Border>
+            
+            <Label Text="{Binding Evaluation.Points}" Grid.Row="3"></Label>
+
+            <Border>
+                <Label Text="{Binding Evaluation.Description}" Grid.Row="4"></Label>
+            </Border>
+
+            <Button Grid.Row="0" HorizontalOptions="End" Text="Edit" Command="{Binding GoToEditCommand}"></Button>
+
+            <Button Grid.Row="1" HorizontalOptions="End" Text="Delete" Command="{Binding DeleteCommand}"></Button>
+
+        </VerticalStackLayout>
+    </Grid>
+    
+</views:ContentPageBase>
