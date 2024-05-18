@@ -13,6 +13,7 @@ public partial class SubjectListViewModel(
     IMessengerService messengerService)
     : ViewModelBase(messengerService), IRecipient<SubjectEditMessage>, IRecipient<SubjectDeleteMessage>
 {
+    public Guid Id { get; set; }
 
     public IEnumerable<SubjectListModel> Subjects { get; set; } = null!;
 

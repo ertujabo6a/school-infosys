@@ -13,5 +13,5 @@ public class DbContextSqLiteFactory : IDbContextFactory<IcsDbContext>
         _contextOptionsBuilder.UseSqlite($"Data Source={databaseName};Cache=Shared");
     }
 
-    public IcsDbContext CreateDbContext() => new(_contextOptionsBuilder.Options);
+    public IcsDbContext CreateDbContext() => new(_contextOptionsBuilder.Options, _seedTestingData);
 }

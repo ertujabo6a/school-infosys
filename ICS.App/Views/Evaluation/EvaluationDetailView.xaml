@@ -8,36 +8,67 @@
                        x:DataType="vm:EvaluationDetailViewModel"
                        x:Name="EvaluationDetailViewRoot">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+        <Grid HorizontalOptions="Center" VerticalOptions="Center" RowSpacing="10" ColumnSpacing="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <VerticalStackLayout HorizontalOptions="Center">
-            <Label Text="{Binding Evaluation.StudentName}" Grid.Row="0"></Label>
-            
-            <Border>
-                <Label Text="{Binding Evaluation.Activity}" Grid.Row="1"></Label>
-            </Border>
-            
-            <Border>
-                <Label Text="{Binding Evaluation.SubjectAbbr}" Grid.Row="2"></Label>
-            </Border>
-            
-            <Label Text="{Binding Evaluation.Points}" Grid.Row="3"></Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-            <Border>
-                <Label Text="{Binding Evaluation.Description}" Grid.Row="4"></Label>
-            </Border>
+        <Label Text="Name:" Grid.Column="0" Grid.Row="0" FontSize="20" HorizontalOptions="End" VerticalOptions="Center"></Label>
+        <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Padding="5, 10, 5, 10">
+            <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+                <Label FontSize="30" HorizontalOptions="Start">
+                    <Label.Text>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="Evaluation.StudentName"></Binding>
+                            <Binding Path="Evaluation.StudentSurname"></Binding>
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+            </Grid>
+        </Border>
 
-            <Button Grid.Row="0" HorizontalOptions="End" Text="Edit" Command="{Binding GoToEditCommand}"></Button>
+        <Label Text="Activity:" Grid.Column="0" Grid.Row="1" FontSize="20" HorizontalOptions="End" VerticalOptions="Center"></Label>
+        <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                <Label Text="{Binding Evaluation.Activity}" FontSize="30" HorizontalOptions="Start" VerticalOptions="Center" Padding="5, 10, 5, 10"></Label>
+            </Grid>
+        </Border>
 
-            <Button Grid.Row="1" HorizontalOptions="End" Text="Delete" Command="{Binding DeleteCommand}"></Button>
+        <Label Text="Subject:" Grid.Column="0" Grid.Row="2" FontSize="20" HorizontalOptions="End" VerticalOptions="Center"></Label>
+        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                <Label Text="{Binding Evaluation.SubjectAbbr}" FontSize="30" HorizontalOptions="Start" VerticalOptions="Center" Padding="5, 10, 5, 10"></Label>
+            </Grid>
+        </Border>
 
-        </VerticalStackLayout>
-    </Grid>
+        <Label Text="Points:" Grid.Column="0" Grid.Row="3" FontSize="20" HorizontalOptions="End" VerticalOptions="Center"></Label>
+        <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+                <Label Text="{Binding Evaluation.Points}" FontSize="30" HorizontalOptions="Start" VerticalOptions="Center" Padding="5, 10, 5, 10"></Label>
+            </Grid>
+        </Border>
+
+        <Label Text="Descr:" Grid.Column="0" Grid.Row="4" FontSize="20" HorizontalOptions="End" VerticalOptions="Center"></Label>
+        <Border Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
+                <Label Text="{Binding Evaluation.Description}" FontSize="30" HorizontalOptions="Start" VerticalOptions="Center" Padding="5, 10, 5, 10"></Label>
+            </Grid>
+        </Border>
+       
+
+        <Button Grid.Row="5" Grid.Column="1" HorizontalOptions="Center" WidthRequest="100" Text="Edit" Command="{Binding GoToEditCommand}"></Button>
+        <Button Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" WidthRequest="100" Text="Delete" Command="{Binding DeleteCommand}"></Button>
+        </Grid>
+
     
 </views:ContentPageBase>

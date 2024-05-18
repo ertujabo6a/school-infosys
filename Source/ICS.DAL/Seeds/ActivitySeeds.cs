@@ -12,13 +12,15 @@ public static class ActivitySeeds
         Room = Common.Enums.Room.E112,
         StartTime = new DateTime(2024, 2, 20, 12, 0, 0),
         EndTime = new DateTime(2024, 2, 20, 13, 50, 0),
-
-        Subject = SubjectSeeds.Ics,
-        SubjectId = SubjectSeeds.Ics.Id
+        SubjectId = SubjectSeeds.Ics.Id,
     };
 
     static ActivitySeeds() => IcsLecture.Evaluations.Add(EvaluationSeeds.IcsEvaluation);
 
     public static void Seed(this ModelBuilder modelBuilder) =>
-        modelBuilder.Entity<ActivityEntity>().HasData(IcsLecture);
+        modelBuilder.Entity<ActivityEntity>().HasData(
+            IcsLecture with
+            {
+                Evaluations = Array.Empty<EvaluationEntity>()
+            });
 }
