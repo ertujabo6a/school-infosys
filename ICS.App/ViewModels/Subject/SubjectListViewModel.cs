@@ -15,6 +15,7 @@ public partial class SubjectListViewModel(
 {
     public Guid Id { get; set; }
 
+
     public IEnumerable<SubjectListModel> Subjects { get; set; } = null!;
 
     protected override async Task LoadDataAsync()

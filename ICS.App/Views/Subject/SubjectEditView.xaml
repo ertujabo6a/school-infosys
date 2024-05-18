@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Subject.SubjectEditView"
+                       x:DataType="vm:SubjectEditViewModel"
+                       x:Name="SubjectEditViewRoot">
+    <Grid HorizontalOptions="Center" VerticalOptions="Center" RowSpacing="10" ColumnSpacing="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!-- Name: -->
+        <Label Grid.Column="0" Grid.Row="2" Text="Subject Name"  HorizontalOptions="End" VerticalOptions="Center"></Label>
+
+        <Entry Grid.Column="1"
+               Grid.Row="2"
+               HorizontalOptions="FillAndExpand"
+               Text="{Binding Subject.SubjectName}">
+        </Entry>
+
+        <!-- ABBR: -->
+        <Label Grid.Column="0" Grid.Row="2" Text="ABBR"  HorizontalOptions="End" VerticalOptions="Center"></Label>
+
+        <Entry Grid.Column="1"
+               Grid.Row="2"
+               HorizontalOptions="FillAndExpand"
+               Text="{Binding Subject.SubjectAbbr}">
+        </Entry>
+        <!-- Credits: -->
+        <Label Grid.Column="0" Grid.Row="2" Text="Credits"  HorizontalOptions="End" VerticalOptions="Center"></Label>
+
+        <Entry Grid.Column="1"
+               Grid.Row="2"
+               HorizontalOptions="FillAndExpand"
+               Text="{Binding Subject.Credits}">
+        </Entry>
+
+
+        <Button Grid.Column="1" Grid.Row="4" HorizontalOptions="Center" Command="{Binding SaveCommand}" Text="Save" WidthRequest="70"></Button>
+
+    </Grid>
+</views:ContentPageBase>

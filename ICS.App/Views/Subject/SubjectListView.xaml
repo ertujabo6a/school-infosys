@@ -5,59 +5,100 @@
                        xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
                        xmlns:vm="clr-namespace:ICS.App.ViewModels"
                        x:Class="ICS.App.Views.Subject.SubjectListView"
+                       Title="Subject List"
                        x:DataType="vm:SubjectListViewModel"
                        x:Name="SubjectListViewRoot">
-
-    <Grid Padding="10">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.RowSpacing>20</Grid.RowSpacing>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="600"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <!-- Header with Search Bar -->
-        <Label Text="ICS" FontSize="Large" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" />
-        <Label Text="SUBJECTS" FontSize="Large" VerticalOptions="Center" HorizontalOptions="End" Grid.Row="0" Grid.Column="1" />
+        <Border Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0">
+            <Label Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0" Text="Subjects" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50"></Label>
+        </Border>
 
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
-            <SearchBar x:Name="SearchBar" Placeholder="Search" Grid.Column="0" />
-            <Button Text="+" Command="{Binding GoToCreateCommand}" FontSize="Large" Grid.Column="1" />
-        </Grid>
-
-        <!-- Subjects List -->
-        <CollectionView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                        ItemsSource="{Binding Subjects}"
-                        SelectionMode="Single">
+        <CollectionView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Subjects}" HorizontalOptions="Center">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="2" />
+                <GridItemsLayout Orientation="Vertical" Span="1"></GridItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="Black" Padding="10" Margin="5" HasShadow="False">
-                        <Label Text="{Binding Abbreviation}" HorizontalOptions="Center" VerticalOptions="Center" />
+                <DataTemplate x:DataType="m:SubjectListModel">
+                    <Frame HeightRequest="75">
                         <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SubjectListViewModel}}, Path=GoToDetailCommand}"
-                                                  CommandParameter="{Binding Id}" />
+                            <TapGestureRecognizer
+                                Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                CommandParameter="{Binding Id}">
+                            </TapGestureRecognizer>
                         </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*, *, *, *" RowDefinitions="auto"  HorizontalOptions="Start">
+                            <Label Text="{Binding SubjectAbbr}" Grid.Column="0" Grid.Row="0" FontSize="30" HorizontalOptions="Center"></Label>
+                            <!-- Add other properties binding here as needed -->
+                        </Grid>
+
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- Pagination -->
-        <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="Center">
-            <!-- Add your pagination controls here -->
-            <Label Text="1, 2, 3, ..., 66" FontSize="Medium" />
-        </StackLayout>
+        <!-- Buttons for sorting or other actions -->
+        <!-- Filters: -->
+                <Grid ColumnDefinitions="200,133, 133, 133" RowDefinitions="auto"  HorizontalOptions="Center" Grid.Row="1" Grid.Column="1">
+            <Button
+            Text="Name"
+            VerticalOptions="Center"
+            Grid.Column="0"
+            WidthRequest="100"
+            HeightRequest="50">
+            </Button>
+            <Button
+                Text="Activity"
+                VerticalOptions="Center"
+                Grid.Column="2"
+                Grid.Row="0"
+                HorizontalOptions="Fill"
+                WidthRequest="100"
+                HeightRequest="50">
+            </Button>
+
+            <Button
+                Text="Subject"
+                VerticalOptions="Center"
+                Grid.Column="1"
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                WidthRequest="100"
+                HeightRequest="50">
+            </Button>
+
+            <Button
+                Text="Points"
+                VerticalOptions="Center"
+                Grid.Column="3"
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                WidthRequest="100"
+                HeightRequest="50">
+            </Button>
+        </Grid>
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="2"
+            WidthRequest="75"
+            HorizontalOptions="Center"
+            VerticalOptions="Start"
+            Text="Create" Command="{Binding Source={x:Reference SubjectListViewRoot},
+                Path=BindingContext.GoToCreateCommand}">
+        </Button>
     </Grid>
 
 </views:ContentPageBase>
