@@ -7,8 +7,9 @@
                        x:Class="ICS.App.Views.Evaluation.EvaluationEditView"
                        x:DataType="vm:EvaluationEditViewModel"
                        x:Name="EvaluationEditViewRoot">
-    <Grid>
+    <Grid HorizontalOptions="Center" VerticalOptions="Center" RowSpacing="10" ColumnSpacing="15">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
@@ -16,29 +17,33 @@
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="90"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        <Label Grid.Column="0" Grid.Row="0" Text="Student"></Label>
-        
-        <VerticalStackLayout Grid.Column="1" Grid.Row="0">
-            <Picker HorizontalOptions="Fill"
-                    ItemsSource="{Binding Evaluation.StudentName}"
-                    SelectedItem="{Binding Evaluation.StudentName}">
-            </Picker>
-        </VerticalStackLayout>
 
-        <Label Grid.Column="0" Grid.Row="1" Text="Activity"></Label>
+        <Label Grid.Column="0" Grid.Row="0" Text="Student" HorizontalOptions="End" VerticalOptions="Center"></Label>
+        <Picker HorizontalOptions="Fill"
+                Grid.Column="1"
+                Grid.Row="0"
+            ItemsSource="{Binding Students}"
+                TextColor="White"
+            ItemDisplayBinding="{Binding ., Converter={StaticResource StudentToFullNameConverter}}"
+                SelectedItem="{Binding SelectedStudent}">
+        </Picker>
 
-        <VerticalStackLayout Grid.Column="1" Grid.Row="1">
-            <Picker HorizontalOptions="Fill"
-                    ItemsSource="{Binding Evaluation.Activity}"
-                    SelectedItem="{Binding Evaluation.Activity}">
-            </Picker>
-        </VerticalStackLayout>
+        <Label Grid.Column="0" Grid.Row="1" Text="Activity"  HorizontalOptions="End" VerticalOptions="Center"></Label>
+        <Picker HorizontalOptions="Fill"
+                Grid.Column="1"
+                Grid.Row="1"
+            ItemsSource="{Binding Activities}"
+                TextColor="White">
+            <Picker.ItemDisplayBinding>
+                <Binding Path="Type" />
+            </Picker.ItemDisplayBinding>
+        </Picker>
 
-        <Label Grid.Column="0" Grid.Row="2" Text="Points"></Label>
+        <Label Grid.Column="0" Grid.Row="2" Text="Points"  HorizontalOptions="End" VerticalOptions="Center"></Label>
 
         <Entry Grid.Column="1"
                Grid.Row="2"
@@ -46,7 +51,7 @@
                Text="{Binding Evaluation.Points}">
         </Entry>
 
-        <Label Grid.Column="0" Grid.Row="3" Text="Description"></Label>
+        <Label Grid.Column="0" Grid.Row="3" Text="Description"  HorizontalOptions="End" VerticalOptions="Center"></Label>
 
         <Entry Grid.Column="1"
                Grid.Row="3"
@@ -54,7 +59,7 @@
                Text="{Binding Evaluation.Description}">
         </Entry>
 
-        <Button Grid.Column="0" Grid.Row="4" HorizontalOptions="Center" Command="{Binding SaveCommand}" Text="Save"></Button>
-        
+        <Button Grid.Column="1" Grid.Row="4" HorizontalOptions="Center" Command="{Binding SaveCommand}" Text="Save" WidthRequest="70"></Button>
+
     </Grid>
 </views:ContentPageBase>
