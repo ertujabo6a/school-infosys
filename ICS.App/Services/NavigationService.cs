@@ -11,6 +11,10 @@ public class NavigationService : INavigationService
     public IEnumerable<RouteModel> Routes { get; } = new List<RouteModel>
     {
         new("//students", typeof(StudentListView), typeof(StudentListViewModel)),
+        new("//students/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
+        new("//student/detail", typeof(StudentDetailView), typeof(StudentDetailViewModel)),
+        new("//student/detail/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
+
 
         new("//subjects", typeof(SubjectListView), typeof(SubjectListViewModel)),
 
@@ -46,6 +50,6 @@ public class NavigationService : INavigationService
         => Shell.Current.SendBackButtonPressed();
 
     private string GetRouteByViewModel<TViewModel>()
-        where TViewModel : IViewModel 
+        where TViewModel : IViewModel
         => Routes.First(route => route.ViewModelType == typeof(TViewModel)).Route;
 }

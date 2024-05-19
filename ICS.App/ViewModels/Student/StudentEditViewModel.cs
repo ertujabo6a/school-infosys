@@ -6,28 +6,27 @@ using ICS.BL.Models;
 
 namespace ICS.App.ViewModels;
 
-public partial class StudentEditViewModel
+
+[QueryProperty(nameof(Student), nameof(Student))]
+public partial class StudentEditViewModel(
+    IStudentFacade studentFacade,
+    INavigationService navigationService,
+    IMessengerService messengerService)
+    : ViewModelBase(messengerService)
 {
-    [QueryProperty(nameof(Student), nameof(Student))]
-    public partial class ActivityEditViewModel(
-        IStudentFacade studentFacade,
-        INavigationService navigationService,
-        IMessengerService messengerService)
-        : ViewModelBase(messengerService)
+    private readonly IMessengerService _messengerService = messengerService;
+
+    public StudentDetailModel Student { get; init; } = StudentDetailModel.Empty;
+
+    [RelayCommand]
+    private async Task SaveAsync()
     {
-        private readonly IMessengerService _messengerService = messengerService;
+        await studentFacade.SaveAsync(Student);
 
-        public StudentDetailModel Student { get; init; } = StudentDetailModel.Empty;
+        _messengerService.Send(new StudentEditMessage { StudentId = Student.Id });
 
-        [RelayCommand]
-        private async Task SaveAsync()
-        {
-            await studentFacade.SaveAsync(Student);
-
-            _messengerService.Send(new StudentEditMessage { StudentId = Student.Id });
-
-            navigationService.SendBackButtonPressed();
-        }
+        navigationService.SendBackButtonPressed();
     }
-
 }
+
+
