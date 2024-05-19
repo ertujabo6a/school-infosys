@@ -122,6 +122,9 @@
 	  <MauiXaml Update="Views\ContentPageBase.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Evaluation\EvaluationCreateView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Evaluation\EvaluationEditView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

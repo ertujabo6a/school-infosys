@@ -6,7 +6,6 @@ namespace ICS.BL.Models;
 
 public record ActivityListModel : ModelBase
 {
-    public new required Guid Id { get; set; }
     public required string SubjectAbbr { get; set; }
     public required ActivityType Type { get; set; }
     public required DateTime StartTime { get; set; }

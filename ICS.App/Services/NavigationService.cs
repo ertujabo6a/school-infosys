@@ -21,6 +21,8 @@ public class NavigationService : INavigationService
         new("//evaluations/detail", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
 
         new("//evaluations/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
+        new("//evaluations/create", typeof(EvaluationCreateView), typeof(EvaluationEditViewModel)),
+
         new("//evaluations/detail/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel))
     };
 

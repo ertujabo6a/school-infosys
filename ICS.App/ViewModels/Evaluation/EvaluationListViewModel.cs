@@ -36,7 +36,8 @@ public partial class EvaluationListViewModel(
     [RelayCommand]
     private async Task GoToCreateAsync()
     {
-        await navigationService.GoToAsync("/edit");
+        await navigationService.GoToAsync("/create",
+            new Dictionary<string, object?> { [nameof(EvaluationEditViewModel.Evaluation)] = EvaluationDetailModel.Empty });
     }
 
     [RelayCommand]
