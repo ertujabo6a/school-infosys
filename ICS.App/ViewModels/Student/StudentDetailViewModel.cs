@@ -19,6 +19,8 @@ public partial class StudentDetailViewModel(
     public Guid Id { get; set; }
     public StudentDetailModel? Student { get; private set; }
 
+    public IEnumerable<SubjectListModel> Subjects => Student?.Subjects ?? Enumerable.Empty<SubjectListModel>();
+
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();

@@ -30,7 +30,7 @@
                 <GridItemsLayout Orientation="Vertical" Span="2"></GridItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="m:EvaluationListModel">
+                <DataTemplate x:DataType="m:StudentListModel">
                     <Frame HeightRequest="75" WidthRequest="250">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer
