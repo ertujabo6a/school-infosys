@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Subject.SubjectDetailView"
+                       Title="Subject Detail"
+                       x:DataType="vm:SubjectDetailViewModel"
+                       x:Name="SubjectDetailViewRoot">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.RowSpacing>20</Grid.RowSpacing>
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label FontSize="30" HorizontalOptions="Start" TextColor="#8A2BE2">
+                <Label.Text>
+                    <MultiBinding StringFormat="{}   {0}     {1}      Credits: {2}">
+                        <Binding Path="Subject.SubjectAbbr"></Binding>
+                        <Binding Path="Subject.SubjectName"></Binding>
+                        <Binding Path="Subject.Credits"></Binding>
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+        </Grid>
+
+        <Label Text="Students:" Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24" ></Label>
+        <Label Text="Activities:" Grid.Column="1" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24" ></Label>
+
+        <!-- First CollectionView: Students -->
+        <CollectionView Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Subject.Students}" HorizontalOptions="Center">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" ></GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:StudentListModel">
+                    <Frame HeightRequest="75">
+                        <Label Text="{Binding Surname}" />
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Second CollectionView: Activities -->
+        <CollectionView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Subject.Activities}" HorizontalOptions="Center">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" ></GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:ActivityListModel">
+                    <Frame HeightRequest="75">
+                        <Label Text="{Binding Type}" />
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!-- Edit Button -->
+            <Button Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="100" Text="Edit" Command="{Binding GoToEditCommand}" />
+            <!-- Delete Button -->
+            <Button Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="100" Text="Delete" Command="{Binding DeleteCommand}" />
+        </Grid>
+
+        </Grid>
+
+</views:ContentPageBase>
