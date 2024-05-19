@@ -13,12 +13,11 @@ public partial class StudentListViewModel(
     IMessengerService messengerService)
     : ViewModelBase(messengerService), IRecipient<StudentEditMessage>, IRecipient<StudentDeleteMessage>
 {
-    public IEnumerable<StudentListModel> Students { get; set; } = null!;
+    public IEnumerable<StudentListModel> Students { get; private set; } = null!;
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-
         Students = await studentFacade.GetAsync();
     }
 
@@ -34,6 +33,19 @@ public partial class StudentListViewModel(
         await navigationService.GoToAsync<StudentDetailViewModel>(
             new Dictionary<string, object?> { [nameof(StudentDetailViewModel.Id)] = id });
     }
+
+    [RelayCommand]
+    private void SortByName()
+    {
+        Students = Students.OrderBy(e => e.Name);
+    }
+
+    [RelayCommand]
+    private void SortBySurname()
+    {
+        Students = Students.OrderBy(e => e.Surname);
+    }
+
     public async void Receive(StudentEditMessage message)
     {
         await LoadDataAsync();
