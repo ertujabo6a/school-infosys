@@ -55,6 +55,22 @@ public partial class EvaluationListViewModel(
     }
 
     [RelayCommand]
+
+    private void SortByAbbr()
+    {
+        if (!_isSortedDescending)
+        {
+            Evaluations = Evaluations.OrderBy(e => e.SubjectAbbr);
+            _isSortedDescending= true;
+        }
+        else
+        {
+            Evaluations = Evaluations.OrderByDescending(e => e.SubjectAbbr);
+            _isSortedDescending = false;
+        }
+    }
+
+    [RelayCommand]
     private void SortByActivity()
     {
         if (!_isSortedDescending)

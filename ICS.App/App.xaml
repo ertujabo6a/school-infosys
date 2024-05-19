@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:StudentToFullNameConverter x:Key="StudentToFullNameConverter" />
+            <converters:ActivityConverter x:Key="ActivityConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

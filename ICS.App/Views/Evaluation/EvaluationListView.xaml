@@ -85,7 +85,7 @@
                 Text="Subject"
                 VerticalOptions="Center"
                 Command="{Binding Source={x:Reference EvaluationListViewRoot}, 
-                        Path=BindingContext.SortByActivityCommand}"
+                        Path=BindingContext.SortByAbbrCommand}"
                 Grid.Column="1"
                 Grid.Row="0"
                 HorizontalOptions="Center"
