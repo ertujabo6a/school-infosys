@@ -14,7 +14,7 @@
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="500"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid.RowSpacing>20</Grid.RowSpacing>
+        <Grid.RowSpacing>30</Grid.RowSpacing>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="600"></ColumnDefinition>
@@ -22,12 +22,14 @@
         </Grid.ColumnDefinitions>
         
         <Border Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0">
-            <Label Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0" Text="Evaluations" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50"></Label>
+            <Label Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0" Text="Evaluations" HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center" FontSize="50">
+            </Label>
         </Border>
-
+        
         <CollectionView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Evaluations}" HorizontalOptions="Center">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="1"></GridItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="2"></GridItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:EvaluationListModel">
@@ -38,9 +40,8 @@
                                 CommandParameter="{Binding Id}">
                             </TapGestureRecognizer>
                         </Frame.GestureRecognizers>
-                        
                         <Grid ColumnDefinitions="200,133, 133, 133" RowDefinitions="auto"  HorizontalOptions="Start">
-                            <Label FontSize="30" HorizontalOptions="Center">
+                            <Label FontSize="25" HorizontalOptions="Center">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="StudentName"></Binding>
@@ -48,25 +49,24 @@
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>
-                            <Label Text="{Binding SubjectAbbr}" Grid.Column="1" Grid.Row="0" FontSize="30" HorizontalOptions="Center"></Label>
-                            <Label Text="{Binding Activity}"  TextColor="White" Grid.Column="2" Grid.Row="0" FontSize="30" HorizontalOptions="Center"></Label>
-                            <Label Text="{Binding Points}"  TextColor="White" Grid.Column="3" Grid.Row="0" FontSize="30" HorizontalOptions="Center"></Label>
+                            <Label Text="{Binding SubjectAbbr}" Grid.Column="1" Grid.Row="0" FontSize="25" HorizontalOptions="Center"></Label>
+                            <Label Text="{Binding Activity}"  TextColor="White" Grid.Column="2" Grid.Row="0" FontSize="25" HorizontalOptions="Center"></Label>
+                            <Label Text="{Binding Points}"  TextColor="White" Grid.Column="3" Grid.Row="0" FontSize="25" HorizontalOptions="Center"></Label>
                         </Grid>
-                            
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Label Text="Sort By:" Grid.Column="0" Grid.Row="1"  VerticalOptions="Start" FontSize="30" HorizontalOptions="End"></Label>
-        <Grid ColumnDefinitions="200,133, 133, 133" RowDefinitions="auto"  HorizontalOptions="Center" Grid.Row="1" Grid.Column="1">
+        <Label Text="Sort by:" Grid.Column="0" Grid.Row="1"  VerticalOptions="Start" FontSize="30" HorizontalOptions="End"></Label>
+        <Grid ColumnDefinitions="200,110, 110, 120" RowDefinitions="auto"  HorizontalOptions="End" Grid.Row="1" Grid.Column="1" ColumnSpacing="30">
             <Button
-            Text="Name"
-            VerticalOptions="Center"
-            Command="{Binding Source={x:Reference EvaluationListViewRoot}, 
-                    Path=BindingContext.SortByNameCommand}"
-            Grid.Column="0"
-            WidthRequest="100"
-            HeightRequest="50">
+                Text="Name"
+                VerticalOptions="Start"
+                Command="{Binding Source={x:Reference EvaluationListViewRoot}, 
+                        Path=BindingContext.SortByNameCommand}"
+                Grid.Column="0"
+                WidthRequest="100"
+                HeightRequest="50">
             </Button>
 
             <Button
@@ -76,7 +76,7 @@
                         Path=BindingContext.SortByActivityCommand}"
                 Grid.Column="2"
                 Grid.Row="0"
-                HorizontalOptions="Fill"
+                HorizontalOptions="Start"
                 WidthRequest="100"
                 HeightRequest="50">
             </Button>
@@ -88,7 +88,7 @@
                         Path=BindingContext.SortByAbbrCommand}"
                 Grid.Column="1"
                 Grid.Row="0"
-                HorizontalOptions="Center"
+                HorizontalOptions="Start"
                 WidthRequest="100"
                 HeightRequest="50">
             </Button>
@@ -100,8 +100,8 @@
                         Path=BindingContext.SortByPointsCommand}"
                 Grid.Column="3"
                 Grid.Row="0"
-                HorizontalOptions="Center"
-                WidthRequest="100"
+                HorizontalOptions="Start"
+                WidthRequest="90"
                 HeightRequest="50">
             </Button>
         </Grid>
@@ -109,9 +109,12 @@
         <Button
             Grid.Row="1"
             Grid.Column="2"
-            WidthRequest="75"
+            FontSize="Medium"
             HorizontalOptions="Center"
             VerticalOptions="Start"
+            TextColor="White"
+            BorderWidth="2"
+            BorderColor="White"
             Text="Create" Command="{Binding Source={x:Reference EvaluationListViewRoot},
                 Path=BindingContext.GoToCreateCommand}">
         </Button>
