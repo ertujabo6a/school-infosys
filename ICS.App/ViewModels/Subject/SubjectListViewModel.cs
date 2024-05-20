@@ -17,6 +17,7 @@ public partial class SubjectListViewModel(
 
 
     public IEnumerable<SubjectListModel> Subjects { get; set; } = null!;
+    public SubjectListModel SubjectToSearch { get; init; } = SubjectListModel.Empty;
 
     protected override async Task LoadDataAsync()
     {
@@ -36,6 +37,21 @@ public partial class SubjectListViewModel(
     {
         await navigationService.GoToAsync<SubjectDetailViewModel>(
             new Dictionary<string, object?> { [nameof(SubjectDetailViewModel.Id)] = id });
+    }
+
+    [RelayCommand]
+    private async Task SearchSubject()
+    {
+        string search = SubjectToSearch.SubjectAbbr;
+        if (string.IsNullOrEmpty(SubjectToSearch.SubjectAbbr))
+        {
+            Subjects = await subjectFacade.GetAsync();
+        }
+        else
+        {
+            Subjects = Subjects.Where(s => s.SubjectAbbr.Contains(search));
+
+        }
     }
 
     public async void Receive(SubjectEditMessage message)
