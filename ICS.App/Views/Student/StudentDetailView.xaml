@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Student.StudentDetailView"
+                       x:DataType="vm:StudentDetailViewModel"
+                       x:Name="StudentDetailViewRoot">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="400"></RowDefinition>
+            <RowDefinition Height="500"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.RowSpacing>20</Grid.RowSpacing>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="500"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0">
+            <Label Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50">
+                <Label.Text>
+                    <MultiBinding StringFormat="{}{0} {1}">
+                        <Binding Path="Student.Name"></Binding>
+                        <Binding Path="Student.Surname"></Binding>
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+        </Border>
+
+        <Frame Grid.Row="1" Grid.Column="0" Padding="0,0,0,0"
+                   HorizontalOptions="Center" VerticalOptions="Center">
+            <Image Aspect="AspectFill"
+                       WidthRequest="200" HeightRequest="200"
+                       Source="{Binding Student.ImageUrl, TargetNullValue='student_placeholder.png'}"/>
+        </Frame>
+
+        <CollectionView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Subjects}" HorizontalOptions="Center">
+            <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                    <Label FontSize="24" HorizontalOptions="Center">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0}">
+                                <Binding Path="SubjectAbbr"></Binding>
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
+    </Grid>
+
+</views:ContentPageBase>
