@@ -27,6 +27,12 @@ public partial class SubjectListViewModel(
     }
 
     [RelayCommand]
+    private void SortBySubjectAbbr()
+    {
+        Subjects = Subjects.OrderBy(e => e.SubjectAbbr);
+    }
+
+    [RelayCommand]
     private async Task GoToCreateAsync()
     {
         await navigationService.GoToAsync("/edit");
