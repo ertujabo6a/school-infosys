@@ -42,8 +42,11 @@ public partial class StudentDetailViewModel(
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        await navigationService.GoToAsync("/edit",
-            new Dictionary<string, object?> { [nameof(Student)] = Student });
+        if (Student is not null)
+        {
+            await navigationService.GoToAsync("/edit",
+                new Dictionary<string, object?> { [nameof(StudentEditViewModel.Student)] = Student });
+        }
     }
 
     public async void Receive(StudentEditMessage message)
