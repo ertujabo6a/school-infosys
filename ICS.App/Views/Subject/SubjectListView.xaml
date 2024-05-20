@@ -25,22 +25,34 @@
         <!-- Search and Create -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="130"></ColumnDefinition>
                 <ColumnDefinition Width="204"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="50"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label Text="Search:" Grid.Column="0" Grid.Row="0"  VerticalOptions="Center" HorizontalOptions="Center" FontSize="30" ></Label>
+            <!-- Search -->
             <Entry
                 Placeholder="Search"
-                Grid.Column="1"
-                Grid.Row="0"
+                Grid.Column="0"
+                Grid.Row="1"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="Center"
                 WidthRequest="200"
                 HeightRequest="50"
                 Text="{Binding SubjectToSearch.SubjectAbbr}" />
+            <Button
+                Text = "Search"
+                Grid.Column="1"
+                Grid.Row="1"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding Source={x:Reference SubjectListViewRoot},
+                        Path=BindingContext.SerachSubjectCommand}"
+                WidthRequest="100"
+                HeightRequest="50"
+                ></Button>
+
             <!-- Create Button -->
             <Button
                 Grid.Column="2"
