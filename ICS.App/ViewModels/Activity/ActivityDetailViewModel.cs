@@ -40,7 +40,7 @@ public partial class ActivityDetailViewModel(
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        await navigationService.GoToAsync("/edit",
+        await navigationService.GoToAsync("//activities/detail/edit",
             new Dictionary<string, object?> { [nameof(Activity)] = Activity });
     }
 

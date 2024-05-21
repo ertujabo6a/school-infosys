@@ -33,8 +33,8 @@ public class ActivityFacadeTests : FacadeTestsBase
             SubjectAbbr = "ABR",
             Type = ActivityType.Lecture,
             ActivityRoom = Room.E112,
-            StartDate = new DateTime(2024, 4, 1, 12, 0, 0),
-            EndDate = new DateTime(2024, 5, 3, 13, 50, 0),
+            StartTime = new DateTime(2024, 4, 1, 12, 0, 0),
+            EndTime = new DateTime(2024, 5, 3, 13, 50, 0),
             Description = "Some fun activity",
             SubjectId = SubjectSeeds.SubjectEntity_ActivityTest_AddNew.Id
         };
@@ -84,8 +84,8 @@ public class ActivityFacadeTests : FacadeTestsBase
             SubjectAbbr = "ABR",
             Type = ActivityType.Lecture,
             ActivityRoom = Room.E112,
-            StartDate = new DateTime(2024, 4, 1, 12, 0, 0),
-            EndDate = new DateTime(2024, 5, 3, 13, 50, 0),
+            StartTime = new DateTime(2024, 4, 1, 12, 0, 0),
+            EndTime = new DateTime(2024, 5, 3, 13, 50, 0),
             SubjectId = SubjectSeeds.SubjectEntity_BL_ActivityTest_Insert.Id
         };
 

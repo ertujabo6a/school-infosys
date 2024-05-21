@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Activity.ActivityDetailView"
+                       Title="Activity detail"
+                       x:DataType="vm:ActivityDetailViewModel"
+                       x:Name="ActivityDetailViewRoot">
+    <VerticalStackLayout Spacing="20">
+        <HorizontalStackLayout HorizontalOptions="End"
+                               Spacing="15"
+                               HeightRequest="30">
+            <Button Text="Delete"
+                    CornerRadius="5"
+                    BackgroundColor="Red"
+                    Command="{Binding DeleteCommand}" />
+
+            <Button Text="Edit"
+                    CornerRadius="5"
+                    BackgroundColor="Green"
+                    Command="{Binding GoToEditCommand}" />
+        </HorizontalStackLayout>
+
+        <Grid HorizontalOptions="Center" VerticalOptions="Start"
+              RowDefinitions="170, *" ColumnDefinitions="*, Auto, Auto, *"
+              RowSpacing="20" ColumnSpacing="20">
+
+            <VerticalStackLayout Grid.Row="0" Grid.RowSpan="2"
+                                 Grid.Column="2"
+                                 Spacing="20">
+                <Label FontSize="24"
+                       Text="{Binding Activity.Id}" />
+
+                <Label FontSize="14"
+                       Text="{Binding Activity.Type}"/>
+
+                <Label FontSize="14"
+                       Text="{Binding Activity.SubjectId}"/>
+
+                <Label FontSize="14"
+                       Text="{Binding Activity.SubjectAbbr}"/>
+
+                <Label FontSize="14"
+                       Text="{Binding Activity.ActivityRoom}"/>
+
+                <Label FontSize="14"
+                       Text="{Binding Activity.StartTime}"/>
+
+                <Label FontSize="14"
+                       Text="{Binding Activity.EndTime}"/>
+
+                <Label FontSize="14"
+                       Text="{Binding Activity.Description}"/>
+            </VerticalStackLayout>
+        </Grid>
+    </VerticalStackLayout>
+</views:ContentPageBase>
