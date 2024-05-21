@@ -17,15 +17,20 @@
             <Label Text="Sort By:"
                    VerticalOptions="Center" />
             <Button Text="Abbr"
-                    Command="{Binding SortBySubjectAbbrCommand}" />
+                    Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.SortBySubjectAbbrCommand}" />
             <Button Text="Type"
-                    Command="{Binding SortByTypeCommand}" />
+                    Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.SortByTypeCommand}" />
             <Button Text="Start time"
-                    Command="{Binding SortByStartTimeCommand}" />
+                    Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.SortByStartTimeCommand}" />
             <Button Text="End time"
-                    Command="{Binding SortByEndTimeCommand}" />
+                    Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.SortByEndTimeCommand}" />
             <Button Text="Create"
-                    Command="{Binding GoToCreateCommand}"
+                    Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.GoToCreateCommand}"
                     HorizontalOptions="End"/>
         </StackLayout>
 
@@ -43,14 +48,15 @@
 
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ActivityListViewModel}},
-                                Path=GoToDetailCommand}"
-                                CommandParameter="{Binding .}" />
+                                Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.GoToDetailCommand}"
+                                CommandParameter="{Binding Id}" />
                         </Grid.GestureRecognizers>
 
                         <Label Text="{Binding SubjectAbbr}"
                                Grid.Column="0"
                                TextColor="White"
+                               FontSize="25"
                                VerticalOptions="Center" />
                         <Label Text="{Binding Type}"
                                Grid.Column="1"

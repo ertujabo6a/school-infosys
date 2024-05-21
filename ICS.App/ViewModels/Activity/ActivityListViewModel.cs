@@ -26,7 +26,7 @@ namespace ICS.App.ViewModels
         [RelayCommand]
         private async Task GoToCreateAsync()
         {
-            await navigationService.GoToAsync("//activities/edit");
+            await navigationService.GoToAsync("/edit");
         }
 
         [RelayCommand]
