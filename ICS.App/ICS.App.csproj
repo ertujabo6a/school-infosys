@@ -48,6 +48,7 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+    <MauiImage Update="Resources\Images\student_placeholder.png" Resize="True" BaseSize="200,200" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -96,6 +97,15 @@
 	  <Compile Update="Views\Evaluation\EvaluationListView.xaml.cs">
 	    <DependentUpon>EvaluationListView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Evaluation\EvaluationDetailView.xaml.cs">
+	    <DependentUpon>EvaluationDetailView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Student\StudentDetailView.xaml.cs">
+	    <DependentUpon>StudentDetailView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Student\StudentEditView.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Student\StudentListView.xaml.cs">
 	    <DependentUpon>StudentListView.xaml</DependentUpon>
 	  </Compile>
@@ -111,7 +121,16 @@
 	  <MauiXaml Update="Views\ContentPageBase.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Evaluation\EvaluationEditView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Evaluation\EvaluationListView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Evaluation\EvaluationDetailView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Student\StudentDetailView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Student\StudentListView.xaml">

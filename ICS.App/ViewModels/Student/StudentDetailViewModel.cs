@@ -19,6 +19,8 @@ public partial class StudentDetailViewModel(
     public Guid Id { get; set; }
     public StudentDetailModel? Student { get; private set; }
 
+    public IEnumerable<SubjectListModel> Subjects => Student?.Subjects ?? Enumerable.Empty<SubjectListModel>();
+
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
@@ -40,8 +42,11 @@ public partial class StudentDetailViewModel(
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        await navigationService.GoToAsync("/edit",
-            new Dictionary<string, object?> { [nameof(Student)] = Student });
+        if (Student is not null)
+        {
+            await navigationService.GoToAsync("/edit",
+                new Dictionary<string, object?> { [nameof(StudentEditViewModel.Student)] = Student });
+        }
     }
 
     public async void Receive(StudentEditMessage message)

@@ -11,12 +11,19 @@ public class NavigationService : INavigationService
     public IEnumerable<RouteModel> Routes { get; } = new List<RouteModel>
     {
         new("//students", typeof(StudentListView), typeof(StudentListViewModel)),
+        new("//students/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
+        new("//students/detail", typeof(StudentDetailView), typeof(StudentDetailViewModel)),
+        new("//students/detail/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
 
         new("//subjects", typeof(SubjectListView), typeof(SubjectListViewModel)),
 
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
 
-        new("//evaluations", typeof(EvaluationListView), typeof(EvaluationListViewModel))
+        new("//evaluations", typeof(EvaluationListView), typeof(EvaluationListViewModel)),
+        new("//evaluations/detail", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
+
+        new("//evaluations/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
+        new("//evaluations/detail/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel))
     };
 
     public async Task GoToAsync<TViewModel>()
@@ -42,6 +49,6 @@ public class NavigationService : INavigationService
         => Shell.Current.SendBackButtonPressed();
 
     private string GetRouteByViewModel<TViewModel>()
-        where TViewModel : IViewModel 
+        where TViewModel : IViewModel
         => Routes.First(route => route.ViewModelType == typeof(TViewModel)).Route;
 }

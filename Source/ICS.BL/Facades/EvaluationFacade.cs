@@ -20,6 +20,8 @@ public class EvaluationFacade(
         List<EvaluationEntity> entities = await uow
             .GetRepository<EvaluationEntity, EvaluationEntityMapper>()
             .Get()
+            .Include(e => e.Student)
+            .Include(e => e.Activity)
             .ToListAsync().ConfigureAwait(false);
 
         if (!string.IsNullOrEmpty(orderBy))

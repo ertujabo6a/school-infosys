@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Student.StudentDetailView"
+                       x:DataType="vm:StudentDetailViewModel"
+                       x:Name="StudentDetailViewRoot">
+
+    <VerticalStackLayout Margin="10" HorizontalOptions="Center" Spacing="10">
+        <Label FontSize="50">
+            <Label.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="Student.Name"></Binding>
+                    <Binding Path="Student.Surname"></Binding>
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+        <HorizontalStackLayout Spacing="10">
+            <Image Aspect="AspectFill"
+                   WidthRequest="200" HeightRequest="200"
+                   Source="{Binding Student.ImageUrl, TargetNullValue='student_placeholder.png'}"/>
+            <Grid RowDefinitions="auto,*" Margin="10" Padding="10">
+                <Label Text="Subjects:" Grid.Row="0" FontSize="20"/>
+                <CollectionView Grid.Row="1" ItemsSource="{Binding Subjects}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label FontSize="24" HorizontalOptions="Center">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0}">
+                                        <Binding Path="SubjectAbbr"></Binding>
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Margin="10" Spacing="10">
+            <Button Text="Delete" Command="{Binding DeleteCommand}"/>
+            <Button Text="Edit" Command="{Binding GoToEditCommand}"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+
+</views:ContentPageBase>
