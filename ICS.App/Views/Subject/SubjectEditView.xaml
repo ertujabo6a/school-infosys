@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Subject.SubjectEditView"
+                       Title="Edit Subject"
+                       x:DataType="vm:SubjectEditViewModel"
+                       x:Name="SubjectEditViewRoot">
+    <Grid HorizontalOptions="Center" VerticalOptions="Center" RowSpacing="10" ColumnSpacing="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Name: -->
+        <Label Grid.Column="0" Grid.Row="0" Text="Subject Name" HorizontalOptions="End" VerticalOptions="Center" />
+        <Entry Grid.Column="1" Grid.Row="0" HorizontalOptions="FillAndExpand" Text="{Binding Subject.SubjectName}" />
+
+        <!-- ABBR: -->
+        <Label Grid.Column="0" Grid.Row="1" Text="ABBR" HorizontalOptions="End" VerticalOptions="Center" />
+        <Entry Grid.Column="1" Grid.Row="1" HorizontalOptions="FillAndExpand" Text="{Binding Subject.SubjectAbbr}" />
+
+        <!-- Credits: -->
+        <Label Grid.Column="0" Grid.Row="2" Text="Credits" HorizontalOptions="End" VerticalOptions="Center" />
+        <Entry Grid.Column="1" Grid.Row="2" HorizontalOptions="FillAndExpand" Text="{Binding Subject.Credits}" />
+
+        <Button Grid.Column="1" Grid.Row="3" HorizontalOptions="Center" Command="{Binding SaveCommand}" Text="Save" WidthRequest="70" />
+    </Grid>
+</views:ContentPageBase>

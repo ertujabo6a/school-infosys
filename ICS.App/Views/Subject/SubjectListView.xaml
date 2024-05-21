@@ -8,7 +8,126 @@
                        Title="Subject List"
                        x:DataType="vm:SubjectListViewModel"
                        x:Name="SubjectListViewRoot">
-    <VerticalStackLayout>
-        <Label Text="Subject list" />
-    </VerticalStackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.RowSpacing>20</Grid.RowSpacing>
+
+        <!-- Header -->
+        <Border Grid.Row="0" >
+            <Label Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0" Text="Subjects" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50"></Label>
+        </Border>
+
+
+        <!-- Search and Create -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15"></ColumnDefinition>
+                <ColumnDefinition Width="204"></ColumnDefinition>
+                <ColumnDefinition Width="104"></ColumnDefinition>
+                <ColumnDefinition Width="134"></ColumnDefinition>
+                <ColumnDefinition Width="350"></ColumnDefinition>
+                <ColumnDefinition Width="104"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.ColumnSpacing>20</Grid.ColumnSpacing>
+
+            <!-- Search -->
+            <Entry
+                Placeholder="Search"
+                Grid.Column="1"
+                Grid.Row="1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center"
+                WidthRequest="200"
+                HeightRequest="50"
+                Text="{Binding SubjectToSearch.SubjectAbbr}" />
+            <Button
+                Text = "Search"
+                Grid.Column="2"
+                Grid.Row="1"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding Source={x:Reference SubjectListViewRoot},
+                        Path=BindingContext.SearchSubjectCommand}"
+                WidthRequest="100"
+                HeightRequest="50"
+                ></Button>
+
+            <!-- Sort By Abbr Button -->
+            <Button
+                Text="Sort by Abbr"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding Source={x:Reference SubjectListViewRoot},
+                        Path=BindingContext.SortBySubjectAbbrCommand}"
+                Grid.Column="3"
+                WidthRequest="130"
+                HeightRequest="50">
+            </Button>
+
+            <!-- Create Button -->
+            <Button
+                Grid.Column="5"
+                WidthRequest="100"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Text="Create" Command="{Binding Source={x:Reference SubjectListViewRoot},
+                Path=BindingContext.GoToCreateCommand}">
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="800"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!-- Grey Rectangle -->
+            <Frame
+                BackgroundColor="LightGray"
+                CornerRadius="10"
+                WidthRequest="850"
+                HorizontalOptions="Center"
+                VerticalOptions="FillAndExpand"
+                Grid.ZIndex="0"
+                Grid.Column="1"
+
+            />
+
+            <!-- CollectionView: Subjects -->
+            <CollectionView Grid.Column="1" ItemsSource="{Binding Subjects}" HorizontalOptions="Center" VerticalOptions="FillAndExpand" Margin="0,10,0,0" >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" ></GridItemsLayout>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate >
+                    <DataTemplate x:DataType="m:SubjectListModel">
+                        <Frame HeightRequest="75" >
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                    CommandParameter="{Binding Id}">
+                                </TapGestureRecognizer>
+                            </Frame.GestureRecognizers>
+
+                            <Grid ColumnDefinitions="*, *, *, *" RowDefinitions="auto"  HorizontalOptions="Start">
+                                <Label Text="{Binding SubjectAbbr}" Grid.Column="0" Grid.Row="0" FontSize="30" HorizontalOptions="Center"></Label>
+
+                            </Grid>
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+
+
+    </Grid>
+
 </views:ContentPageBase>

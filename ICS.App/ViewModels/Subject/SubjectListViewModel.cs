@@ -13,14 +13,24 @@ public partial class SubjectListViewModel(
     IMessengerService messengerService)
     : ViewModelBase(messengerService), IRecipient<SubjectEditMessage>, IRecipient<SubjectDeleteMessage>
 {
+    public Guid Id { get; set; }
+
 
     public IEnumerable<SubjectListModel> Subjects { get; set; } = null!;
+    public SubjectListModel SubjectToSearch { get; init; } = SubjectListModel.Empty;
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
 
         Subjects = await subjectFacade.GetAsync();
+
+    }
+
+    [RelayCommand]
+    private void SortBySubjectAbbr()
+    {
+        Subjects = Subjects.OrderBy(e => e.SubjectAbbr);
     }
 
     [RelayCommand]
@@ -34,6 +44,21 @@ public partial class SubjectListViewModel(
     {
         await navigationService.GoToAsync<SubjectDetailViewModel>(
             new Dictionary<string, object?> { [nameof(SubjectDetailViewModel.Id)] = id });
+    }
+
+    [RelayCommand]
+    private async Task SearchSubject()
+    {
+        string search = SubjectToSearch.SubjectAbbr;
+        if (string.IsNullOrEmpty(SubjectToSearch.SubjectAbbr))
+        {
+            Subjects = await subjectFacade.GetAsync();
+        }
+        else
+        {
+            Subjects = Subjects.Where(s => s.SubjectAbbr.Contains(search));
+
+        }
     }
 
     public async void Receive(SubjectEditMessage message)
