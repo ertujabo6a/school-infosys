@@ -14,7 +14,7 @@ public partial class EvaluationListViewModel(
     IActivityFacade activityFacade,
     INavigationService navigationService,
     IMessengerService messengerService)
-    : ViewModelBase(messengerService), IRecipient<EvaluationEditMessage>, IRecipient<EvaluationDeleteMessage>
+    : ViewModelBase(messengerService), IRecipient<EvaluationEditMessage>, IRecipient<EvaluationDeleteMessage>, IRecipient<SubjectDeleteMessage>, IRecipient<ActivityDeleteMessage>
 {
     public IEnumerable<EvaluationListModel> Evaluations { get; set; } = null!;
     private bool _isSortedDescending = false;
@@ -113,6 +113,15 @@ public partial class EvaluationListViewModel(
     }
 
     public async void Receive(EvaluationDeleteMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    public async void Receive(SubjectDeleteMessage message)
+    {
+        await LoadDataAsync();
+    }
+    public async void Receive(ActivityDeleteMessage message)
     {
         await LoadDataAsync();
     }

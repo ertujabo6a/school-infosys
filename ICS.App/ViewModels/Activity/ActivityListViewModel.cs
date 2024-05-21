@@ -12,7 +12,7 @@ namespace ICS.App.ViewModels
         ISubjectFacade subjectFacade,
         INavigationService navigationService,
         IMessengerService messengerService)
-        : ViewModelBase(messengerService), IRecipient<ActivityEditMessage>, IRecipient<ActivityDeleteMessage>
+        : ViewModelBase(messengerService), IRecipient<ActivityEditMessage>, IRecipient<ActivityDeleteMessage>, IRecipient<SubjectDeleteMessage>
     {
         public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
         private bool _isSortedDescending = false;
@@ -110,6 +110,11 @@ namespace ICS.App.ViewModels
         }
 
         public async void Receive(ActivityDeleteMessage message)
+        {
+            await LoadDataAsync();
+        }
+
+        public async void Receive(SubjectDeleteMessage message)
         {
             await LoadDataAsync();
         }
