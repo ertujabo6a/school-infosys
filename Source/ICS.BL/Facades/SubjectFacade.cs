@@ -28,5 +28,5 @@ public class SubjectFacade(
         return ModelMapper.MapToListModel(subjects);
     }
     protected override ICollection<string> IncludesNavigationPathDetail =>
-        [$"{nameof(SubjectEntity.Students)}", $"{nameof(SubjectEntity.Activities)}"];
+        [$"{nameof(SubjectEntity.StudentToSubjects)}.{nameof(StudentToSubjectEntity.Student)}", $"{nameof(SubjectEntity.Activities)}"];
 }

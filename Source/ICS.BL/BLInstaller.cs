@@ -22,18 +22,14 @@ public static class BLInstaller
         var evaluationModelMapper = new EvaluationModelMapper();
         var subjectModelMapper = new SubjectModelMapper(null!, activityModelMapper);
         var studentModelMapper = new StudentModelMapper(subjectModelMapper);
-        subjectModelMapper.SetStudentModelMapper(studentModelMapper);
+        var studentToSubjectModelMapper = new StudentToSubjectModelMapper(studentModelMapper, subjectModelMapper);
+        subjectModelMapper.setStudentModelMapper(studentModelMapper);
 
         services.AddSingleton(typeof(IActivityModelMapper), activityModelMapper);
         services.AddSingleton(typeof(IEvaluationModelMapper), evaluationModelMapper);
         services.AddSingleton(typeof(ISubjectModelMapper), subjectModelMapper);
         services.AddSingleton(typeof(IStudentModelMapper), studentModelMapper);
-
-        /*services.Scan(selector => selector
-            .FromAssemblyOf<BusinessLogic>()
-            .AddClasses(filter => filter.AssignableTo(typeof(IModelMapper<,,>)))
-            .AsSelfWithInterfaces()
-            .WithSingletonLifetime());*/
+        services.AddSingleton(typeof(IStudentToSubjectModelMapper), studentToSubjectModelMapper);
 
         return services;
     }

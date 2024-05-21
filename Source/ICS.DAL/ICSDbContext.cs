@@ -7,6 +7,7 @@ public class IcsDbContext(DbContextOptions contextOptions, bool seedDemoData = f
 {
     public DbSet<StudentEntity> Students => Set<StudentEntity>();
     public DbSet<SubjectEntity> Subjects => Set<SubjectEntity>();
+    public DbSet<StudentToSubjectEntity> studentToSubjects => Set<StudentToSubjectEntity>();
     public DbSet<ActivityEntity> Activities => Set<ActivityEntity>();
     public DbSet<EvaluationEntity> Evaluations => Set<EvaluationEntity>();
 
@@ -15,12 +16,16 @@ public class IcsDbContext(DbContextOptions contextOptions, bool seedDemoData = f
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<StudentEntity>()
-            .HasMany(i => i.Subjects)
-            .WithMany(i => i.Students);
+            .HasMany(i => i.StudentToSubjects)
+            .WithOne(i => i.Student);
 
         modelBuilder.Entity<StudentEntity>()
             .HasMany(i => i.Evaluations)
             .WithOne(i => i.Student);
+
+        modelBuilder.Entity<SubjectEntity>()
+            .HasMany(i => i.StudentToSubjects)
+            .WithOne(i => i.Subject);
 
         modelBuilder.Entity<ActivityEntity>()
             .HasOne(i => i.Subject)
@@ -32,6 +37,7 @@ public class IcsDbContext(DbContextOptions contextOptions, bool seedDemoData = f
 
         if (seedDemoData)
         {
+            StudentToSubjectSeeds.Seed(modelBuilder);
             StudentSeeds.Seed(modelBuilder);
             SubjectSeeds.Seed(modelBuilder);
             ActivitySeeds.Seed(modelBuilder);

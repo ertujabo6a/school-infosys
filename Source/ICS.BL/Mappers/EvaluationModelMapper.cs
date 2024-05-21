@@ -34,8 +34,8 @@ public class EvaluationModelMapper
                 StudentId = entity.StudentId,
                 StudentName = entity.Student != null ? entity.Student.Name : string.Empty,
                 StudentSurname = entity.Student != null ? entity.Student.Surname : string.Empty,
-                SubjectId = entity.Activity != null ? entity.Activity.Subject.Id : Guid.Empty,
-                SubjectAbbr = entity.Activity != null ? entity.Activity.Subject.Abbr : string.Empty,
+                SubjectId = entity.Activity != null ? entity.Activity.Subject!.Id : Guid.Empty,
+                SubjectAbbr = entity.Activity != null ? entity.Activity.Subject!.Abbr : string.Empty,
                 Points = entity.Points,
                 Description = entity.Description
             };

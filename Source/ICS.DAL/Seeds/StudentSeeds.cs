@@ -21,10 +21,8 @@ public static class StudentSeeds
 
     static StudentSeeds()
     {
-        PetrNovakov.Subjects.Add(SubjectSeeds.Ics);
+        PetrNovakov.StudentToSubjects.Add(StudentToSubjectSeeds.PetrNovakovToIcs);
         PetrNovakov.Evaluations.Add(EvaluationSeeds.IcsEvaluation);
-        KamilAjajaj.Subjects.Add(SubjectSeeds.Ics);
-        KamilAjajaj.Evaluations.Add(EvaluationSeeds.IcsEvaluation2);
     }
 
     public static void Seed(this ModelBuilder modelBuilder) =>
@@ -32,11 +30,11 @@ public static class StudentSeeds
             PetrNovakov with
             {
                 Evaluations = Array.Empty<EvaluationEntity>(),
-                Subjects = Array.Empty<SubjectEntity>()
+                StudentToSubjects = Array.Empty<StudentToSubjectEntity>()
             },
             KamilAjajaj with
             {
                 Evaluations = Array.Empty<EvaluationEntity>(),
-                Subjects = Array.Empty<SubjectEntity>()
+                StudentToSubjects = Array.Empty<StudentToSubjectEntity>()
             });
 }

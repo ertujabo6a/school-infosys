@@ -20,6 +20,19 @@ public class StudentModelMapper(ISubjectModelMapper subjectModelMapper)
             Surname = entity.Surname,
         };
 
+    public IEnumerable<StudentListModel> MapToListModel(IEnumerable<StudentToSubjectEntity> entities)
+    {
+        var arr = new List<StudentListModel>();
+        foreach (var entity in entities)
+            arr.Add(new StudentListModel
+            {
+                Id = entity.Student!.Id,
+                Name = entity.Student!.Name,
+                Surname = entity.Student!.Surname
+            });
+        return arr;
+    }
+
     public override StudentDetailModel MapToDetailModel(StudentEntity? entity)
         => entity is null
             ? StudentDetailModel.Empty
@@ -29,10 +42,9 @@ public class StudentModelMapper(ISubjectModelMapper subjectModelMapper)
             Name = entity.Name,
             Surname = entity.Surname,
             ImageUrl = entity.ImageUrl,
-
-            Subjects = entity.Subjects == null
+            Subjects = entity.StudentToSubjects == null
                 ? new ObservableCollection<SubjectListModel>()
-                : subjectModelMapper.MapToListModel(entity.Subjects).ToObservableCollection()
+                : subjectModelMapper.MapToListModel(entity.StudentToSubjects).ToObservableCollection()
         };
 
     public override StudentEntity MapToEntity(StudentDetailModel detailModel)
@@ -42,7 +54,7 @@ public class StudentModelMapper(ISubjectModelMapper subjectModelMapper)
             Name = detailModel.Name,
             Surname = detailModel.Surname,
             ImageUrl = detailModel.ImageUrl,
-            Subjects = null!,
+            StudentToSubjects = null!,
             Evaluations = null!
         };
 }

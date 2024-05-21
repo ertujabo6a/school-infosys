@@ -10,7 +10,7 @@ public static class SubjectSeeds
         Id = Guid.Parse("fabde0cd-eefe-443f-baf6-3d96cc2cbf2d"),
         Name = "The C# programming language",
         Abbr = "ICS",
-        Credits = 4
+        Credits = 4,
     };
 
     static SubjectSeeds()
@@ -24,7 +24,7 @@ public static class SubjectSeeds
         modelBuilder.Entity<SubjectEntity>().HasData(
             Ics with
             {
-                Students = Array.Empty<StudentEntity>(),
-                Activities = Array.Empty<ActivityEntity>()
+                Activities = Array.Empty<ActivityEntity>(),
+                StudentToSubjects = Array.Empty<StudentToSubjectEntity>()
             });
 }
