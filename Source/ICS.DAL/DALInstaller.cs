@@ -23,6 +23,7 @@ public static class DALInstaller
         services.AddSingleton<EvaluationEntityMapper>();
         services.AddSingleton<StudentEntityMapper>();
         services.AddSingleton<SubjectEntityMapper>();
+        services.AddSingleton<StudentToSubjectEntityMapper>();
 
         return services;
     }

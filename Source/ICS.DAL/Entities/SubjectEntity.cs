@@ -7,7 +7,7 @@ public record SubjectEntity : IEntity
     public required int Credits { get; set; }
 
     public ICollection<ActivityEntity> Activities { get; init; } = [];
-    public ICollection<StudentEntity> Students { get; init; } = [];
+    public ICollection<StudentToSubjectEntity> StudentToSubjects { get; init; } = [];
 
     public required Guid Id { get; set; }
 }

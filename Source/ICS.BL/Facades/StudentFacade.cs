@@ -38,5 +38,5 @@ public class StudentFacade(
     }
 
     protected override ICollection<string> IncludesNavigationPathDetail =>
-        [$"{nameof(StudentEntity.Subjects)}"];
+        [$"{nameof(StudentEntity.StudentToSubjects)}.{nameof(StudentToSubjectEntity.Subject)}"];
 }

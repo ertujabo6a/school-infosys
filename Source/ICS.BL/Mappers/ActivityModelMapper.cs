@@ -6,7 +6,7 @@ namespace ICS.BL.Mappers;
 
 public class ActivityModelMapper
     : ModelMapperBase<ActivityEntity, ActivityListModel, ActivityDetailModel>,
-    IActivityModelMapper
+        IActivityModelMapper
 {
     public override ActivityListModel MapToListModel(ActivityEntity? entity)
         => entity is null
@@ -14,7 +14,10 @@ public class ActivityModelMapper
             : new ActivityListModel
             {
                 Id = entity.Id,
-                Type = entity.Type
+                SubjectAbbr = entity.Subject?.Abbr ?? string.Empty, // Null check for Subject
+                Type = entity.Type,
+                StartTime = entity.StartTime,
+                EndTime = entity.EndTime
             };
 
     public override ActivityDetailModel MapToDetailModel(ActivityEntity? entity)
@@ -24,14 +27,13 @@ public class ActivityModelMapper
             {
                 Id = entity.Id,
                 SubjectId = entity.SubjectId,
-                SubjectAbbr = entity.Subject == null ? string.Empty : entity.Subject.Abbr,
+                SubjectAbbr = entity.Subject?.Abbr ?? string.Empty, // Null check for Subject
                 Type = entity.Type,
                 ActivityRoom = entity.Room,
-                StartDate = entity.StartTime,
-                EndDate = entity.EndTime,
+                StartTime = entity.StartTime,
+                EndTime = entity.EndTime,
                 Description = entity.Description
             };
-
 
     public override ActivityEntity MapToEntity(ActivityDetailModel detailModel)
         => new()
@@ -39,10 +41,10 @@ public class ActivityModelMapper
             Id = detailModel.Id,
             Type = detailModel.Type,
             Room = detailModel.ActivityRoom,
-            StartTime = detailModel.StartDate,
-            EndTime = detailModel.EndDate,
+            StartTime = detailModel.StartTime,
+            EndTime = detailModel.EndTime,
             Description = detailModel.Description,
             SubjectId = detailModel.SubjectId,
-            Subject = null!
+            Subject = null! // Assuming Subject is set elsewhere after mapping
         };
 }

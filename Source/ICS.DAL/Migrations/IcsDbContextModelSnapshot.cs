@@ -46,6 +46,17 @@ namespace ICS.DAL.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Activities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fabde0cd-eefe-443f-baf6-3d96cc2cbf2a"),
+                            EndTime = new DateTime(2024, 2, 20, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            Room = 2,
+                            StartTime = new DateTime(2024, 2, 20, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubjectId = new Guid("fabde0cd-eefe-443f-baf6-3d96cc2cbf2d"),
+                            Type = 1
+                        });
                 });
 
             modelBuilder.Entity("ICS.DAL.Entities.EvaluationEntity", b =>
@@ -73,6 +84,22 @@ namespace ICS.DAL.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("Evaluations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fabde0cd-eefe-443f-baf6-3d96cc2cbf2b"),
+                            ActivityId = new Guid("fabde0cd-eefe-443f-baf6-3d96cc2cbf2a"),
+                            Points = 2,
+                            StudentId = new Guid("fabde0cd-eefe-443f-baf6-3d96cc2cbf2c")
+                        },
+                        new
+                        {
+                            Id = new Guid("8f3f6551-5a7c-40ff-af05-6d7edd395736"),
+                            ActivityId = new Guid("fabde0cd-eefe-443f-baf6-3d96cc2cbf2a"),
+                            Points = 3,
+                            StudentId = new Guid("4b3702a3-6e75-473b-882b-1c15face46ea")
+                        });
                 });
 
             modelBuilder.Entity("ICS.DAL.Entities.StudentEntity", b =>
@@ -95,6 +122,49 @@ namespace ICS.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fabde0cd-eefe-443f-baf6-3d96cc2cbf2c"),
+                            Name = "Petr",
+                            Surname = "Novakov"
+                        },
+                        new
+                        {
+                            Id = new Guid("4b3702a3-6e75-473b-882b-1c15face46ea"),
+                            Name = "Kamil",
+                            Surname = "Ajajaj"
+                        });
+                });
+
+            modelBuilder.Entity("ICS.DAL.Entities.StudentToSubjectEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("studentToSubjects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fabde0cd-eefe-443f-baf6-1234cc2cbf2a"),
+                            StudentId = new Guid("fabde0cd-eefe-443f-baf6-3d96cc2cbf2c"),
+                            SubjectId = new Guid("fabde0cd-eefe-443f-baf6-3d96cc2cbf2d")
+                        });
                 });
 
             modelBuilder.Entity("ICS.DAL.Entities.SubjectEntity", b =>
@@ -117,21 +187,15 @@ namespace ICS.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Subjects");
-                });
 
-            modelBuilder.Entity("StudentEntitySubjectEntity", b =>
-                {
-                    b.Property<Guid>("StudentsId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("SubjectsId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("StudentsId", "SubjectsId");
-
-                    b.HasIndex("SubjectsId");
-
-                    b.ToTable("StudentEntitySubjectEntity");
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fabde0cd-eefe-443f-baf6-3d96cc2cbf2d"),
+                            Abbr = "ICS",
+                            Credits = 4,
+                            Name = "The C# programming language"
+                        });
                 });
 
             modelBuilder.Entity("ICS.DAL.Entities.ActivityEntity", b =>
@@ -164,19 +228,23 @@ namespace ICS.DAL.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("StudentEntitySubjectEntity", b =>
+            modelBuilder.Entity("ICS.DAL.Entities.StudentToSubjectEntity", b =>
                 {
-                    b.HasOne("ICS.DAL.Entities.StudentEntity", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
+                    b.HasOne("ICS.DAL.Entities.StudentEntity", "Student")
+                        .WithMany("StudentToSubjects")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ICS.DAL.Entities.SubjectEntity", null)
-                        .WithMany()
-                        .HasForeignKey("SubjectsId")
+                    b.HasOne("ICS.DAL.Entities.SubjectEntity", "Subject")
+                        .WithMany("StudentToSubjects")
+                        .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("ICS.DAL.Entities.ActivityEntity", b =>
@@ -187,11 +255,15 @@ namespace ICS.DAL.Migrations
             modelBuilder.Entity("ICS.DAL.Entities.StudentEntity", b =>
                 {
                     b.Navigation("Evaluations");
+
+                    b.Navigation("StudentToSubjects");
                 });
 
             modelBuilder.Entity("ICS.DAL.Entities.SubjectEntity", b =>
                 {
                     b.Navigation("Activities");
+
+                    b.Navigation("StudentToSubjects");
                 });
 #pragma warning restore 612, 618
         }

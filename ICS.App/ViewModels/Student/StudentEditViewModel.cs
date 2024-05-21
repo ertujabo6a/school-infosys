@@ -11,6 +11,7 @@ namespace ICS.App.ViewModels;
 public partial class StudentEditViewModel(
     IStudentFacade studentFacade,
     ISubjectFacade subjectFacade,
+    IStudentToSubjectFacade studentToSubjectFacade,
     INavigationService navigationService,
     IMessengerService messengerService)
     : ViewModelBase(messengerService)
@@ -25,7 +26,21 @@ public partial class StudentEditViewModel(
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        Subjects = (await _subjectFacade.GetAsync()).Except(Student.Subjects);
+        var tmpSubject = await _subjectFacade.GetAsync();
+        var freeSubjects = new List<SubjectListModel>();
+        foreach (SubjectListModel subjectListModel in tmpSubject)
+        {
+            bool isInStudentSubjects = false;
+            foreach (SubjectListModel studentSubject in Student.Subjects)
+                if (studentSubject.Id == subjectListModel.Id)
+                {
+                    isInStudentSubjects = true;
+                    break;
+                }
+            if (!isInStudentSubjects)
+                freeSubjects.Add(subjectListModel);
+        }
+        Subjects = freeSubjects;
     }
 
     [RelayCommand]
@@ -45,7 +60,8 @@ public partial class StudentEditViewModel(
     [RelayCommand]
     private async Task SaveAsync()
     {
-        await studentFacade.SaveAsync(Student with { Subjects = default! });
+        var savedStudent = await studentFacade.SaveAsync(Student with { Subjects = default! });
+        await studentToSubjectFacade.SaveAsync(savedStudent with { Subjects = Student.Subjects });
         _messengerService.Send(new StudentEditMessage { StudentId = Student.Id });
         navigationService.SendBackButtonPressed();
     }
