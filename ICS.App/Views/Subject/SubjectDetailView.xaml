@@ -24,7 +24,7 @@
 
         <!-- Header -->
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <Label FontSize="30" HorizontalOptions="Start" TextColor="#8A2BE2">
+            <Label FontSize="30" HorizontalOptions="Start" >
                 <Label.Text>
                     <MultiBinding StringFormat="{}   {0}     {1}      Credits: {2}">
                         <Binding Path="Subject.SubjectAbbr"></Binding>
@@ -35,8 +35,8 @@
             </Label>
         </Grid>
 
-        <Label Text="Students:" Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24" ></Label>
-        <Label Text="Activities:" Grid.Column="1" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24" ></Label>
+        <Label Text="Students:" Grid.Column="0" TextColor="#8A2BE2" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="27" ></Label>
+        <Label Text="Activities:" Grid.Column="1" TextColor="#8A2BE2" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="27" ></Label>
 
         <!-- First CollectionView: Students -->
         <CollectionView Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Subject.Students}" HorizontalOptions="Center">
@@ -46,7 +46,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:StudentListModel">
                     <Frame HeightRequest="75">
-                        <Label Text="{Binding Surname}" />
+                        <Label FontSize="24" Text="{Binding Surname}" />
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -60,7 +60,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:ActivityListModel">
                     <Frame HeightRequest="75">
-                        <Label Text="{Binding Type}" />
+                        <Label FontSize="24" Text="{Binding Type}" />
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

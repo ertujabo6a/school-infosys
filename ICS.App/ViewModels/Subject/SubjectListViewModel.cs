@@ -24,6 +24,7 @@ public partial class SubjectListViewModel(
         await base.LoadDataAsync();
 
         Subjects = await subjectFacade.GetAsync();
+
     }
 
     [RelayCommand]

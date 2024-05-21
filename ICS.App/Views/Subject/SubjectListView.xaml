@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <!-- Search -->
@@ -61,8 +61,8 @@
                 HorizontalOptions="Center"
                 Command="{Binding Source={x:Reference SubjectListViewRoot},
                         Path=BindingContext.SortBySubjectAbbr}"
-                Grid.Column="0"
-                WidthRequest="100"
+                Grid.Column="2"
+                WidthRequest="130"
                 HeightRequest="50">
             </Button>
 
