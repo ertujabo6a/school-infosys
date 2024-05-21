@@ -8,94 +8,147 @@
                        x:Class="ICS.App.Views.Activity.ActivityEditView"
                        x:DataType="vm:ActivityEditViewModel"
                        x:Name="ActivityEditViewRoot">
+    <Grid HorizontalOptions="Center"
+          RowSpacing="50">
 
-        <Grid HorizontalOptions="Center" RowSpacing="50">
-    <Grid.RowDefinitions>
-        <RowDefinition Height="auto"></RowDefinition>
-        <RowDefinition Height="auto"></RowDefinition>
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="auto"></ColumnDefinition>
-    </Grid.ColumnDefinitions>
-
-    <Border Grid.Row="0" Grid.Column="0" VerticalOptions="Start">
-        <Label Text="Create" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="60"></Label>
-    </Border>
-
-    <Grid Grid.Row="1" Grid.Column="0" VerticalOptions="StartAndExpand" RowSpacing="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="130"></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Text="Subject:" HorizontalOptions="End" VerticalOptions="Center" Padding="10" FontSize="20"></Label>
-        <Picker HorizontalOptions="Fill"
-            Grid.Column="1"
-            Grid.Row="0"
-            FontSize="20"
-            ItemsSource="{Binding Subjects}"
-            TextColor="White"
-            ItemDisplayBinding="{Binding ., Converter={StaticResource SubjectConverter}}"
-            SelectedItem="{Binding SelectedSubject}">
-        </Picker>
+        <Grid Grid.Row="1"
+              Grid.Column="0"
+              VerticalOptions="StartAndExpand"
+              RowSpacing="20">
 
-        <Label Grid.Column="0" Grid.Row="1" Text="Activity type:"  HorizontalOptions="End" VerticalOptions="Center" Padding="10" FontSize="20"></Label>
-        <Picker HorizontalOptions="Fill"
-            Grid.Column="1"
-            Grid.Row="1"
-            FontSize="20"
-            ItemsSource="{Binding ActivityTypes}"
-            TextColor="White"
-            SelectedItem="{Binding SelectedActivityType}">
-        </Picker>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="2" Text="Room:"  HorizontalOptions="End" VerticalOptions="Center" Padding="10" FontSize="20"></Label>
-        <Picker HorizontalOptions="Fill"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Text="Subject:"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   Padding="10"
+                   FontSize="20">
+            </Label>
+
+            <Picker HorizontalOptions="Fill"
                 Grid.Column="1"
-                Grid.Row="2"
+                Grid.Row="0"
                 FontSize="20"
-                ItemsSource="{Binding Rooms}"
+                ItemsSource="{Binding Subjects}"
                 TextColor="White"
-                SelectedItem="{Binding SelectedRoom}">
-        </Picker>
+                ItemDisplayBinding="{Binding .,
+                Converter={StaticResource SubjectConverter}}"
+                SelectedItem="{Binding SelectedSubject}">
+            </Picker>
 
-        <Label Grid.Column="0" Grid.Row="3" Text="Start time:"  HorizontalOptions="End" VerticalOptions="Center" Padding="10" FontSize="20"></Label>
-        <Entry Grid.Column="1"
-           Grid.Row="3"
-            FontSize="20"
-           HorizontalOptions="FillAndExpand"
-           Text="{Binding Activity.StartTime}">
-        </Entry>
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Text="Activity type:"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   Padding="10"
+                   FontSize="20">
+            </Label>
 
-        <Label Grid.Column="0" Grid.Row="4" Text="End time:"  HorizontalOptions="End" VerticalOptions="Center" Padding="10" FontSize="20"></Label>
-        <Entry Grid.Column="1"
-               Grid.Row="4"
-               FontSize="20"
+            <Picker HorizontalOptions="Fill"
+                Grid.Column="1"
+                Grid.Row="1"
+                FontSize="20"
+                ItemsSource="{Binding ActivityTypes}"
+                TextColor="White"
+                SelectedItem="{Binding SelectedActivityType}">
+            </Picker>
+
+            <Label Grid.Column="0"
+                   Grid.Row="2"
+                   Text="Room:"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   Padding="10"
+                   FontSize="20">
+            </Label>
+
+            <Picker HorizontalOptions="Fill"
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    FontSize="20"
+                    ItemsSource="{Binding Rooms}"
+                    TextColor="White"
+                    SelectedItem="{Binding SelectedRoom}">
+            </Picker>
+
+            <Label Grid.Column="0"
+                   Grid.Row="3"
+                   Text="Start time:"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   Padding="10"
+                   FontSize="20">
+            </Label>
+
+            <Entry Grid.Column="1"
+                   Grid.Row="3"
+                   FontSize="20"
+                   HorizontalOptions="FillAndExpand"
+                   Text="{Binding Activity.StartTime}">
+            </Entry>
+
+            <Label Grid.Column="0"
+                   Grid.Row="4"
+                   Text="End time:"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   Padding="10"
+                   FontSize="20">
+            </Label>
+
+            <Entry Grid.Column="1"
+                   Grid.Row="4"
+                   FontSize="20"
+                   HorizontalOptions="FillAndExpand"
+                   Text="{Binding Activity.EndTime}">
+            </Entry>
+
+            <Label Grid.Column="0"
+                   Grid.Row="5"
+                   Text="Description:"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   Padding="10"
+                   FontSize="20">
+            </Label>
+
+            <Entry Grid.Column="1"
+               Grid.Row="5"
                HorizontalOptions="FillAndExpand"
-               Text="{Binding Activity.EndTime}">
-        </Entry>
+               Text="{Binding Activity.Description}">
+            </Entry>
 
-        <Label Grid.Column="0" Grid.Row="5" Text="Description:"  HorizontalOptions="End" VerticalOptions="Center" Padding="10" FontSize="20"></Label>
-        <Entry Grid.Column="1"
-           Grid.Row="5"
-           HorizontalOptions="FillAndExpand"
-           Text="{Binding Activity.Description}">
-        </Entry>
-
-        <Button Grid.Column="1" Grid.Row="6" HorizontalOptions="Center" Command="{Binding SaveCommand}" Text="Save" WidthRequest="90"></Button>
+            <Button Grid.Column="1"
+                    Grid.Row="6"
+                    HorizontalOptions="Center"
+                    Command="{Binding SaveCommand}"
+                    Text="Save" WidthRequest="90">
+            </Button>
+        </Grid>
     </Grid>
-</Grid>
-
 </views:ContentPageBase>
-
-
-
