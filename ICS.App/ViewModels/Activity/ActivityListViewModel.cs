@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using ICS.App.Messages;
 using ICS.App.Services;
@@ -11,54 +9,32 @@ namespace ICS.App.ViewModels
 {
     public partial class ActivityListViewModel(
         IActivityFacade activityFacade,
+        ISubjectFacade subjectFacade,
         INavigationService navigationService,
         IMessengerService messengerService)
         : ViewModelBase(messengerService), IRecipient<ActivityEditMessage>, IRecipient<ActivityDeleteMessage>
     {
         public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
-        private ObservableCollection<ActivityListModel> FilteredActivities { get; set; } = [];
-
-        [ObservableProperty]
-        private TimeSpan startTime = TimeSpan.Zero;
-
-        [ObservableProperty]
-        private TimeSpan endTime = TimeSpan.Zero;
+        private bool _isSortedDescending = false;
 
         protected override async Task LoadDataAsync()
         {
             await base.LoadDataAsync();
-
-            Activities = await activityFacade.GetAsync();
-            // Initialize FilteredActivities with all activities initially
-            FilteredActivities.Clear();
-            foreach (var activity in Activities)
+            Activities = (await activityFacade.GetAsync()).ToList();
+            foreach (ActivityListModel e in Activities)
             {
-                FilteredActivities.Add(activity);
+                SubjectDetailModel? subjectDetailModel = await subjectFacade.GetAsync(e.SubjectId);
+                if (subjectDetailModel != null)
+                {
+                    e.SubjectAbbr = subjectDetailModel.SubjectAbbr;
+                }
             }
-        }
-
-        private async Task Filter(DateTime start, DateTime end)
-        {
-            var filteredActivities = await activityFacade.GetAsync(null, start, end);
-            FilteredActivities.Clear();
-            foreach (var activity in filteredActivities)
-            {
-                FilteredActivities.Add(activity);
-            }
-        }
-
-        [RelayCommand]
-        private async Task FilterByTimeAsync()
-        {
-            DateTime startDate = DateTime.Today.Add(StartTime);
-            DateTime endDate = DateTime.Today.Add(EndTime);
-            await Filter(startDate, endDate);
         }
 
         [RelayCommand]
         private async Task GoToCreateAsync()
         {
-            await navigationService.GoToAsync("//activities/edit");
+            await navigationService.GoToAsync("/edit");
         }
 
         [RelayCommand]
@@ -66,6 +42,66 @@ namespace ICS.App.ViewModels
         {
             await navigationService.GoToAsync<ActivityDetailViewModel>(
                 new Dictionary<string, object?> { [nameof(ActivityDetailViewModel.Id)] = id });
+        }
+
+        [RelayCommand]
+        private void SortBySubjectAbbr()
+        {
+            if (!_isSortedDescending)
+            {
+                Activities = Activities.OrderBy(e => e.SubjectAbbr);
+                _isSortedDescending = true;
+            }
+            else
+            {
+                Activities = Activities.OrderByDescending(e => e.SubjectAbbr);
+                _isSortedDescending = false;
+            }
+        }
+
+        [RelayCommand]
+        private void SortByType()
+        {
+            if (!_isSortedDescending)
+            {
+                Activities = Activities.OrderBy(e => e.Type);
+                _isSortedDescending= true;
+            }
+            else
+            {
+                Activities = Activities.OrderByDescending(e => e.Type);
+                _isSortedDescending = false;
+            }
+        }
+
+        [RelayCommand]
+        private void SortByStartTime()
+        {
+            if (!_isSortedDescending)
+            {
+                Activities = Activities.OrderBy(e => e.StartTime);
+                _isSortedDescending = true;
+            }
+            else
+            {
+                Activities = Activities.OrderByDescending(e => e.StartTime);
+                _isSortedDescending = false;
+            }
+        }
+
+        [RelayCommand]
+        private void SortByEndTime()
+        {
+            if (!_isSortedDescending)
+            {
+                Activities = Activities.OrderBy(e => e.EndTime);
+                _isSortedDescending= true;
+            }
+            else
+            {
+                Activities = Activities.OrderByDescending(e => e.EndTime);
+                _isSortedDescending = false;
+            }
         }
 
         public async void Receive(ActivityEditMessage message)

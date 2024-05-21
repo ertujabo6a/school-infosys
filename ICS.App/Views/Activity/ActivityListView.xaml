@@ -8,70 +8,86 @@
                        x:Class="ICS.App.Views.Activity.ActivityListView"
                        x:DataType="vm:ActivityListViewModel"
                        x:Name="ActivityListViewRoot">
-    <Grid HorizontalOptions="FillAndExpand" RowDefinitions="70, *"
-          RowSpacing="20">
 
-        <Button Grid.Row="0"
-                Padding="12, 6"
-                HorizontalOptions="End" VerticalOptions="Start"
-                Text="Add activity"
-                Command="{Binding GoToCreateCommand}"
-                CornerRadius="5" FontFamily="MontserratMedium"
-                BackgroundColor="Green"
-                FontSize="14" />
+    <StackLayout Padding="10">
 
-        <Button Grid.Row="1"
-                Padding="12, 6"
-                HorizontalOptions="End" VerticalOptions="Start"
-                Text="Filter by Time"
-                Command="{Binding FilterByTimeCommand}"
-                CornerRadius="5" FontFamily="MontserratMedium"
-                FontSize="14" />
+        <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="Center"
+                     Spacing="30">
+            <Label Text="Sort by:"
+                   FontSize="25"
+                   VerticalOptions="Center" />
+            <Button Text="Abbr"
+                    FontSize="25"
+                    TextColor="White"
+                    Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.SortBySubjectAbbrCommand}" />
+            <Button Text="Type"
+                    TextColor="White"
+                    FontSize="25"
+                    Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.SortByTypeCommand}" />
+            <Button Text="Start time"
+                    TextColor="White"
+                    FontSize="25"
+                    Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.SortByStartTimeCommand}" />
+            <Button Text="End time"
+                    TextColor="White"
+                    FontSize="25"
+                    Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.SortByEndTimeCommand}" />
+            <Button Text="Create"
+                    TextColor="White"
+                    FontSize="25"
+                    BackgroundColor="Green"
+                    Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.GoToCreateCommand}" />
+        </StackLayout>
 
-        <CollectionView Grid.Row="2"
-                        ItemsSource="{Binding Activities}">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Horizontal"
-                                 HorizontalItemSpacing="10" VerticalItemSpacing="10"
-                                 Span="2" />
-            </CollectionView.ItemsLayout>
-
+        <CollectionView ItemsSource="{Binding Activities}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:ActivityListModel">
-                    <Grid RowDefinitions="*, *">
-                        <Label Grid.Row="2"
-                               Margin="22,12"
-                               FontSize="20" LineBreakMode="WordWrap"
-                               Text="{Binding Id}"
-                               TextColor="White" VerticalOptions="End" />
+                    <Grid Padding="10"
+                          ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="2"
-                               Margin="22,12"
-                               FontSize="20" LineBreakMode="WordWrap"
-                               Text="{Binding SubjectAbbr}"
-                               TextColor="White" VerticalOptions="End" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={x:Reference ActivityListViewRoot},
+                                Path=BindingContext.GoToDetailCommand}"
+                                CommandParameter="{Binding Id}" />
+                        </Grid.GestureRecognizers>
 
-                        <Label Grid.Row="2"
-                               Margin="22,12"
-                               FontSize="20" LineBreakMode="WordWrap"
-                               Text="{Binding Type}"
-                               TextColor="White" VerticalOptions="End" />
-
-                        <Label Grid.Row="2"
-                               Margin="22,12"
-                               FontSize="20" LineBreakMode="WordWrap"
-                               Text="{Binding StartTime}"
-                               TextColor="White" VerticalOptions="End" />
-
-                        <Label Grid.Row="2"
-                               Margin="22,12"
-                               FontSize="20" LineBreakMode="WordWrap"
-                               Text="{Binding EndTime}"
-                               TextColor="White" VerticalOptions="End" />
+                        <Label Text="{Binding SubjectAbbr}"
+                               Grid.Column="0"
+                               TextColor="White"
+                               FontSize="25"
+                               VerticalOptions="Center" />
+                        <Label Text="{Binding Type}"
+                               Grid.Column="1"
+                               TextColor="White"
+                               FontSize="25"
+                               VerticalOptions="Center" />
+                        <Label Text="{Binding StartTime}"
+                               Grid.Column="2"
+                               TextColor="White"
+                               FontSize="25"
+                               VerticalOptions="Center" />
+                        <Label Text="{Binding EndTime}"
+                               Grid.Column="3"
+                               TextColor="White"
+                               FontSize="25"
+                               VerticalOptions="Center" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </Grid>
-</views:ContentPageBase>
 
+    </StackLayout>
+</views:ContentPageBase>

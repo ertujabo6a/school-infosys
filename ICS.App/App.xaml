@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converters:SubjectConverter x:Key="SubjectConverter"/>
             <converters:StudentToFullNameConverter x:Key="StudentToFullNameConverter" />
             <converters:ActivityConverter x:Key="ActivityConverter" />
         </ResourceDictionary>

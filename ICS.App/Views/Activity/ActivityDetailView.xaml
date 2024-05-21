@@ -8,52 +8,160 @@
                        Title="Activity detail"
                        x:DataType="vm:ActivityDetailViewModel"
                        x:Name="ActivityDetailViewRoot">
-    <VerticalStackLayout Spacing="20">
-        <HorizontalStackLayout HorizontalOptions="End"
-                               Spacing="15"
-                               HeightRequest="30">
-            <Button Text="Delete"
-                    CornerRadius="5"
-                    BackgroundColor="Red"
-                    Command="{Binding DeleteCommand}" />
+    <Grid HorizontalOptions="Center"
+          VerticalOptions="Center"
+          RowSpacing="10"
+          ColumnSpacing="15">
 
-            <Button Text="Edit"
-                    CornerRadius="5"
-                    BackgroundColor="Green"
-                    Command="{Binding GoToEditCommand}" />
-        </HorizontalStackLayout>
+        <Grid.RowDefinitions>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+    </Grid.RowDefinitions>
 
-        <Grid HorizontalOptions="Center" VerticalOptions="Start"
-              RowDefinitions="170, *" ColumnDefinitions="*, Auto, Auto, *"
-              RowSpacing="20" ColumnSpacing="20">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="120"></ColumnDefinition>
+        <ColumnDefinition Width="200"></ColumnDefinition>
+        <ColumnDefinition Width="200"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
 
-            <VerticalStackLayout Grid.Row="0" Grid.RowSpan="2"
-                                 Grid.Column="2"
-                                 Spacing="20">
-                <Label FontSize="24"
-                       Text="{Binding Activity.Id}" />
+    <Label Text="Subject:"
+           Grid.Column="0"
+           Grid.Row="0"
+           FontSize="20"
+           HorizontalOptions="End"
+           VerticalOptions="Center">
+    </Label>
 
-                <Label FontSize="14"
-                       Text="{Binding Activity.Type}"/>
+    <Border Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Padding="5, 10, 5, 10">
+            <Label Text="{Binding Activity.SubjectAbbr}"
+                   FontSize="30"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center">
+            </Label>
+    </Border>
 
-                <Label FontSize="14"
-                       Text="{Binding Activity.SubjectId}"/>
+    <Label Text="Type:"
+           Grid.Column="0"
+           Grid.Row="1"
+           FontSize="20"
+           HorizontalOptions="End"
+           VerticalOptions="Center">
+    </Label>
 
-                <Label FontSize="14"
-                       Text="{Binding Activity.SubjectAbbr}"/>
+    <Border Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Padding="5, 10, 5, 10">
+            <Label Text="{Binding Activity.Type}"
+                   FontSize="30"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center">
+            </Label>
+    </Border>
 
-                <Label FontSize="14"
-                       Text="{Binding Activity.ActivityRoom}"/>
+    <Label Text="Room:"
+           Grid.Column="0"
+           Grid.Row="2"
+           FontSize="20"
+           HorizontalOptions="End"
+           VerticalOptions="Center">
+    </Label>
 
-                <Label FontSize="14"
-                       Text="{Binding Activity.StartTime}"/>
+    <Border Grid.Row="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Padding="5, 10, 5, 10">
+            <Label Text="{Binding Activity.ActivityRoom}"
+                   FontSize="30"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center">
+            </Label>
+    </Border>
 
-                <Label FontSize="14"
-                       Text="{Binding Activity.EndTime}"/>
+    <Label Text="Start time:"
+           Grid.Column="0"
+           Grid.Row="3"
+           FontSize="20"
+           HorizontalOptions="End"
+           VerticalOptions="Center">
+    </Label>
 
-                <Label FontSize="14"
-                       Text="{Binding Activity.Description}"/>
-            </VerticalStackLayout>
-        </Grid>
-    </VerticalStackLayout>
+    <Border Grid.Row="3"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Padding="5, 10, 5, 10">
+            <Label Text="{Binding Activity.StartTime}"
+               FontSize="30"
+               HorizontalOptions="Start"
+               VerticalOptions="Center">
+            </Label>
+    </Border>
+
+    <Label Text="End time:"
+           Grid.Column="0"
+           Grid.Row="4"
+           FontSize="20"
+           HorizontalOptions="End"
+           VerticalOptions="Center">
+    </Label>
+
+    <Border Grid.Row="4"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Padding="5, 10, 5, 10">
+            <Label Text="{Binding Activity.EndTime}"
+                   FontSize="30"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center">
+            </Label>
+    </Border>
+
+    <Label Text="Description:"
+           Grid.Column="0"
+           Grid.Row="5"
+           FontSize="20"
+           HorizontalOptions="End"
+           VerticalOptions="Center">
+    </Label>
+
+    <Border Grid.Row="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Padding="5, 10, 5, 10">
+            <Label Text="{Binding Activity.Description}"
+                   FontSize="30"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center">
+            </Label>
+    </Border>
+
+    <Button Grid.Row="6"
+            Grid.Column="1"
+            HorizontalOptions="Center"
+            WidthRequest="100"
+            Text="Edit"
+            TextColor="White"
+            BackgroundColor="Green"
+            Command="{Binding GoToEditCommand}">
+    </Button>
+
+    <Button Grid.Row="6"
+            Grid.Column="2"
+            HorizontalOptions="Center"
+            WidthRequest="100"
+            Text="Delete"
+            TextColor="White"
+            BackgroundColor="Red"
+            Command="{Binding DeleteCommand}">
+    </Button>
+</Grid>
+
 </views:ContentPageBase>

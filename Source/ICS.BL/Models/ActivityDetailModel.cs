@@ -5,7 +5,6 @@ namespace ICS.BL.Models;
 
 public record ActivityDetailModel : ModelBase
 {
-    public new required Guid Id { get; set; }
     public required ActivityType Type { get; set; }
     public required Guid SubjectId { get; set; }
     public required string SubjectAbbr { get; set; }

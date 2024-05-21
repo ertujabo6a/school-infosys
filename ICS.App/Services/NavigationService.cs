@@ -18,10 +18,12 @@ public class NavigationService : INavigationService
         new("//subjects", typeof(SubjectListView), typeof(SubjectListViewModel)),
 
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
+        new("//activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
         new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
 
         new("//evaluations", typeof(EvaluationListView), typeof(EvaluationListViewModel)),
         new("//evaluations/detail", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
+        new("//activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
 
         new("//evaluations/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
         new("//evaluations/create", typeof(EvaluationCreateView), typeof(EvaluationEditViewModel)),

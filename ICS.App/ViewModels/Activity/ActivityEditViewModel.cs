@@ -1,29 +1,60 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using ICS.App.Messages;
 using ICS.App.Services;
 using ICS.BL.Facades.Interfaces;
 using ICS.BL.Models;
+using ICS.Common.Enums;
 
 namespace ICS.App.ViewModels;
 
 [QueryProperty(nameof(Activity), nameof(Activity))]
-public partial class ActivityEditViewModel(
+public partial class ActivityEditViewModel (
     IActivityFacade activityFacade,
+    ISubjectFacade subjectFacade,
     INavigationService navigationService,
     IMessengerService messengerService)
     : ViewModelBase(messengerService)
 {
-    private readonly IMessengerService _messengerService = messengerService;
-
     public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
+    public IList<SubjectListModel>? Subjects { get; set; }
+    [ObservableProperty]
+    private SubjectListModel _selectedSubject = null!;
+    public IEnumerable<ActivityType>? ActivityTypes { get; set; }
+    [ObservableProperty]
+    private ActivityType _selectedActivityType;
+    public IEnumerable<Room>? Rooms { get; set; }
+    [ObservableProperty]
+    private Room _selectedRoom;
+
+    protected override async Task LoadDataAsync()
+    {
+        await base.LoadDataAsync();
+        Subjects = (await subjectFacade.GetAsync()).ToList();
+        ActivityTypes = Enum.GetValues(typeof(ActivityType)).Cast<ActivityType>().ToList();
+        Rooms = Enum.GetValues(typeof(Room)).Cast<Room>().ToList();
+    }
+
+    partial void OnSelectedSubjectChanged(SubjectListModel value)
+    {
+        Activity.SubjectId = value.Id;
+    }
+
+    partial void OnSelectedActivityTypeChanged(ActivityType value)
+    {
+        Activity.Type = value;
+    }
+
+    partial void OnSelectedRoomChanged(Room value)
+    {
+        Activity.ActivityRoom = value;
+    }
 
     [RelayCommand]
     private async Task SaveAsync()
     {
         await activityFacade.SaveAsync(Activity);
-
-        _messengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
-
+        MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
         navigationService.SendBackButtonPressed();
     }
 }
