@@ -5,6 +5,7 @@ using ICS.App.Services;
 using ICS.BL.Models;
 using ICS.BL.Facades.Interfaces;
 using ICS.App.Messages;
+using ICS.BL.Facades;
 
 
 namespace ICS.App.ViewModels;
@@ -14,6 +15,7 @@ public partial class EvaluationEditViewModel(
     IEvaluationFacade evaluationFacade,
     IStudentFacade studentFacade,
     IActivityFacade activityFacade,
+    ISubjectFacade subjectFacade,
     INavigationService navigationService,
     IMessengerService messengerService)
     : ViewModelBase(messengerService)
@@ -31,6 +33,15 @@ public partial class EvaluationEditViewModel(
         await base.LoadDataAsync();
         Students = (await studentFacade.GetAsync()).ToList();
         Activities = (await activityFacade.GetAsync()).ToList();
+        foreach (ActivityListModel e in Activities)
+        {
+            SubjectDetailModel? subjectDetailModel = await subjectFacade.GetAsync(e.SubjectId);
+            if (subjectDetailModel != null)
+            {
+                e.SubjectAbbr = subjectDetailModel.SubjectAbbr;
+            }
+        }
+        Activities = Activities.ToList();
     }
 
     partial void OnSelectedStudentChanged(StudentListModel value)

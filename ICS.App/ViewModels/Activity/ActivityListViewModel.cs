@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using ICS.App.Messages;
 using ICS.App.Services;
@@ -12,10 +14,27 @@ namespace ICS.App.ViewModels
         ISubjectFacade subjectFacade,
         INavigationService navigationService,
         IMessengerService messengerService)
-        : ViewModelBase(messengerService), IRecipient<ActivityEditMessage>, IRecipient<ActivityDeleteMessage>, IRecipient<SubjectDeleteMessage>
+        : ViewModelBase(messengerService), IRecipient<ActivityEditMessage>, IRecipient<ActivityDeleteMessage>, IRecipient<SubjectDeleteMessage>, IRecipient<SubjectEditMessage>
     {
         public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
         private bool _isSortedDescending = false;
+        public IList<SubjectListModel>? Subjects { get; set; }
+
+        [ObservableProperty]
+        private SubjectListModel? _selectedSubject;
+
+        [ObservableProperty]
+        private DateTime _startDate = DateTime.Now;
+
+        [ObservableProperty]
+        private TimeSpan _startTime = TimeSpan.Zero;
+
+        [ObservableProperty]
+        private DateTime _endDate = DateTime.Now;
+
+        [ObservableProperty]
+        private TimeSpan _endTime = TimeSpan.Zero;
+
 
         protected override async Task LoadDataAsync()
         {
@@ -29,6 +48,8 @@ namespace ICS.App.ViewModels
                     e.SubjectAbbr = subjectDetailModel.SubjectAbbr;
                 }
             }
+
+            Subjects = (await subjectFacade.GetAsync()).ToList();
         }
 
         [RelayCommand]
@@ -104,6 +125,37 @@ namespace ICS.App.ViewModels
             }
         }
 
+        [RelayCommand]
+        private async Task Filter()
+        {
+            Activities = (await activityFacade.GetAsync(SelectedSubject == null ? null : SelectedSubject.SubjectAbbr, StartDate.Date + StartTime, EndDate.Date + EndTime)).ToList();
+            foreach (ActivityListModel e in Activities)
+            {
+                SubjectDetailModel? subjectDetailModel = await subjectFacade.GetAsync(e.SubjectId);
+                if (subjectDetailModel != null)
+                {
+                    e.SubjectAbbr = subjectDetailModel.SubjectAbbr;
+                }
+            }
+            Activities = Activities.ToList();
+        }
+
+        [RelayCommand]
+        private async Task Unfilter()
+        {
+            Activities = (await activityFacade.GetAsync()).ToList();
+            foreach (ActivityListModel e in Activities)
+            {
+                SubjectDetailModel? subjectDetailModel = await subjectFacade.GetAsync(e.SubjectId);
+                if (subjectDetailModel != null)
+                {
+                    e.SubjectAbbr = subjectDetailModel.SubjectAbbr;
+                }
+            }
+            Activities = Activities.ToList();
+            SelectedSubject = null;
+        }
+
         public async void Receive(ActivityEditMessage message)
         {
             await LoadDataAsync();
@@ -117,6 +169,12 @@ namespace ICS.App.ViewModels
         public async void Receive(SubjectDeleteMessage message)
         {
             await LoadDataAsync();
+        }
+
+        public async void Receive(SubjectEditMessage message)
+        {
+            await LoadDataAsync();
+            Subjects = (await subjectFacade.GetAsync()).ToList();
         }
     }
 }
