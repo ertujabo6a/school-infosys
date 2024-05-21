@@ -1,6 +1,8 @@
 ﻿using ICS.App.ViewModels;
-using ICS.App.ViewModels.Student;
+using ICS.App.Views.Activity;
+using ICS.App.Views.Evaluation;
 using ICS.App.Views.Student;
+using ICS.App.Views.Subject;
 
 namespace ICS.App.Services;
 
@@ -8,19 +10,40 @@ public class NavigationService : INavigationService
 {
     public IEnumerable<RouteModel> Routes { get; } = new List<RouteModel>
     {
-        new("//students", typeof(StudentListView), typeof(StudentListViewModel))
+        new("//students", typeof(StudentListView), typeof(StudentListViewModel)),
+        new("//students/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
+        new("//students/detail", typeof(StudentDetailView), typeof(StudentDetailViewModel)),
+        new("//students/detail/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
+
+        new("//subjects", typeof(SubjectListView), typeof(SubjectListViewModel)),
+        new("//subjects/edit", typeof(SubjectEditView), typeof(SubjectEditViewModel)),
+        new("//subjects/detail", typeof(SubjectDetailView), typeof(SubjectDetailViewModel)),
+        new("//subjects/detail/edit", typeof(SubjectEditView), typeof(SubjectEditViewModel)),
+
+        new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
+        new("//activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+        new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
+
+        new("//evaluations", typeof(EvaluationListView), typeof(EvaluationListViewModel)),
+        new("//evaluations/detail", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
+        new("//activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+
+        new("//evaluations/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
+        new("//evaluations/create", typeof(EvaluationCreateView), typeof(EvaluationEditViewModel)),
+
+        new("//evaluations/detail/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel))
     };
 
     public async Task GoToAsync<TViewModel>()
         where TViewModel : IViewModel
     {
-        var route = GetRouteByViewModel<TViewModel>();
+        string route = GetRouteByViewModel<TViewModel>();
         await Shell.Current.GoToAsync(route);
     }
     public async Task GoToAsync<TViewModel>(IDictionary<string, object?> parameters)
         where TViewModel : IViewModel
     {
-        var route = GetRouteByViewModel<TViewModel>();
+        string route = GetRouteByViewModel<TViewModel>();
         await Shell.Current.GoToAsync(route, parameters);
     }
 
@@ -34,6 +57,6 @@ public class NavigationService : INavigationService
         => Shell.Current.SendBackButtonPressed();
 
     private string GetRouteByViewModel<TViewModel>()
-        where TViewModel : IViewModel 
+        where TViewModel : IViewModel
         => Routes.First(route => route.ViewModelType == typeof(TViewModel)).Route;
 }

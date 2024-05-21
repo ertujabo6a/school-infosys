@@ -1,8 +1,13 @@
-﻿// To learn more about WinUI, the WinUI project structure,
+﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+//
+
+using Microsoft.UI.Xaml;
+
+// To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace ICS.App.Platforms.Windows;
-
+namespace ICS.App.WinUI;
 /// <summary>
 /// Provides application-specific behavior to supplement the default Application class.
 /// </summary>
@@ -14,8 +19,9 @@ public partial class App : MauiWinUIApplication
     /// </summary>
     public App()
     {
-        InitializeComponent();
+        this.InitializeComponent();
     }
 
     protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 }
+

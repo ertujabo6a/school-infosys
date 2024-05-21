@@ -5,7 +5,7 @@ using ICS.App.Services;
 using ICS.BL.Facades.Interfaces;
 using ICS.BL.Models;
 
-namespace ICS.App.ViewModels.Activity;
+namespace ICS.App.ViewModels;
 
 [QueryProperty(nameof(Id), nameof(Id))]
 public partial class ActivityDetailViewModel(
@@ -40,7 +40,7 @@ public partial class ActivityDetailViewModel(
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        await navigationService.GoToAsync("/edit",
+        await navigationService.GoToAsync("detail/edit",
             new Dictionary<string, object?> { [nameof(Activity)] = Activity });
     }
 

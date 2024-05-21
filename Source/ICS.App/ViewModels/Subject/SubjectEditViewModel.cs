@@ -5,7 +5,7 @@ using ICS.BL.Models;
 using ICS.BL.Facades.Interfaces;
 using ICS.App.Messages;
 
-namespace ICS.App.ViewModels.Subject;
+namespace ICS.App.ViewModels;
 
 [QueryProperty(nameof(Subject), nameof(Subject))]
 public partial class SubjectEditViewModel(
@@ -20,9 +20,8 @@ public partial class SubjectEditViewModel(
 
     private async Task SaveAsync()
     {
-        await subjectFacade.SaveAsync(Subject);
+        await subjectFacade.SaveAsync(Subject with { Activities = default!, Students = default! });
         MessengerService.Send(new SubjectEditMessage { SubjectId = Subject.Id });
-
         navigationService.SendBackButtonPressed();
     }
 }

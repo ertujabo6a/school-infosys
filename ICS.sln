@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICS.DAL.Tests", "Source\ICS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICS.BL.Tests", "Source\ICS.BL.Tests\ICS.BL.Tests.csproj", "{73D007AF-E063-4358-8D95-54C3CAA663EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICS.App", "ICS.App\ICS.App.csproj", "{7B22C11B-6D90-4052-97B4-F40254B5AD8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICS.App", "Source\ICS.App\ICS.App.csproj", "{7B22C11B-6D90-4052-97B4-F40254B5AD8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

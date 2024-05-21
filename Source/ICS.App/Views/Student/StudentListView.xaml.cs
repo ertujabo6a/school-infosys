@@ -1,13 +1,12 @@
-﻿using ICS.App.ViewModels.Student;
+using ICS.App.ViewModels;
 
 namespace ICS.App.Views.Student;
 
-public partial class StudentListView : ContentPageBase
+public partial class StudentListView
 {
-
     public StudentListView(StudentListViewModel viewModel)
-        : base(viewModel)
-    {
-        InitializeComponent();
-    }
+		: base(viewModel)
+	{
+		InitializeComponent();
+	}
 }

@@ -1,6 +1,4 @@
-﻿using ICS.App.Shells;
-
-namespace ICS.App;
+﻿namespace ICS.App;
 
 public partial class App : Application
 {

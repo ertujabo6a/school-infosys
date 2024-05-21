@@ -9,7 +9,6 @@ public partial class ContentPageBase
     public ContentPageBase(IViewModel viewModel)
 	{
 		InitializeComponent();
-
         BindingContext = ViewModel = viewModel;
     }
 

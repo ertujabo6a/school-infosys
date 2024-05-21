@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using ICS.DAL.Migrator;
 using ICS.App.Services;
-using ICS.App.Shells;
 
 [assembly: System.Resources.NeutralResourcesLanguage("en")]
 namespace ICS.App;
@@ -15,7 +14,10 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         MauiAppBuilder builder = MauiApp.CreateBuilder();
-        builder.UseMauiApp<App>().ConfigureFonts(fonts =>
+        builder
+            .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
+            .ConfigureFonts(fonts =>
         {
             fonts.AddFont("RobotoMono-Regular.ttf", "RobotoMonoRegular");
             fonts.AddFont("RobotoMono-Bold.ttf", "RobotoMonoBold");

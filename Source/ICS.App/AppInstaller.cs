@@ -3,7 +3,7 @@ using ICS.App.Services;
 using ICS.App.ViewModels;
 using ICS.App.Views;
 
-namespace ICS.App.Shells;
+namespace ICS.App;
 
 public static class AppInstaller
 {
@@ -20,7 +20,7 @@ public static class AppInstaller
             .FromAssemblyOf<App>()
             .AddClasses(filter => filter.AssignableTo<ContentPageBase>())
             .AsSelf()
-            .WithTransientLifetime());
+            .WithTransientLifetime());  
 
         services.Scan(selector => selector
             .FromAssemblyOf<App>()
