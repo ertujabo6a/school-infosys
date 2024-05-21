@@ -148,6 +148,8 @@
             HorizontalOptions="Center"
             WidthRequest="100"
             Text="Edit"
+            TextColor="White"
+            BackgroundColor="Green"
             Command="{Binding GoToEditCommand}">
     </Button>
 
@@ -156,6 +158,8 @@
             HorizontalOptions="Center"
             WidthRequest="100"
             Text="Delete"
+            TextColor="White"
+            BackgroundColor="Red"
             Command="{Binding DeleteCommand}">
     </Button>
 </Grid>

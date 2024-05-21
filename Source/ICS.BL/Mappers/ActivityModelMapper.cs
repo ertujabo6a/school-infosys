@@ -14,6 +14,7 @@ namespace ICS.BL.Mappers
                 : new ActivityListModel
                 {
                     Id = entity.Id,
+                    SubjectId = entity.SubjectId,
                     SubjectAbbr = entity.Subject?.Abbr ?? string.Empty, // Null check for Subject
                     Type = entity.Type,
                     StartTime = entity.StartTime,

@@ -13,25 +13,36 @@
 
         <StackLayout Orientation="Horizontal"
                      HorizontalOptions="Center"
-                     Spacing="10">
-            <Label Text="Sort By:"
+                     Spacing="30">
+            <Label Text="Sort by:"
+                   FontSize="25"
                    VerticalOptions="Center" />
             <Button Text="Abbr"
+                    FontSize="25"
+                    TextColor="White"
                     Command="{Binding Source={x:Reference ActivityListViewRoot},
                                 Path=BindingContext.SortBySubjectAbbrCommand}" />
             <Button Text="Type"
+                    TextColor="White"
+                    FontSize="25"
                     Command="{Binding Source={x:Reference ActivityListViewRoot},
                                 Path=BindingContext.SortByTypeCommand}" />
             <Button Text="Start time"
+                    TextColor="White"
+                    FontSize="25"
                     Command="{Binding Source={x:Reference ActivityListViewRoot},
                                 Path=BindingContext.SortByStartTimeCommand}" />
             <Button Text="End time"
+                    TextColor="White"
+                    FontSize="25"
                     Command="{Binding Source={x:Reference ActivityListViewRoot},
                                 Path=BindingContext.SortByEndTimeCommand}" />
             <Button Text="Create"
+                    TextColor="White"
+                    FontSize="25"
+                    BackgroundColor="Green"
                     Command="{Binding Source={x:Reference ActivityListViewRoot},
-                                Path=BindingContext.GoToCreateCommand}"
-                    HorizontalOptions="End"/>
+                                Path=BindingContext.GoToCreateCommand}" />
         </StackLayout>
 
         <CollectionView ItemsSource="{Binding Activities}">
@@ -61,14 +72,17 @@
                         <Label Text="{Binding Type}"
                                Grid.Column="1"
                                TextColor="White"
+                               FontSize="25"
                                VerticalOptions="Center" />
                         <Label Text="{Binding StartTime}"
                                Grid.Column="2"
                                TextColor="White"
+                               FontSize="25"
                                VerticalOptions="Center" />
                         <Label Text="{Binding EndTime}"
                                Grid.Column="3"
                                TextColor="White"
+                               FontSize="25"
                                VerticalOptions="Center" />
                     </Grid>
                 </DataTemplate>

@@ -20,7 +20,15 @@ namespace ICS.App.ViewModels
         protected override async Task LoadDataAsync()
         {
             await base.LoadDataAsync();
-            Activities = await activityFacade.GetAsync();
+            Activities = (await activityFacade.GetAsync()).ToList();
+            foreach (ActivityListModel e in Activities)
+            {
+                SubjectDetailModel? subjectDetailModel = await subjectFacade.GetAsync(e.SubjectId);
+                if (subjectDetailModel != null)
+                {
+                    e.SubjectAbbr = subjectDetailModel.SubjectAbbr;
+                }
+            }
         }
 
         [RelayCommand]

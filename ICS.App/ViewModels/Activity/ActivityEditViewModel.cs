@@ -17,13 +17,13 @@ public partial class ActivityEditViewModel (
     : ViewModelBase(messengerService)
 {
     public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
-    public IList<SubjectListModel> Subjects { get; set; }
+    public IList<SubjectListModel>? Subjects { get; set; }
     [ObservableProperty]
-    private SubjectListModel _selectedSubject;
-    public IEnumerable<ActivityType> ActivityTypes { get; set; }
+    private SubjectListModel _selectedSubject = null!;
+    public IEnumerable<ActivityType>? ActivityTypes { get; set; }
     [ObservableProperty]
     private ActivityType _selectedActivityType;
-    public IEnumerable<Room> Rooms { get; set; }
+    public IEnumerable<Room>? Rooms { get; set; }
     [ObservableProperty]
     private Room _selectedRoom;
 
@@ -38,6 +38,16 @@ public partial class ActivityEditViewModel (
     partial void OnSelectedSubjectChanged(SubjectListModel value)
     {
         Activity.SubjectId = value.Id;
+    }
+
+    partial void OnSelectedActivityTypeChanged(ActivityType value)
+    {
+        Activity.Type = value;
+    }
+
+    partial void OnSelectedRoomChanged(Room value)
+    {
+        Activity.ActivityRoom = value;
     }
 
     [RelayCommand]
