@@ -102,51 +102,6 @@ public partial class EvaluationListViewModel(
     }
 
     [RelayCommand]
-    private void SortByName()
-    {
-        if (!_isSortedDescending)
-        {
-            Evaluations = Evaluations.OrderBy(e => e.StudentName);
-            _isSortedDescending = true;
-        }
-        else
-        {
-            Evaluations = Evaluations.OrderByDescending(e => e.StudentName);
-            _isSortedDescending = false;
-        }
-    }
-
-    [RelayCommand]
-    private void SortByActivity()
-    {
-        if (!_isSortedDescending)
-        {
-            Evaluations = Evaluations.OrderBy(e => e.Activity);
-            _isSortedDescending = true;
-        }
-        else
-        {
-            Evaluations = Evaluations.OrderByDescending(e => e.Activity);
-            _isSortedDescending = false;
-        }
-    }
-
-    [RelayCommand]
-    private void SortByPoints()
-    {
-        if (!_isSortedDescending)
-        {
-            Evaluations = Evaluations.OrderBy(e => e.Points);
-            _isSortedDescending= true;
-        }
-        else
-        {
-            Evaluations = Evaluations.OrderByDescending(e => e.Points);
-            _isSortedDescending = false;
-        }
-    }
-
-    [RelayCommand]
     private async Task GoToDetailAsync(Guid id)
     {
         await navigationService.GoToAsync<EvaluationDetailViewModel>(
