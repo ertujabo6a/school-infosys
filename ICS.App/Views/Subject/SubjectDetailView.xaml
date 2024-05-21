@@ -11,7 +11,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="85"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="70"></RowDefinition>
@@ -22,11 +22,13 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Border>
+
         <!-- Header -->
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <Label FontSize="30" HorizontalOptions="Start" >
+            <Label FontSize="30" HorizontalOptions="Center" VerticalOptions="Center">
                 <Label.Text>
-                    <MultiBinding StringFormat="{}   {0}     {1}      Credits: {2}">
+                    <MultiBinding StringFormat="{}                  {0}     {1}      Credits: {2}">
                         <Binding Path="Subject.SubjectAbbr"></Binding>
                         <Binding Path="Subject.SubjectName"></Binding>
                         <Binding Path="Subject.Credits"></Binding>
@@ -35,17 +37,45 @@
             </Label>
         </Grid>
 
-        <Label Text="Students:" Grid.Column="0" TextColor="#8A2BE2" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="27" ></Label>
-        <Label Text="Activities:" Grid.Column="1" TextColor="#8A2BE2" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="27" ></Label>
+
+        <!-- Rectangles -->
+        <Frame
+            BackgroundColor="LightGray"
+            CornerRadius="10"
+            WidthRequest="450"
+            HorizontalOptions="Center"
+            VerticalOptions="FillAndExpand"
+            Grid.ZIndex="0"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            Margin="7, 0, 0, 0"
+        />
+        <Frame
+            BackgroundColor="LightGray"
+            CornerRadius="10"
+            WidthRequest="450"
+            HorizontalOptions="Center"
+            VerticalOptions="FillAndExpand"
+            Grid.ZIndex="0"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Margin="7, 0, 0, 0"
+        />
+
+        <!-- Labels -->
+        <Label Text="Students:" Grid.Column="0" TextColor="#373b39" FontAttributes="Bold" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="27" ></Label>
+        <Label Text="Activities:" Grid.Column="1" TextColor="#373b39" FontAttributes="Bold" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="27" ></Label>
 
         <!-- First CollectionView: Students -->
-        <CollectionView Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Subject.Students}" HorizontalOptions="Center">
+        <CollectionView Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Subject.Students}" HorizontalOptions="FillAndExpand">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" ></GridItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:StudentListModel">
-                    <Frame HeightRequest="75">
+                    <Frame HeightRequest="75" WidthRequest="400">
                         <Label FontSize="24" Text="{Binding Surname}" />
                     </Frame>
                 </DataTemplate>
@@ -53,13 +83,13 @@
         </CollectionView>
 
         <!-- Second CollectionView: Activities -->
-        <CollectionView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Subject.Activities}" HorizontalOptions="Center">
+        <CollectionView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Subject.Activities}" HorizontalOptions="FillAndExpand">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" ></GridItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:ActivityListModel">
-                    <Frame HeightRequest="75">
+                    <Frame HeightRequest="75" WidthRequest="400">
                         <Label FontSize="24" Text="{Binding Type}" />
                     </Frame>
                 </DataTemplate>
