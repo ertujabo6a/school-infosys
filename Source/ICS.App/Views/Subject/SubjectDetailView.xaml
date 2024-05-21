@@ -105,7 +105,7 @@
             <!-- Edit Button -->
             <Button Grid.Column="1" HorizontalOptions="End" BackgroundColor="LightBlue" VerticalOptions="Center" WidthRequest="100" Text="Edit" Command="{Binding GoToEditCommand}" />
             <!-- Delete Button -->
-            <Button Grid.Column="2" HorizontalOptions="Center" BackgroundColor="LightGreen" VerticalOptions="Center" WidthRequest="100" Text="Delete" Command="{Binding DeleteCommand}" />
+            <Button Grid.Column="2" HorizontalOptions="Center" BackgroundColor="DimGray" VerticalOptions="Center" WidthRequest="100" Text="Delete" Command="{Binding DeleteCommand}" />
         </Grid>
 
         </Grid>

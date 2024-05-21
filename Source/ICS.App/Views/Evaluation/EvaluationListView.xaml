@@ -20,13 +20,13 @@
             <ColumnDefinition Width="600"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
         <Border Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0">
             <Label Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0" Text="Evaluations" HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center" FontSize="50">
             </Label>
         </Border>
-        
+
         <CollectionView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Evaluations}" HorizontalOptions="Center">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="2"></GridItemsLayout>
@@ -62,7 +62,7 @@
             <Button
                 Text="Name"
                 VerticalOptions="Start"
-                Command="{Binding Source={x:Reference EvaluationListViewRoot}, 
+                Command="{Binding Source={x:Reference EvaluationListViewRoot},
                         Path=BindingContext.SortByNameCommand}"
                 Grid.Column="0"
                 WidthRequest="100"
@@ -72,7 +72,7 @@
             <Button
                 Text="Activity"
                 VerticalOptions="Center"
-                Command="{Binding Source={x:Reference EvaluationListViewRoot}, 
+                Command="{Binding Source={x:Reference EvaluationListViewRoot},
                         Path=BindingContext.SortByActivityCommand}"
                 Grid.Column="2"
                 Grid.Row="0"
@@ -84,7 +84,7 @@
             <Button
                 Text="Subject"
                 VerticalOptions="Center"
-                Command="{Binding Source={x:Reference EvaluationListViewRoot}, 
+                Command="{Binding Source={x:Reference EvaluationListViewRoot},
                         Path=BindingContext.SortByAbbrCommand}"
                 Grid.Column="1"
                 Grid.Row="0"
@@ -96,7 +96,7 @@
             <Button
                 Text="Points"
                 VerticalOptions="Center"
-                Command="{Binding Source={x:Reference EvaluationListViewRoot}, 
+                Command="{Binding Source={x:Reference EvaluationListViewRoot},
                         Path=BindingContext.SortByPointsCommand}"
                 Grid.Column="3"
                 Grid.Row="0"
@@ -112,9 +112,7 @@
             FontSize="Medium"
             HorizontalOptions="Center"
             VerticalOptions="Start"
-            TextColor="White"
-            BorderWidth="2"
-            BorderColor="White"
+            BackgroundColor="LightBlue"
             Text="Create" Command="{Binding Source={x:Reference EvaluationListViewRoot},
                 Path=BindingContext.GoToCreateCommand}">
         </Button>

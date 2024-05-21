@@ -66,9 +66,9 @@
     </Border>
 
 
-    <Button Grid.Row="5" Grid.Column="1" HorizontalOptions="Center" WidthRequest="100" Text="Edit" Command="{Binding GoToEditCommand}"></Button>
-    <Button Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" WidthRequest="100" Text="Delete" Command="{Binding DeleteCommand}"></Button>
+    <Button Grid.Row="5" Grid.Column="1" HorizontalOptions="Center" BackgroundColor="LightBlue" WidthRequest="100" Text="Edit" Command="{Binding GoToEditCommand}"></Button>
+    <Button Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" BackgroundColor="DimGray" WidthRequest="100" Text="Delete" Command="{Binding DeleteCommand}"></Button>
     </Grid>
 
-    
+
 </views:ContentPageBase>

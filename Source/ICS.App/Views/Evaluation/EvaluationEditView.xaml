@@ -9,18 +9,13 @@
                        x:Name="EvaluationEditViewRoot">
     <Grid HorizontalOptions="Center" RowSpacing="50">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Grid.Column="0" VerticalOptions="Start" >
-            <Label Grid.Row="0" Grid.Column="0" Text="Edit" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="60"></Label>
-        </Border>
-        
-        <Grid Grid.Row="1" Grid.Column="0" VerticalOptions="StartAndExpand" RowSpacing="20">
+        <Grid Grid.Row="0" Grid.Column="0" VerticalOptions="Center" RowSpacing="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -33,7 +28,7 @@
                 <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
+
             <Label Grid.Column="0" Grid.Row="0" Text="Student:" HorizontalOptions="End" VerticalOptions="Center" Padding="10" FontSize="20"></Label>
             <Border Grid.Column="1" Grid.Row="0">
                 <Label FontSize="25" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" VerticalOptions="Center" Padding="10">
@@ -63,7 +58,7 @@
                 Grid.Row="2"
                 FontSize="25"
                 HorizontalOptions="FillAndExpand"
-                Text="{Binding Evaluation.Points}"> 
+                Text="{Binding Evaluation.Points}">
             </Entry>
 
             <Label Grid.Column="0" Grid.Row="3" Text="Description:"  HorizontalOptions="End" VerticalOptions="Center" Padding="10" FontSize="20"></Label>
@@ -73,7 +68,7 @@
                 Text="{Binding Evaluation.Description}">
             </Entry>
 
-            <Button Grid.Column="1" Grid.Row="4" HorizontalOptions="Center" Command="{Binding SaveCommand}" Text="Save" WidthRequest="70"></Button>
+            <Button Grid.Column="1" Grid.Row="4" HorizontalOptions="Center" BackgroundColor="LightGreen" Command="{Binding SaveCommand}" Text="Save" WidthRequest="70"></Button>
         </Grid>
     </Grid>
 </views:ContentPageBase>
