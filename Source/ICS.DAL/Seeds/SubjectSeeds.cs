@@ -16,8 +16,6 @@ public static class SubjectSeeds
     static SubjectSeeds()
     {
         Ics.Activities.Add(ActivitySeeds.IcsLecture);
-        Ics.Students.Add(StudentSeeds.PetrNovakov);
-        Ics.Students.Add(StudentSeeds.KamilAjajaj);
     }
 
     public static void Seed(this ModelBuilder modelBuilder) =>

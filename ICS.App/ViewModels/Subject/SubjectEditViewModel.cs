@@ -20,7 +20,7 @@ public partial class SubjectEditViewModel(
 
     private async Task SaveAsync()
     {
-        await subjectFacade.SaveAsync(Subject);
+        await subjectFacade.SaveAsync(Subject with { Activities = default!, Students = default! });
         MessengerService.Send(new SubjectEditMessage { SubjectId = Subject.Id });
 
         navigationService.SendBackButtonPressed();

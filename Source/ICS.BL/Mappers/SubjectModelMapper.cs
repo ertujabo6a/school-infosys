@@ -9,9 +9,8 @@ public class SubjectModelMapper(IStudentModelMapper studentModelMapper, IActivit
     : ModelMapperBase<SubjectEntity, SubjectListModel, SubjectDetailModel>,
     ISubjectModelMapper
 {
-
     public void setStudentModelMapper(IStudentModelMapper studentMM)
-        => studentMM = studentModelMapper;
+        => studentModelMapper = studentMM;
 
     public override SubjectListModel MapToListModel(SubjectEntity? entity)
         => entity is null
