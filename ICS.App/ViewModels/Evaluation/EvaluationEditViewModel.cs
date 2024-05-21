@@ -1,11 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
 using ICS.App.Services;
 using ICS.BL.Models;
 using ICS.BL.Facades.Interfaces;
 using ICS.App.Messages;
-using ICS.BL.Facades;
 
 
 namespace ICS.App.ViewModels;
@@ -21,12 +19,12 @@ public partial class EvaluationEditViewModel(
     : ViewModelBase(messengerService)
 {
     public EvaluationDetailModel Evaluation { get; init; } = EvaluationDetailModel.Empty;
-    public IList<StudentListModel> Students { get; set; }
+    public IList<StudentListModel> Students { get; set; } = null!;
     [ObservableProperty]
-    private StudentListModel _selectedStudent;
-    public IList<ActivityListModel> Activities { get; set; }
+    private StudentListModel _selectedStudent = null!;
+    public IList<ActivityListModel> Activities { get; set; } = null!;
     [ObservableProperty]
-    private ActivityListModel _selectedActivity;
+    private ActivityListModel _selectedActivity = null!;
 
     protected override async Task LoadDataAsync()
     {
@@ -41,7 +39,7 @@ public partial class EvaluationEditViewModel(
                 e.SubjectAbbr = subjectDetailModel.SubjectAbbr;
             }
         }
-        Activities = Activities.ToList();
+        Activities = [.. Activities];
     }
 
     partial void OnSelectedStudentChanged(StudentListModel value)

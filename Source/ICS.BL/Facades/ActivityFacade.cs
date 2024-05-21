@@ -20,7 +20,7 @@ public class ActivityFacade(
         List<ActivityEntity> activities = await uow
             .GetRepository<ActivityEntity, ActivityEntityMapper>()
             .Get()
-            .Where(i => i.Subject.Abbr == (!string.IsNullOrEmpty(subject) ? subject : i.Subject.Abbr) && i.StartTime >= start && i.EndTime <= end)
+            .Where(i => i.Subject!.Abbr == (!string.IsNullOrEmpty(subject) ? subject : i.Subject.Abbr) && i.StartTime >= start && i.EndTime <= end)
             .ToListAsync().ConfigureAwait(false);
 
         return ModelMapper.MapToListModel(activities);
