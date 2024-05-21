@@ -32,6 +32,6 @@
         <Label Grid.Column="0" Grid.Row="2" Text="Credits:" FontSize="23" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" />
         <Entry Grid.Column="1" Grid.Row="2" HorizontalOptions="FillAndExpand" FontSize="23" Text="{Binding Subject.Credits}" />
 
-        <Button Grid.Column="1" Grid.Row="3" HorizontalOptions="Center" Command="{Binding SaveCommand}" Text="Save" WidthRequest="100" />
+        <Button Grid.Column="1" Grid.Row="3" BackgroundColor="LightGreen" HorizontalOptions="Center" Command="{Binding SaveCommand}" Text="Save" WidthRequest="100" />
     </Grid>
 </views:ContentPageBase>
