@@ -71,6 +71,7 @@ public partial class ActivityEditViewModel (
     [RelayCommand]
     private async Task SaveAsync()
     {
+        if (Activity.SubjectId == Guid.Empty) return;
         Activity.StartTime = StartDate.Date + StartTime;
         Activity.EndTime = EndDate.Date + EndTime;
 

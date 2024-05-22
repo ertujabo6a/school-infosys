@@ -5,7 +5,7 @@
                        xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
                        xmlns:vm="clr-namespace:ICS.App.ViewModels"
                        x:Class="ICS.App.Views.Subject.SubjectEditView"
-                       Title="Edit Subject"
+                       Title=""
                        x:DataType="vm:SubjectEditViewModel"
                        x:Name="SubjectEditViewRoot">
     <Grid HorizontalOptions="Center" VerticalOptions="Center" RowSpacing="10" ColumnSpacing="15">
@@ -16,22 +16,19 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="350" />
         </Grid.ColumnDefinitions>
 
-        <!-- Name: -->
-        <Label Grid.Column="0" Grid.Row="0" Text="Subject Name:" FontSize="23" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" />
-        <Entry Grid.Column="1" Grid.Row="0" HorizontalOptions="FillAndExpand" FontSize="23" Text="{Binding Subject.SubjectName}" />
+        <Label Grid.Column="0" Grid.Row="0" Text="Subject Name:" HorizontalOptions="End" VerticalOptions="Center" />
+        <Entry Grid.Column="1" Grid.Row="0" HorizontalOptions="FillAndExpand" Text="{Binding Subject.SubjectName}" />
 
-        <!-- ABBR: -->
-        <Label Grid.Column="0" Grid.Row="1" Text="ABBR:" FontSize="23" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" />
-        <Entry Grid.Column="1" Grid.Row="1" HorizontalOptions="FillAndExpand" FontSize="23" Text="{Binding Subject.SubjectAbbr}" />
+        <Label Grid.Column="0" Grid.Row="1" Text="Abbreviation:" HorizontalOptions="End" VerticalOptions="Center" />
+        <Entry Grid.Column="1" Grid.Row="1" HorizontalOptions="FillAndExpand" Text="{Binding Subject.SubjectAbbr}" />
 
-        <!-- Credits: -->
-        <Label Grid.Column="0" Grid.Row="2" Text="Credits:" FontSize="23" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" />
-        <Entry Grid.Column="1" Grid.Row="2" HorizontalOptions="FillAndExpand" FontSize="23" Text="{Binding Subject.Credits}" />
+        <Label Grid.Column="0" Grid.Row="2" Text="Credits:" HorizontalOptions="End" VerticalOptions="Center" />
+        <Entry Grid.Column="1" Grid.Row="2" HorizontalOptions="FillAndExpand" Text="{Binding Subject.Credits}" />
 
-        <Button Grid.Column="1" Grid.Row="3" BackgroundColor="LightGreen" HorizontalOptions="Center" Command="{Binding SaveCommand}" Text="Save" WidthRequest="100" />
+        <Button Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" BackgroundColor="Green" HorizontalOptions="Center" Command="{Binding SaveCommand}" Text="Save" WidthRequest="100" />
     </Grid>
 </views:ContentPageBase>

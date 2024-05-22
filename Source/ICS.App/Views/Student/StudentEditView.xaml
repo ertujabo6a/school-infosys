@@ -8,7 +8,7 @@
                        x:DataType="vm:StudentEditViewModel"
                        x:Name="StudentEditViewRoot">
 
-    <VerticalStackLayout Margin="10" Spacing="10" HorizontalOptions="Center">
+    <VerticalStackLayout Margin="10" Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
         <HorizontalStackLayout Spacing="10">
             <Grid Margin="10" ColumnSpacing="10" RowSpacing="20">
                 <Grid.RowDefinitions>
@@ -32,14 +32,14 @@
                     <Label Grid.Row="0" Text="Chosen Subjects:"/>
                     <CollectionView Grid.Row="1" ItemsSource="{Binding Student.Subjects}">
                         <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical" Span="3"/>
+                            <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="3" HorizontalItemSpacing="3"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="m:SubjectListModel">
                                 <Button
                                     Text="{Binding SubjectAbbr}"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:StudentEditViewModel}}, Path=UnchooseSubjectCommand}" CommandParameter="{Binding .}"
-                                    Background="Green"/>
+                                    Background="Orange"/>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -48,7 +48,7 @@
                     <Label Grid.Row="0" Text="All Subjects:"/>
                     <CollectionView Grid.Row="1" ItemsSource="{Binding Subjects}">
                         <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical" Span="3"/>
+                            <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="3" HorizontalItemSpacing="3" Span="3"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="m:SubjectListModel">
@@ -65,6 +65,7 @@
         <Button
             HorizontalOptions="Center"
             Command="{Binding SaveCommand}"
-            Text="Save"/>
+            Text="Save"
+            BackgroundColor="Green"/>
     </VerticalStackLayout>
 </views:ContentPageBase>

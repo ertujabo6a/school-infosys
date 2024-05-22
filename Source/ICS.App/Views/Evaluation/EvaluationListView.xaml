@@ -5,36 +5,25 @@
                        xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
                        xmlns:vm="clr-namespace:ICS.App.ViewModels"
                        x:Class="ICS.App.Views.Evaluation.EvaluationListView"
-                       Title="Evaluation List"
+                       Title="Evaluations"
                        x:DataType="vm:EvaluationListViewModel"
                        x:Name="EvaluationListViewRoot">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70"></RowDefinition>
-            <RowDefinition Height="500"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.RowSpacing>30</Grid.RowSpacing>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="600"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-
-        <CollectionView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Evaluations}" HorizontalOptions="Center">
+    <Grid RowDefinitions="auto,*" Margin="10" Padding="10" HorizontalOptions="Center" RowSpacing="20">
+        <CollectionView Grid.Row= "1" ItemsSource="{Binding Evaluations}" HorizontalOptions="Center" WidthRequest="600">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="2"></GridItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="3"></GridItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:EvaluationListModel">
-                    <Frame HeightRequest="75">
+                    <Frame HeightRequest="66">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer
                                 Command="{Binding Source={x:Reference EvaluationListViewRoot}, Path=BindingContext.GoToDetailCommand}"
                                 CommandParameter="{Binding Id}">
                             </TapGestureRecognizer>
                         </Frame.GestureRecognizers>
-                        <Grid ColumnDefinitions="200,133, 133, 133" RowDefinitions="auto"  HorizontalOptions="Start">
-                            <Label FontSize="25" HorizontalOptions="Center">
+                        <Grid ColumnDefinitions="100, 100, 100, 100" RowDefinitions="auto"  HorizontalOptions="Center">
+                            <Label HorizontalOptions="Center">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="StudentName"></Binding>
@@ -42,72 +31,38 @@
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>
-                            <Label Text="{Binding SubjectAbbr}" Grid.Column="1" Grid.Row="0" FontSize="25" HorizontalOptions="Center"></Label>
-                            <Label Text="{Binding Activity}"  TextColor="White" Grid.Column="2" Grid.Row="0" FontSize="25" HorizontalOptions="Center"></Label>
-                            <Label Text="{Binding Points}"  TextColor="White" Grid.Column="3" Grid.Row="0" FontSize="25" HorizontalOptions="Center"></Label>
+                            <Label Text="{Binding SubjectAbbr}" Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"></Label>
+                            <Label Text="{Binding Activity}"  Grid.Column="2" Grid.Row="0" HorizontalOptions="Center"></Label>
+                            <Label Text="{Binding Points}"  Grid.Column="3" Grid.Row="0" HorizontalOptions="Center"></Label>
                         </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Label Text="Sort by:" Grid.Column="0" Grid.Row="0"  VerticalOptions="Start" FontSize="30" HorizontalOptions="End"></Label>
-        <Grid ColumnDefinitions="200,110, 110, 120" RowDefinitions="auto"  HorizontalOptions="End" Grid.Row="0" Grid.Column="1" ColumnSpacing="30">
-            <Button
-                Text="Name"
-                VerticalOptions="Start"
-                Command="{Binding Source={x:Reference EvaluationListViewRoot},
-                        Path=BindingContext.SortByNameCommand}"
-                Grid.Column="0"
-                WidthRequest="100"
-                HeightRequest="50">
-            </Button>
 
+        <HorizontalStackLayout Grid.Row="0" Spacing="10" HorizontalOptions="Center">
             <Button
-                Text="Activity"
-                VerticalOptions="Center"
+                Text="Sort by Name"
                 Command="{Binding Source={x:Reference EvaluationListViewRoot},
-                        Path=BindingContext.SortByActivityCommand}"
-                Grid.Column="2"
-                Grid.Row="0"
-                HorizontalOptions="Start"
-                WidthRequest="100"
-                HeightRequest="50">
-            </Button>
-
+                Path=BindingContext.SortByNameCommand}"/>
             <Button
-                Text="Subject"
-                VerticalOptions="Center"
+                Text="Sort by Activity"
                 Command="{Binding Source={x:Reference EvaluationListViewRoot},
-                        Path=BindingContext.SortByAbbrCommand}"
-                Grid.Column="1"
-                Grid.Row="0"
-                HorizontalOptions="Start"
-                WidthRequest="100"
-                HeightRequest="50">
-            </Button>
-
+                        Path=BindingContext.SortByActivityCommand}"/>
             <Button
-                Text="Points"
-                VerticalOptions="Center"
+                Text="Sort by Subject"
                 Command="{Binding Source={x:Reference EvaluationListViewRoot},
-                        Path=BindingContext.SortByPointsCommand}"
-                Grid.Column="3"
-                Grid.Row="0"
-                HorizontalOptions="Start"
-                WidthRequest="90"
-                HeightRequest="50">
-            </Button>
-        </Grid>
-
-        <Button
-            Grid.Row="0"
-            Grid.Column="2"
-            FontSize="Medium"
-            HorizontalOptions="Center"
-            VerticalOptions="Start"
-            BackgroundColor="LightBlue"
-            Text="Create" Command="{Binding Source={x:Reference EvaluationListViewRoot},
-                Path=BindingContext.GoToCreateCommand}">
-        </Button>
+                        Path=BindingContext.SortByAbbrCommand}"/>
+            <Button
+                Text="Sort by Point"
+                Command="{Binding Source={x:Reference EvaluationListViewRoot},
+                        Path=BindingContext.SortByPointsCommand}"/>
+            <Button
+                BackgroundColor="Green"
+                Text="Create"
+                Command="{Binding Source={x:Reference EvaluationListViewRoot},
+                        Path=BindingContext.GoToCreateCommand}"
+                Margin="20, 0, 0, 0"/>
+        </HorizontalStackLayout>
     </Grid>
 </views:ContentPageBase>

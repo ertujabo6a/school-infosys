@@ -64,6 +64,7 @@ public partial class EvaluationEditViewModel(
     [RelayCommand]
     private async Task SaveAsync()
     {
+        if (Evaluation.StudentId == Guid.Empty || Evaluation.ActivityId == Guid.Empty) return;
         await evaluationFacade.SaveAsync(Evaluation);
         MessengerService.Send(new EvaluationEditMessage { EvaluationId = Evaluation.Id });
         navigationService.SendBackButtonPressed();

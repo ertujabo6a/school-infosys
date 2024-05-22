@@ -5,7 +5,7 @@
                        xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
                        xmlns:vm="clr-namespace:ICS.App.ViewModels"
                        x:Class="ICS.App.Views.Activity.ActivityDetailView"
-                       Title="Activity detail"
+                       Title=""
                        x:DataType="vm:ActivityDetailViewModel"
                        x:Name="ActivityDetailViewRoot">
     <Grid HorizontalOptions="Center"
@@ -32,7 +32,6 @@
     <Label Text="Subject:"
            Grid.Column="0"
            Grid.Row="0"
-           FontSize="20"
            HorizontalOptions="End"
            VerticalOptions="Center">
     </Label>
@@ -42,7 +41,6 @@
             Grid.ColumnSpan="2"
             Padding="5, 10, 5, 10">
             <Label Text="{Binding Activity.SubjectAbbr}"
-                   FontSize="30"
                    HorizontalOptions="Start"
                    VerticalOptions="Center">
             </Label>
@@ -51,7 +49,6 @@
     <Label Text="Type:"
            Grid.Column="0"
            Grid.Row="1"
-           FontSize="20"
            HorizontalOptions="End"
            VerticalOptions="Center">
     </Label>
@@ -61,7 +58,6 @@
             Grid.ColumnSpan="2"
             Padding="5, 10, 5, 10">
             <Label Text="{Binding Activity.Type}"
-                   FontSize="30"
                    HorizontalOptions="Start"
                    VerticalOptions="Center">
             </Label>
@@ -70,7 +66,6 @@
     <Label Text="Room:"
            Grid.Column="0"
            Grid.Row="2"
-           FontSize="20"
            HorizontalOptions="End"
            VerticalOptions="Center">
     </Label>
@@ -80,7 +75,6 @@
             Grid.ColumnSpan="2"
             Padding="5, 10, 5, 10">
             <Label Text="{Binding Activity.ActivityRoom}"
-                   FontSize="30"
                    HorizontalOptions="Start"
                    VerticalOptions="Center">
             </Label>
@@ -89,7 +83,6 @@
     <Label Text="Start time:"
            Grid.Column="0"
            Grid.Row="3"
-           FontSize="20"
            HorizontalOptions="End"
            VerticalOptions="Center">
     </Label>
@@ -99,7 +92,6 @@
             Grid.ColumnSpan="2"
             Padding="5, 10, 5, 10">
             <Label Text="{Binding Activity.StartTime}"
-               FontSize="30"
                HorizontalOptions="Start"
                VerticalOptions="Center">
             </Label>
@@ -108,7 +100,6 @@
     <Label Text="End time:"
            Grid.Column="0"
            Grid.Row="4"
-           FontSize="20"
            HorizontalOptions="End"
            VerticalOptions="Center">
     </Label>
@@ -118,7 +109,6 @@
             Grid.ColumnSpan="2"
             Padding="5, 10, 5, 10">
             <Label Text="{Binding Activity.EndTime}"
-                   FontSize="30"
                    HorizontalOptions="Start"
                    VerticalOptions="Center">
             </Label>
@@ -127,7 +117,6 @@
     <Label Text="Description:"
            Grid.Column="0"
            Grid.Row="5"
-           FontSize="20"
            HorizontalOptions="End"
            VerticalOptions="Center">
     </Label>
@@ -137,7 +126,6 @@
             Grid.ColumnSpan="2"
             Padding="5, 10, 5, 10">
             <Label Text="{Binding Activity.Description}"
-                   FontSize="30"
                    HorizontalOptions="Start"
                    VerticalOptions="Center">
             </Label>

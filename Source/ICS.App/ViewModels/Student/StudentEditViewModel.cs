@@ -54,7 +54,21 @@ public partial class StudentEditViewModel(
     private async Task UnchooseSubject(SubjectListModel subject)
     {
         Student.Subjects.Remove(subject);
-        Subjects = (await _subjectFacade.GetAsync()).Except(Student.Subjects);
+        var tmpSubject = await _subjectFacade.GetAsync();
+        var freeSubjects = new List<SubjectListModel>();
+        foreach (SubjectListModel subjectListModel in tmpSubject)
+        {
+            bool isInStudentSubjects = false;
+            foreach (SubjectListModel studentSubject in Student.Subjects)
+                if (studentSubject.Id == subjectListModel.Id)
+                {
+                    isInStudentSubjects = true;
+                    break;
+                }
+            if (!isInStudentSubjects)
+                freeSubjects.Add(subjectListModel);
+        }
+        Subjects = freeSubjects;
     }
 
     [RelayCommand]

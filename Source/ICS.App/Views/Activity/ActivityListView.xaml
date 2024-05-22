@@ -9,129 +9,100 @@
                        x:DataType="vm:ActivityListViewModel"
                        x:Name="ActivityListViewRoot">
 
-    <StackLayout Padding="10" Spacing="15">
-
-        <StackLayout Orientation="Horizontal"
+    <VerticalStackLayout Padding="10" Spacing="10">
+        <HorizontalStackLayout
                      HorizontalOptions="Center"
-                     Spacing="30">
-            <Label Text="Sort by:"
-                   FontSize="25"
-                   VerticalOptions="Center" />
-            <Button Text="Abbr"
-                    FontSize="25"
+                     Spacing="10">
+            <Button Text="Sort by Abbreviation"
                     Command="{Binding Source={x:Reference ActivityListViewRoot},
                                 Path=BindingContext.SortBySubjectAbbrCommand}" />
-            <Button Text="Type"
-                    FontSize="25"
+            <Button Text="Sort by Type"
                     Command="{Binding Source={x:Reference ActivityListViewRoot},
                                 Path=BindingContext.SortByTypeCommand}" />
-            <Button Text="Start time"
-                    FontSize="25"
+            <Button Text="Sort by Start time"
                     Command="{Binding Source={x:Reference ActivityListViewRoot},
                                 Path=BindingContext.SortByStartTimeCommand}" />
-            <Button Text="End time"
-                    FontSize="25"
+            <Button Text="Sort By End time"
                     Command="{Binding Source={x:Reference ActivityListViewRoot},
                                 Path=BindingContext.SortByEndTimeCommand}" />
             <Button Text="Create"
-                    FontSize="25"
                     BackgroundColor="Green"
+                    HorizontalOptions="End"
                     Command="{Binding Source={x:Reference ActivityListViewRoot},
                                 Path=BindingContext.GoToCreateCommand}" />
-        </StackLayout>
-        <HorizontalStackLayout Spacing="10">
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
             <Label
-                   Text="Start time:"
-                HorizontalOptions="End"
+                Text="Start time:"
                 VerticalOptions="Center"
-                Padding="10"
-                FontSize="20">
-            </Label>
+                Padding="10"/>
 
-            <DatePicker
-                FontSize="20"
-                HorizontalOptions="FillAndExpand"
-                Date="{Binding StartDate}" />
-            <TimePicker
-                FontSize="20"
-                HorizontalOptions="FillAndExpand"
-                Time="{Binding StartTime}" />
+            <VerticalStackLayout Spacing="5">
+                <DatePicker
+                    HorizontalOptions="Center"
+                    Date="{Binding StartDate}" />
+                <TimePicker
+                    HorizontalOptions="FillAndExpand"
+                    Time="{Binding StartTime}" />
+            </VerticalStackLayout>
+            
 
-            <Label Grid.Column="0"
-               Grid.Row="4"
+            <Label
                Text="End time:"
                HorizontalOptions="End"
                VerticalOptions="Center"
-               Padding="10"
-               FontSize="20">
-            </Label>
+               Padding="10"/>
 
-            <DatePicker
-                FontSize="20"
-                HorizontalOptions="FillAndExpand"
-                Date="{Binding EndDate}" />
-            <TimePicker
-                FontSize="20"
-                HorizontalOptions="FillAndExpand"
-                Time="{Binding EndTime}" />
+            <VerticalStackLayout Spacing="5">
+                <DatePicker
+                    HorizontalOptions="Center"
+                    Date="{Binding EndDate}" />
+                <TimePicker
+                    HorizontalOptions="FillAndExpand"
+                    Time="{Binding EndTime}" />
+            </VerticalStackLayout>
 
             <Picker
-                HorizontalOptions="Fill"
-                FontSize="20"
+                VerticalOptions="Center"
+                WidthRequest="100"
                 ItemsSource="{Binding Subjects}"
                 ItemDisplayBinding="{Binding .,
                 Converter={StaticResource SubjectConverter}}"
                 SelectedItem="{Binding SelectedSubject}">
             </Picker>
             
-            <Button Command="{Binding FilterCommand}" Text="Filter"/>
-            <Button Command="{Binding UnfilterCommand}" Text="Show all"/>
-
+            <Button Command="{Binding FilterCommand}" Text="Filter" VerticalOptions="Center"/>
+            <Button Command="{Binding UnfilterCommand}" Text="Show all" VerticalOptions="Center"/>
         </HorizontalStackLayout>
 
-        <CollectionView ItemsSource="{Binding Activities}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="m:ActivityListModel">
-                    <Grid Padding="10"
-                          ColumnSpacing="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+        <Grid Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="600"></RowDefinition>
+            </Grid.RowDefinitions>
+            <CollectionView ItemsSource="{Binding Activities}" HorizontalOptions="Center" WidthRequest="700" Grid.Row="0" Grid.Column="0">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="3" Span="1"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:ActivityListModel">
+                        <Frame HeightRequest="60">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                    CommandParameter="{Binding Id}">
+                                </TapGestureRecognizer>
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="50, 100, 200, 200" RowDefinitions="auto"  HorizontalOptions="Center">
+                                <Label Text="{Binding SubjectAbbr}" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Type}" Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"/>
+                                <Label Text="{Binding StartTime}"  Grid.Column="2" Grid.Row="0" HorizontalOptions="Center"/>
+                                <Label Text="{Binding EndTime}"  Grid.Column="3" Grid.Row="0"  HorizontalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
 
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding Source={x:Reference ActivityListViewRoot},
-                                Path=BindingContext.GoToDetailCommand}"
-                                CommandParameter="{Binding Id}" />
-                        </Grid.GestureRecognizers>
-
-                        <Label Text="{Binding SubjectAbbr}"
-                               Grid.Column="0"
-                               
-                               FontSize="25"
-                               VerticalOptions="Center" />
-                        <Label Text="{Binding Type}"
-                               Grid.Column="1"
-                               
-                               FontSize="25"
-                               VerticalOptions="Center" />
-                        <Label Text="{Binding StartTime}"
-                               Grid.Column="2"
-                               
-                               FontSize="25"
-                               VerticalOptions="Center" />
-                        <Label Text="{Binding EndTime}"
-                               Grid.Column="3"
-                               
-                               FontSize="25"
-                               VerticalOptions="Center" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-    </StackLayout>
+    </VerticalStackLayout>
 </views:ContentPageBase>

@@ -5,7 +5,7 @@
                        xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
                        xmlns:vm="clr-namespace:ICS.App.ViewModels"
                        x:Class="ICS.App.Views.Subject.SubjectDetailView"
-                       Title="Subject Detail"
+                       Title=""
                        x:DataType="vm:SubjectDetailViewModel"
                        x:Name="SubjectDetailViewRoot">
 
@@ -24,7 +24,6 @@
 
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Border>
 
-        <!-- Header -->
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Label FontSize="30" HorizontalOptions="Center" VerticalOptions="Center">
                 <Label.Text>
@@ -37,15 +36,12 @@
             </Label>
         </Grid>
 
-
-        <!-- Rectangles -->
         <Frame
             BackgroundColor="LightGray"
             CornerRadius="10"
             WidthRequest="450"
             HorizontalOptions="Center"
             VerticalOptions="FillAndExpand"
-            Grid.ZIndex="0"
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="0"
@@ -57,57 +53,60 @@
             WidthRequest="450"
             HorizontalOptions="Center"
             VerticalOptions="FillAndExpand"
-            Grid.ZIndex="0"
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="1"
             Margin="7, 0, 0, 0"
         />
 
-        <!-- Labels -->
-        <Label Text="Students:" Grid.Column="0" TextColor="#373b39" FontAttributes="Bold" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="27" ></Label>
-        <Label Text="Activities:" Grid.Column="1" TextColor="#373b39" FontAttributes="Bold" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="27" ></Label>
+        <Label Text="Students:" Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"/>
+        <Label Text="Activities:" Grid.Column="1" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"/>
 
-        <!-- First CollectionView: Students -->
         <CollectionView Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Subject.Students}" HorizontalOptions="FillAndExpand">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" ></GridItemsLayout>
+                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="3"></GridItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:StudentListModel">
-                    <Frame HeightRequest="75" WidthRequest="400">
-                        <Label FontSize="24" Text="{Binding Surname}" />
+                    <Frame HeightRequest="60" WidthRequest="400">
+                        <Label HorizontalOptions="Center">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Name"></Binding>
+                                    <Binding Path="Surname"></Binding>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- Second CollectionView: Activities -->
         <CollectionView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Subject.Activities}" HorizontalOptions="FillAndExpand">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" ></GridItemsLayout>
+                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="3"></GridItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:ActivityListModel">
-                    <Frame HeightRequest="75" WidthRequest="400">
-                        <Label FontSize="24" Text="{Binding Type}" />
+                    <Frame HeightRequest="90" WidthRequest="400">
+                        <Label HorizontalOptions="Center">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}&#x0d;{1}&#x0d;{2}">
+                                    <Binding Path="Type"></Binding>
+                                    <Binding Path="StartTime"></Binding>
+                                    <Binding Path="EndTime"></Binding>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Grid Grid.Row="3" Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <!-- Edit Button -->
-            <Button Grid.Column="1" HorizontalOptions="End" BackgroundColor="LightBlue" VerticalOptions="Center" WidthRequest="100" Text="Edit" Command="{Binding GoToEditCommand}" />
-            <!-- Delete Button -->
-            <Button Grid.Column="2" HorizontalOptions="Center" BackgroundColor="DimGray" VerticalOptions="Center" WidthRequest="100" Text="Delete" Command="{Binding DeleteCommand}" />
-        </Grid>
-
-        </Grid>
+        <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" Spacing="20">
+            <Button Grid.Column="0" HorizontalOptions="End" BackgroundColor="Green" VerticalOptions="Center" WidthRequest="100" Text="Edit" Command="{Binding GoToEditCommand}" />
+            <Button Grid.Column="2" HorizontalOptions="Center" BackgroundColor="Red" VerticalOptions="Center" WidthRequest="100" Text="Delete" Command="{Binding DeleteCommand}" />
+        </HorizontalStackLayout>
+    </Grid>
 
 </views:ContentPageBase>
