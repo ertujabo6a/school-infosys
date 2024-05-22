@@ -43,3 +43,9 @@ steps:
       command: 'test'
       publishTestResults: true
       projects: '**/ICS.BL.Tests.csproj'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet test ICS.App'
+    inputs:
+      command: 'build'
+      projects: '**/ICS.App.csproj'
