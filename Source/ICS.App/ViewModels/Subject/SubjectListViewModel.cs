@@ -70,4 +70,10 @@ public partial class SubjectListViewModel(
     {
         await LoadDataAsync();
     }
+
+    [RelayCommand]
+    public async Task Refresh()
+    {
+        await LoadDataAsync();
+    }
 }

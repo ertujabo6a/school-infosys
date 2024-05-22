@@ -63,6 +63,8 @@
                 Command="{Binding Source={x:Reference EvaluationListViewRoot},
                         Path=BindingContext.GoToCreateCommand}"
                 Margin="20, 0, 0, 0"/>
+
+            <Button BackgroundColor="Green" Text="Refresh" Command="{Binding RefreshCommand}"/>
         </HorizontalStackLayout>
     </Grid>
 </views:ContentPageBase>

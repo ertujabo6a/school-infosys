@@ -14,7 +14,8 @@
             <Button Text="Search" Command="{Binding SearchStudentCommand}" Margin="0,0,20,0"/>
             <Button Text="Sort by Name" Command="{Binding SortByNameCommand}" />
             <Button Text="Sort by Surname" Command="{Binding SortBySurnameCommand}" />
-            <Button BackgroundColor="Green" Grid.Column="1" Text="Create" Command="{Binding GoToCreateCommand}" HorizontalOptions="End" />
+            <Button BackgroundColor="Green" Text="Create" Command="{Binding GoToCreateCommand}"/>
+            <Button BackgroundColor="Green" Text="Refresh" Command="{Binding RefreshCommand}"/>
         </HorizontalStackLayout>
 
         <CollectionView ItemsSource="{Binding Students}" MaximumWidthRequest="800" Grid.Row="1">

@@ -83,4 +83,10 @@ public partial class StudentListViewModel(
     {
         await LoadDataAsync();
     }
+
+    [RelayCommand]
+    public async Task Refresh()
+    {
+        await LoadDataAsync();
+    }
 }

@@ -30,6 +30,7 @@
                     HorizontalOptions="End"
                     Command="{Binding Source={x:Reference ActivityListViewRoot},
                                 Path=BindingContext.GoToCreateCommand}" />
+            <Button BackgroundColor="Green" Text="Refresh" Command="{Binding RefreshCommand}"/>
         </HorizontalStackLayout>
         <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
             <Label

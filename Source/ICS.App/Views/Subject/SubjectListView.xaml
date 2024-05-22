@@ -25,6 +25,8 @@
             <Button
                 BackgroundColor="Green"
                 Text="Create" Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToCreateCommand}"/>
+
+            <Button BackgroundColor="Green" Text="Refresh" Command="{Binding RefreshCommand}"/>
         </HorizontalStackLayout>
 
         <CollectionView ItemsSource="{Binding Subjects}" MaximumWidthRequest="800" Grid.Row="1">

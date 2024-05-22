@@ -48,8 +48,8 @@ public partial class ActivityListViewModel(
                 e.SubjectAbbr = subjectDetailModel.SubjectAbbr;
             }
         }
-
         Subjects = (await subjectFacade.GetAsync()).ToList();
+        Activities = Activities.ToList();
     }
 
     [RelayCommand]
@@ -175,6 +175,12 @@ public partial class ActivityListViewModel(
     {
         await LoadDataAsync();
         Subjects = (await subjectFacade.GetAsync()).ToList();
+    }
+
+    [RelayCommand]
+    public async Task Refresh()
+    {
+        await LoadDataAsync();
     }
 }
 

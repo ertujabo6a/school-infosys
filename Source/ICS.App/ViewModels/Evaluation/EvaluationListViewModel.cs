@@ -31,6 +31,7 @@ public partial class EvaluationListViewModel(
                 e.SubjectAbbr = activityDetailModel.SubjectAbbr;
             }
         }
+        Evaluations = Evaluations.ToList();
     }
 
     [RelayCommand]
@@ -122,6 +123,12 @@ public partial class EvaluationListViewModel(
         await LoadDataAsync();
     }
     public async void Receive(ActivityDeleteMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    [RelayCommand]
+    public async Task Refresh()
     {
         await LoadDataAsync();
     }
