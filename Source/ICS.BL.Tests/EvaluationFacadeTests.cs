@@ -19,7 +19,7 @@ public sealed class EvaluationFacadeTests : FacadeTestsBase
     }
 
     [Fact]
-    public async Task Create_WithNonExistingItem_DoesNotThrow()
+    public async Task SaveNew_Evaluation_DoesNotThrow()
     {
         var model = new EvaluationDetailModel()
         {
@@ -82,24 +82,34 @@ public sealed class EvaluationFacadeTests : FacadeTestsBase
         };
 
         var savedModel = await _evaluationFacadeSUT.SaveAsync(model);
+        model.Id = savedModel.Id;
 
-        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        var evaluation = await dbxAssert.Evaluations.SingleAsync(e => e.Id == savedModel.Id);
-        DeepAssert.Equal(savedModel, EvaluationModelMapper.MapToDetailModel(evaluation));
+        var evaluation = await _evaluationFacadeSUT.GetAsync(savedModel.Id);
+        DeepAssert.Equal(model, evaluation);
     }
 
     [Fact]
     public async Task Update_ExistingEvaluation__Updated()
     {
         var model = EvaluationModelMapper.MapToDetailModel(EvaluationSeeds.EvaluationEntity_BL_EvaluationTest_Update);
-        model.Points = 10;
-        model.Description = "Updated description";
+        model.SubjectId = SubjectSeeds.SubjectEntity_BL_EvaluationTest_Update.Id;
 
-        await _evaluationFacadeSUT.SaveAsync(model);
+        var savedModel = await _evaluationFacadeSUT.SaveAsync(model);
 
-        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        var evaluation = await dbxAssert.Evaluations.SingleAsync(e => e.Id == EvaluationSeeds.EvaluationEntity_BL_EvaluationTest_Update.Id);
-        DeepAssert.Equal(model, EvaluationModelMapper.MapToDetailModel(evaluation));
+        var modelFromDB = await _evaluationFacadeSUT.GetAsync(savedModel.Id);
+
+        Assert.NotNull(modelFromDB);
+
+        var updatedModel = modelFromDB with
+        {
+            Description = "Updated description",
+            Points = 100
+        };
+
+        var savedUpdatedModel = await _evaluationFacadeSUT.SaveAsync(updatedModel);
+
+        var evaluation = await _evaluationFacadeSUT.GetAsync(savedUpdatedModel.Id);
+        Assert.Equal(updatedModel, evaluation);
     }
 
 

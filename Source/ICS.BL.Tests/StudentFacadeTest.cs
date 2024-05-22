@@ -50,8 +50,8 @@ public sealed class StudentFacadeTests : FacadeTestsBase
     {
         await _studentFacade.DeleteAsync(StudentSeeds.StudentEntity_BL_StudentTest_Delete.Id);
 
-        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        Assert.False(await dbxAssert.Students.AnyAsync(s => s.Id == StudentSeeds.StudentEntity_BL_StudentTest_Delete.Id));
+        var student = await _studentFacade.GetAsync(StudentSeeds.StudentEntity_BL_StudentTest_Delete.Id);
+        Assert.Null(student);
     }
 
     [Fact]
@@ -69,9 +69,8 @@ public sealed class StudentFacadeTests : FacadeTestsBase
         student = await _studentFacade.SaveAsync(student);
 
         //Assert
-        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        var studentFromDb = await dbxAssert.Students.SingleAsync(s => s.Id == student.Id);
-        DeepAssert.Equal(student, StudentModelMapper.MapToDetailModel(studentFromDb));
+        var studentFromDb = await _studentFacade.GetAsync(student.Id);
+        DeepAssert.Equal(student, studentFromDb);
     }
 
     [Fact]
@@ -88,12 +87,12 @@ public sealed class StudentFacadeTests : FacadeTestsBase
         student.Surname += " Updated";
 
         //Act
-        await _studentFacade.SaveAsync(student);
+        student = await _studentFacade.SaveAsync(student);
 
         //Assert
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        StudentEntity studentFromDb = await dbxAssert.Students.SingleAsync(s => s.Id == student.Id);
-        DeepAssert.Equal(student, StudentModelMapper.MapToDetailModel(studentFromDb));
+        var studentFromDb = await _studentFacade.GetAsync(StudentSeeds.StudentEntity_BL_StudentTest_Update.Id);
+        DeepAssert.Equal(student, studentFromDb);
     }
 
     [Fact]
