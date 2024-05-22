@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Evaluation.EvaluationListView"
+                       Title="Evaluations"
+                       x:DataType="vm:EvaluationListViewModel"
+                       x:Name="EvaluationListViewRoot">
+    <Grid RowDefinitions="auto,*" Margin="10" Padding="10" HorizontalOptions="Center" RowSpacing="20">
+        <CollectionView Grid.Row= "1" ItemsSource="{Binding Evaluations}" HorizontalOptions="Center" WidthRequest="600">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="3"></GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:EvaluationListModel">
+                    <Frame HeightRequest="66">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={x:Reference EvaluationListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                CommandParameter="{Binding Id}">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                        <Grid ColumnDefinitions="100, 100, 100, 100" RowDefinitions="auto"  HorizontalOptions="Center">
+                            <Label HorizontalOptions="Center">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="StudentName"></Binding>
+                                        <Binding Path="StudentSurname"></Binding>
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label Text="{Binding SubjectAbbr}" Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"></Label>
+                            <Label Text="{Binding Activity}"  Grid.Column="2" Grid.Row="0" HorizontalOptions="Center"></Label>
+                            <Label Text="{Binding Points}"  Grid.Column="3" Grid.Row="0" HorizontalOptions="Center"></Label>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <HorizontalStackLayout Grid.Row="0" Spacing="10" HorizontalOptions="Center">
+            <Button
+                Text="Sort by Name"
+                Command="{Binding Source={x:Reference EvaluationListViewRoot},
+                Path=BindingContext.SortByNameCommand}"/>
+            <Button
+                Text="Sort by Activity"
+                Command="{Binding Source={x:Reference EvaluationListViewRoot},
+                        Path=BindingContext.SortByActivityCommand}"/>
+            <Button
+                Text="Sort by Subject"
+                Command="{Binding Source={x:Reference EvaluationListViewRoot},
+                        Path=BindingContext.SortByAbbrCommand}"/>
+            <Button
+                Text="Sort by Point"
+                Command="{Binding Source={x:Reference EvaluationListViewRoot},
+                        Path=BindingContext.SortByPointsCommand}"/>
+            <Button
+                BackgroundColor="Green"
+                Text="Create"
+                Command="{Binding Source={x:Reference EvaluationListViewRoot},
+                        Path=BindingContext.GoToCreateCommand}"
+                Margin="20, 0, 0, 0"/>
+        </HorizontalStackLayout>
+    </Grid>
+</views:ContentPageBase>

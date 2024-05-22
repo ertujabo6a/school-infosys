@@ -9,6 +9,5 @@ public class StudentEntityMapper : IEntityMapper<StudentEntity>
         oldEntity.Name = newEntity.Name;
         oldEntity.Surname = newEntity.Surname;
         oldEntity.ImageUrl = newEntity.ImageUrl;
-
     }
 }

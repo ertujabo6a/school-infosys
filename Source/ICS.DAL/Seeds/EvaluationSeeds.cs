@@ -10,12 +10,19 @@ public static class EvaluationSeeds
         Id = Guid.Parse("fabde0cd-eefe-443f-baf6-3d96cc2cbf2b"),
         Points = 2,
 
-        Student = StudentSeeds.PetrNovakov,
         StudentId = StudentSeeds.PetrNovakov.Id,
-        Activity = ActivitySeeds.IcsLecture,
+        ActivityId = ActivitySeeds.IcsLecture.Id,
+    };
+
+    public static readonly EvaluationEntity IcsEvaluation2 = new()
+    {
+        Id = Guid.Parse("8f3f6551-5a7c-40ff-af05-6d7edd395736"),
+        Points = 3,
+
+        StudentId = StudentSeeds.KamilAjajaj.Id,
         ActivityId = ActivitySeeds.IcsLecture.Id,
     };
 
     public static void Seed(this ModelBuilder modelBuilder) =>
-        modelBuilder.Entity<EvaluationEntity>().HasData(IcsEvaluation);
+        modelBuilder.Entity<EvaluationEntity>().HasData(IcsEvaluation, IcsEvaluation2);
 }

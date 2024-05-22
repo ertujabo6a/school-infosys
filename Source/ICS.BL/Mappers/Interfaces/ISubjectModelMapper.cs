@@ -6,4 +6,5 @@ namespace ICS.BL.Mappers.Interfaces;
 public interface ISubjectModelMapper
     : IModelMapper<SubjectEntity, SubjectListModel, SubjectDetailModel>
 {
+    public IEnumerable<SubjectListModel> MapToListModel(IEnumerable<StudentToSubjectEntity> entities);
 }

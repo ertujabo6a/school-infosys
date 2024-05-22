@@ -17,6 +17,7 @@ public class FacadeTestsBase : IAsyncLifetime
     protected EvaluationModelMapper EvaluationModelMapper { get; }
     protected StudentModelMapper StudentModelMapper { get; }
     protected SubjectModelMapper SubjectModelMapper { get; }
+    protected StudentToSubjectModelMapper StudentToSubjectModelMapper { get; }
 
     protected UnitOfWorkFactory UnitOfWorkFactory { get; }
 
@@ -31,7 +32,8 @@ public class FacadeTestsBase : IAsyncLifetime
         EvaluationModelMapper = new EvaluationModelMapper();
         SubjectModelMapper = new SubjectModelMapper(null!, ActivityModelMapper);
         StudentModelMapper = new StudentModelMapper(SubjectModelMapper);
-        SubjectModelMapper.SetStudentModelMapper(StudentModelMapper);
+        StudentToSubjectModelMapper = new StudentToSubjectModelMapper(StudentModelMapper, SubjectModelMapper);
+        SubjectModelMapper.setStudentModelMapper(StudentModelMapper);
 
         UnitOfWorkFactory = new UnitOfWorkFactory(DbContextFactory);
     }

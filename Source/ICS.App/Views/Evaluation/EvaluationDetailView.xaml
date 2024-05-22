@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Evaluation.EvaluationDetailView"
+                       x:DataType="vm:EvaluationDetailViewModel"
+                       x:Name="EvaluationDetailViewRoot">
+
+    <Grid HorizontalOptions="Center" VerticalOptions="Center" RowSpacing="10" ColumnSpacing="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="120"></ColumnDefinition>
+        <ColumnDefinition Width="200"></ColumnDefinition>
+        <ColumnDefinition Width="200"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+
+    <Label Text="Name:" Grid.Column="0" Grid.Row="0" HorizontalOptions="End" VerticalOptions="Center"></Label>
+    <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Padding="5, 10, 5, 10">
+        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label HorizontalOptions="Start">
+                <Label.Text>
+                    <MultiBinding StringFormat="{}{0} {1}">
+                        <Binding Path="Evaluation.StudentName"></Binding>
+                        <Binding Path="Evaluation.StudentSurname"></Binding>
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+        </Grid>
+    </Border>
+
+    <Label Text="Activity:" Grid.Column="0" Grid.Row="1" HorizontalOptions="End" VerticalOptions="Center"></Label>
+    <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label Text="{Binding Evaluation.Activity}" HorizontalOptions="Start" VerticalOptions="Center" Padding="5, 10, 5, 10"></Label>
+        </Grid>
+    </Border>
+
+    <Label Text="Subject:" Grid.Column="0" Grid.Row="2" HorizontalOptions="End" VerticalOptions="Center"></Label>
+    <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label Text="{Binding Evaluation.SubjectAbbr}" HorizontalOptions="Start" VerticalOptions="Center" Padding="5, 10, 5, 10"></Label>
+        </Grid>
+    </Border>
+
+    <Label Text="Points:" Grid.Column="0" Grid.Row="3" HorizontalOptions="End" VerticalOptions="Center"></Label>
+    <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+        <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label Text="{Binding Evaluation.Points}" HorizontalOptions="Start" VerticalOptions="Center" Padding="5, 10, 5, 10"></Label>
+        </Grid>
+    </Border>
+
+    <Label Text="Description:" Grid.Column="0" Grid.Row="4" HorizontalOptions="End" VerticalOptions="Center"></Label>
+    <Border Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
+        <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label Text="{Binding Evaluation.Description}" HorizontalOptions="Start" VerticalOptions="Center" Padding="5, 10, 5, 10"></Label>
+        </Grid>
+    </Border>
+
+
+    <Button Grid.Row="5" Grid.Column="1" HorizontalOptions="Center" BackgroundColor="Green" WidthRequest="100" Text="Edit" Command="{Binding GoToEditCommand}"></Button>
+    <Button Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" BackgroundColor="Red" WidthRequest="100" Text="Delete" Command="{Binding DeleteCommand}"></Button>
+    </Grid>
+
+
+</views:ContentPageBase>

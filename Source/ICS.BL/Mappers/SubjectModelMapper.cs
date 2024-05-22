@@ -9,7 +9,8 @@ public class SubjectModelMapper(IStudentModelMapper studentModelMapper, IActivit
     : ModelMapperBase<SubjectEntity, SubjectListModel, SubjectDetailModel>,
     ISubjectModelMapper
 {
-    public void SetStudentModelMapper(IStudentModelMapper studModelMapper) => studentModelMapper = studModelMapper;
+    public void setStudentModelMapper(IStudentModelMapper studentMM)
+        => studentModelMapper = studentMM;
 
     public override SubjectListModel MapToListModel(SubjectEntity? entity)
         => entity is null
@@ -20,6 +21,27 @@ public class SubjectModelMapper(IStudentModelMapper studentModelMapper, IActivit
             SubjectAbbr = entity.Abbr,
         };
 
+    public SubjectListModel MapToListModel(StudentToSubjectEntity? entity)
+        => entity is null
+        ? SubjectListModel.Empty
+        : new SubjectListModel
+        {
+            Id = entity.Subject!.Id,
+            SubjectAbbr = entity.Subject!.Abbr
+        };
+
+    public IEnumerable<SubjectListModel> MapToListModel(IEnumerable<StudentToSubjectEntity> entities)
+    {
+        var arr = new List<SubjectListModel>();
+        foreach (var entity in entities)
+            arr.Add(new SubjectListModel
+            {
+                Id = entity.SubjectId,
+                SubjectAbbr = entity.Subject!.Abbr
+            });
+        return arr;
+    }
+
     public override SubjectDetailModel MapToDetailModel(SubjectEntity? entity)
         => entity is null
             ? SubjectDetailModel.Empty
@@ -29,8 +51,8 @@ public class SubjectModelMapper(IStudentModelMapper studentModelMapper, IActivit
             SubjectName = entity.Name,
             SubjectAbbr = entity.Abbr,
             Credits = entity.Credits,
-            Students = entity.Students != null
-                ? studentModelMapper.MapToListModel(entity.Students).ToObservableCollection()
+            Students = entity.StudentToSubjects != null
+                ? studentModelMapper.MapToListModel(entity.StudentToSubjects).ToObservableCollection()
                 : new ObservableCollection<StudentListModel>(),
             Activities = entity.Activities != null
                 ? activityModelMapper.MapToListModel(entity.Activities).ToObservableCollection()
@@ -45,6 +67,6 @@ public class SubjectModelMapper(IStudentModelMapper studentModelMapper, IActivit
             Name = list_model.SubjectName,
             Credits = list_model.Credits,
             Activities = null!,
-            Students = null!
+            StudentToSubjects = null!
         };
 }

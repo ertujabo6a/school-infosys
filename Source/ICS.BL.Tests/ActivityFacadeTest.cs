@@ -30,20 +30,20 @@ public class ActivityFacadeTests : FacadeTestsBase
         var activity = new ActivityDetailModel()
         {
             Id = Guid.Parse(input: "fab130cd-eefe-443f-baf6-3d96cc2cbf23"),
-            SubjectAbbr = "ABR",
+            SubjectAbbr = SubjectSeeds.SubjectEntity_ActivityTest_AddNew.Abbr,
             Type = ActivityType.Lecture,
             ActivityRoom = Room.E112,
-            StartDate = new DateTime(2024, 4, 1, 12, 0, 0),
-            EndDate = new DateTime(2024, 5, 3, 13, 50, 0),
+            StartTime = new DateTime(2024, 4, 1, 12, 0, 0),
+            EndTime = new DateTime(2024, 5, 3, 13, 50, 0),
             Description = "Some fun activity",
             SubjectId = SubjectSeeds.SubjectEntity_ActivityTest_AddNew.Id
         };
         // Act
         var _activity = await _activityFacadeSUT.SaveAsync(activity);
+        activity.Id = _activity.Id;
         // Assert
-        await using IcsDbContext dbContext = DbContextFactory.CreateDbContext();
-        var activityFromDb = await dbContext.Activities.SingleAsync(e => e.Id == _activity.Id);
-        DeepAssert.Equal(_activity, ActivityModelMapper.MapToDetailModel(activityFromDb));
+        var activityFromDb = await _activityFacadeSUT.GetAsync(_activity.Id);
+        Assert.Equal(activity, activityFromDb);
     }
 
     [Fact]
@@ -84,8 +84,8 @@ public class ActivityFacadeTests : FacadeTestsBase
             SubjectAbbr = "ABR",
             Type = ActivityType.Lecture,
             ActivityRoom = Room.E112,
-            StartDate = new DateTime(2024, 4, 1, 12, 0, 0),
-            EndDate = new DateTime(2024, 5, 3, 13, 50, 0),
+            StartTime = new DateTime(2024, 4, 1, 12, 0, 0),
+            EndTime = new DateTime(2024, 5, 3, 13, 50, 0),
             SubjectId = SubjectSeeds.SubjectEntity_BL_ActivityTest_Insert.Id
         };
 

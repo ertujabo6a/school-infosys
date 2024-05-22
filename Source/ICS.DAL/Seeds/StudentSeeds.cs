@@ -12,9 +12,16 @@ public static class StudentSeeds
         Surname = "Novakov"
     };
 
+    public static readonly StudentEntity KamilAjajaj = new()
+    {
+        Id = Guid.Parse("4b3702a3-6e75-473b-882b-1c15face46ea"),
+        Name = "Kamil",
+        Surname = "Ajajaj"
+    };
+
     static StudentSeeds()
     {
-        PetrNovakov.Subjects.Add(SubjectSeeds.Ics);
+        PetrNovakov.StudentToSubjects.Add(StudentToSubjectSeeds.PetrNovakovToIcs);
         PetrNovakov.Evaluations.Add(EvaluationSeeds.IcsEvaluation);
     }
 
@@ -23,6 +30,11 @@ public static class StudentSeeds
             PetrNovakov with
             {
                 Evaluations = Array.Empty<EvaluationEntity>(),
-                Subjects = Array.Empty<SubjectEntity>()
+                StudentToSubjects = Array.Empty<StudentToSubjectEntity>()
+            },
+            KamilAjajaj with
+            {
+                Evaluations = Array.Empty<EvaluationEntity>(),
+                StudentToSubjects = Array.Empty<StudentToSubjectEntity>()
             });
 }

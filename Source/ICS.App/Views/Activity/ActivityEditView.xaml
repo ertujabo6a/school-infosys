@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       Title=""
+                       x:Class="ICS.App.Views.Activity.ActivityEditView"
+                       x:DataType="vm:ActivityEditViewModel"
+                       x:Name="ActivityEditViewRoot">
+    <Grid HorizontalOptions="Center" RowSpacing="10" ColumnSpacing="30" VerticalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0"
+              Grid.Column="0"
+              RowSpacing="10"
+              ColumnSpacing="10"
+              VerticalOptions="Center">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Text="Subject:"
+                   VerticalOptions="Center"/>
+
+            <Picker
+                Grid.Column="1"
+                Grid.Row="0"
+                ItemsSource="{Binding Subjects}"
+                ItemDisplayBinding="{Binding .,
+                Converter={StaticResource SubjectConverter}}"
+                SelectedItem="{Binding SelectedSubject}">
+            </Picker>
+
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Text="Activity type:" 
+                   VerticalOptions="Center"/>
+
+            <Picker
+                Grid.Column="1"
+                Grid.Row="1"
+                ItemsSource="{Binding ActivityTypes}"
+                SelectedItem="{Binding SelectedActivityType}">
+            </Picker>
+
+            <Label Grid.Column="0"
+                   Grid.Row="2"
+                   Text="Room:" 
+                   VerticalOptions="Center"/>
+
+            <Picker
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    ItemsSource="{Binding Rooms}"
+                    SelectedItem="{Binding SelectedRoom}">
+            </Picker>
+        </Grid>
+        <Grid
+            Grid.Row="0"
+            Grid.Column="1"
+            RowSpacing="10"
+            ColumnSpacing="10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="0"
+                Text="Start time:" 
+                VerticalOptions="Center"/>
+
+            <StackLayout Grid.Column="1" Grid.Row="0">
+                <DatePicker
+                    Date="{Binding StartDate}"
+                    HorizontalOptions="Center"
+                    Margin="5"/>
+                <TimePicker
+                    Time="{Binding StartTime}" />
+            </StackLayout>
+
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Text="End time:"
+                   VerticalOptions="Center"/>
+
+            <StackLayout Grid.Column="1" Grid.Row="1">
+                <DatePicker
+                    Date="{Binding EndDate}"
+                    HorizontalOptions="Center"
+                    Margin="5"/>
+                <TimePicker
+                    Time="{Binding EndTime}" />
+            </StackLayout>
+        </Grid>
+        <HorizontalStackLayout HorizontalOptions="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="10">
+            <Label
+                Text="Description:"
+                VerticalOptions="Center"/>
+            <Entry
+               Text="{Binding Activity.Description}"
+                WidthRequest="600"/>
+        </HorizontalStackLayout>
+
+        <Button
+            Grid.Column="0"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            HorizontalOptions="Center"
+            Text="Save"
+            BackgroundColor="Green"
+            Command="{Binding SaveCommand}"
+            Margin="20">
+        </Button>
+    </Grid>
+</views:ContentPageBase>

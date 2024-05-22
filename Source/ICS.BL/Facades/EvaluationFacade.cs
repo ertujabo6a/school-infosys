@@ -20,19 +20,21 @@ public class EvaluationFacade(
         List<EvaluationEntity> entities = await uow
             .GetRepository<EvaluationEntity, EvaluationEntityMapper>()
             .Get()
+            .Include(e => e.Student)
+            .Include(e => e.Activity)
             .ToListAsync().ConfigureAwait(false);
 
         if (!string.IsNullOrEmpty(orderBy))
             switch (orderBy.ToLower())
             {
                 case "name":
-                    entities = (List<EvaluationEntity>)entities.OrderBy(i => i.Student.Name);
+                    entities = (List<EvaluationEntity>)entities.OrderBy(i => i.Student!.Name);
                     break;
                 case "surname":
-                    entities = (List<EvaluationEntity>)entities.OrderBy(i => i.Student.Surname);
+                    entities = (List<EvaluationEntity>)entities.OrderBy(i => i.Student!.Surname);
                     break;
                 case "activity":
-                    entities = (List<EvaluationEntity>)entities.OrderBy(i => i.Activity.Type);
+                    entities = (List<EvaluationEntity>)entities.OrderBy(i => i.Activity!.Type);
                     break;
                 case "points":
                     entities = (List<EvaluationEntity>)entities.OrderBy(i => i.Points);

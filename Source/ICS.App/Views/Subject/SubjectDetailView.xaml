@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Subject.SubjectDetailView"
+                       Title=""
+                       x:DataType="vm:SubjectDetailViewModel"
+                       x:Name="SubjectDetailViewRoot">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.RowSpacing>20</Grid.RowSpacing>
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Border>
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label FontSize="30" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label.Text>
+                    <MultiBinding StringFormat="{}                  {0}     {1}      Credits: {2}">
+                        <Binding Path="Subject.SubjectAbbr"></Binding>
+                        <Binding Path="Subject.SubjectName"></Binding>
+                        <Binding Path="Subject.Credits"></Binding>
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+        </Grid>
+
+        <Frame
+            BackgroundColor="LightGray"
+            CornerRadius="10"
+            WidthRequest="450"
+            HorizontalOptions="Center"
+            VerticalOptions="FillAndExpand"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            Margin="7, 0, 0, 0"
+        />
+        <Frame
+            BackgroundColor="LightGray"
+            CornerRadius="10"
+            WidthRequest="450"
+            HorizontalOptions="Center"
+            VerticalOptions="FillAndExpand"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Margin="7, 0, 0, 0"
+        />
+
+        <Label Text="Students:" Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"/>
+        <Label Text="Activities:" Grid.Column="1" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+        <CollectionView Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Subject.Students}" HorizontalOptions="FillAndExpand">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="3"></GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:StudentListModel">
+                    <Frame HeightRequest="60" WidthRequest="400">
+                        <Label HorizontalOptions="Center">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Name"></Binding>
+                                    <Binding Path="Surname"></Binding>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <CollectionView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Subject.Activities}" HorizontalOptions="FillAndExpand">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="3"></GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:ActivityListModel">
+                    <Frame HeightRequest="90" WidthRequest="400">
+                        <Label HorizontalOptions="Center">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}&#x0d;{1}&#x0d;{2}">
+                                    <Binding Path="Type"></Binding>
+                                    <Binding Path="StartTime"></Binding>
+                                    <Binding Path="EndTime"></Binding>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" Spacing="20">
+            <Button Grid.Column="0" HorizontalOptions="End" BackgroundColor="Green" VerticalOptions="Center" WidthRequest="100" Text="Edit" Command="{Binding GoToEditCommand}" />
+            <Button Grid.Column="2" HorizontalOptions="Center" BackgroundColor="Red" VerticalOptions="Center" WidthRequest="100" Text="Delete" Command="{Binding DeleteCommand}" />
+        </HorizontalStackLayout>
+    </Grid>
+
+</views:ContentPageBase>

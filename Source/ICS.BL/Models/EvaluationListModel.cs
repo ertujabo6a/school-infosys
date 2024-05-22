@@ -9,6 +9,8 @@ public record EvaluationListModel : ModelBase
     public required Guid StudentId { get; set; }
     public required string StudentName { get; set; }
     public required string StudentSurname { get; set; }
+    public required string SubjectAbbr { get; set; }
+
     public required int Points { get; set; }
 
     public static EvaluationListModel Empty => new()
@@ -19,6 +21,7 @@ public record EvaluationListModel : ModelBase
         StudentId = Guid.Empty,
         StudentName = string.Empty,
         StudentSurname = string.Empty,
+        SubjectAbbr = string.Empty,
         Points = default
     };
 }

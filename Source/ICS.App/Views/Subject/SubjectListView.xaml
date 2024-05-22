@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICS.App.Views"
+                       xmlns:m="clr-namespace:ICS.BL.Models;assembly=ICS.BL"
+                       xmlns:vm="clr-namespace:ICS.App.ViewModels"
+                       x:Class="ICS.App.Views.Subject.SubjectListView"
+                       Title="Subjects"
+                       x:DataType="vm:SubjectListViewModel"
+                       x:Name="SubjectListViewRoot">
+    <Grid RowDefinitions="auto,*" Margin="10" Padding="10" RowSpacing="20">
+        <HorizontalStackLayout Grid.Row="0" Spacing="10" HorizontalOptions="Center">
+            <Entry
+                Placeholder="Search"
+                Text="{Binding SubjectToSearch.SubjectAbbr}"
+                WidthRequest="300"/>
+            <Button
+                Text = "Search"
+                Command="{Binding Source={x:Reference SubjectListViewRoot},Path=BindingContext.SearchSubjectCommand}"
+                Margin="0,0,20,0"/>
+
+            <Button
+                Text="Sort by Abbreviation"
+                Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.SortBySubjectAbbrCommand}"/>
+            <Button
+                BackgroundColor="Green"
+                Text="Create" Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToCreateCommand}"/>
+        </HorizontalStackLayout>
+
+        <CollectionView ItemsSource="{Binding Subjects}" MaximumWidthRequest="800" Grid.Row="1">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="3" HorizontalItemSpacing="3" Span="2"></GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:SubjectListModel">
+                    <Button
+                        Text="{Binding SubjectAbbr}"
+                        Command = "{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                        CommandParameter ="{Binding Id}"
+                        BackgroundColor="Orange"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</views:ContentPageBase>
